@@ -4,7 +4,7 @@ services:
   backend: &backend
     build:
       context: .
-      dockerfile: docker/development/backend.Dockerfile
+      dockerfile: docker/production/backend.Dockerfile
     volumes:
       - ./backend:/backend:cached
       - backend_tmp:/backend/tmp
@@ -31,7 +31,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: docker/development/frontend.Dockerfile
+      dockerfile: docker/production/frontend.Dockerfile
     volumes:
       - ./frontend:/frontend:cached
       - node_modules:/frontend/node_modules
@@ -48,7 +48,7 @@ services:
   # sidekiq:
   #   build:
   #     context: .
-  #     dockerfile: docker/development/sidekiq.Dockerfile
+  #     dockerfile: docker/production/sidekiq.Dockerfile
   #   volumes:
   #     - ./backend:/sidekiq:cached
   #     - sidekiq_tmp:/sidekiq/tmp

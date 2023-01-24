@@ -9,13 +9,10 @@ docker compose build
 
 echo Fetching env variables from tawbar...
 
-if tawbar fetch re development ; then
-  mv .env ./frontend/.env.development
+if tawbar fetch codeboard/frontend development ; then
+  mv .env ./frontend/.env
 
-  tawbar fetch re test
-  mv .env ./frontend/.env.test
-
-  tawbar fetch re-backend develop
+  tawbar fetch codeboard/backend development
   mv .env ./backend/.env
 
   echo Done!
