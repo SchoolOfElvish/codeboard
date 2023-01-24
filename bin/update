@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+docker compose build
+
+echo Fetching env variables from tawbar...
+
+if tawbar fetch re development ; then
+  mv .env ./frontend/.env.development
+
+  tawbar fetch re test
+  mv .env ./frontend/.env.test
+
+  tawbar fetch re-backend develop
+  mv .env ./backend/.env
+
+  echo Done!
+else
+  echo -e "Please run ${BLUE}tawbar login${NC} first"
+  exit 0
+fi
+
+bin/backend/bundle install
+bin/backend/rails db:migrate
+
+bin/frontend/yarn install
