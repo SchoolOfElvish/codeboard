@@ -5,11 +5,11 @@ module Users
     def call(email:, password:, password_confirmation:)
       @email = email
       @password = password
-      @confirm_password = confirm_password
+      @password_confirmation = password_confirmation
 
       user = User.create!(email: email, password: password, password_confirmation: password_confirmation)
 
-      Jwt::Issuer.call(user: user)
+      Jwt::Issuer.call(user)
     end
 
     private
