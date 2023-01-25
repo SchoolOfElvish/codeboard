@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-      get '/sign_up', to: 'sessions#sign_up'
-      get '/sign_in', to: 'sessions#sign_in'
-      get '/sign_out', to: 'sessions#sign_out'
+      post '/sign_up', to: 'sessions#sign_up'
+      post '/sign_in', to: 'sessions#sign_in'
+      post '/sign_out', to: 'sessions#sign_out'
     end
   end
 end

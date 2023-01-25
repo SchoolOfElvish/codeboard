@@ -76,3 +76,5 @@ group :test do
 end
 
 gem "jwt", "~> 2.6"
+
+gem "dry-monads", "~> 1.6"
