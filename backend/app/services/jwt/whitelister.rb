@@ -6,20 +6,20 @@ module Jwt
 
     def whitelist!(jti:, exp:, user:)
       user.whitelisted_tokens.create!(
-        jti: jti,
-        exp: Time.at(exp)
+        jti:,
+        exp: Time.zone.at(exp)
       )
     end
 
     def remove_whitelist!(jti:)
       whitelist = WhitelistedToken.find_by(
-        jti: jti
+        jti:
       )
       whitelist.destroy if whitelist.present?
     end
 
     def whitelisted?(jti:)
-      WhitelistedToken.exists?(jti: jti)
+      WhitelistedToken.exists?(jti:)
     end
   end
 end

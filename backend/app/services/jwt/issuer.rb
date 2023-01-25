@@ -8,9 +8,9 @@ module Jwt
       access_token, jti, exp = Jwt::Encoder.call(user)
       refresh_token = user.refresh_tokens.create!
       Jwt::Whitelister.whitelist!(
-        jti: jti,
-        exp: exp,
-        user: user
+        jti:,
+        exp:,
+        user:
       )
 
       [access_token, refresh_token]

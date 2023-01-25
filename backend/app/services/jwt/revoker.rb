@@ -8,11 +8,11 @@ module Jwt
       jti = decoded_token.fetch(:jti)
       exp = decoded_token.fetch(:exp)
 
-      Jwt::Whitelister.remove_whitelist!(jti: jti)
+      Jwt::Whitelister.remove_whitelist!(jti:)
       Jwt::Blacklister.blacklist!(
-        jti: jti,
-        exp: exp,
-        user: user
+        jti:,
+        exp:,
+        user:
       )
     rescue StandardError
       raise Errors::Jwt::InvalidToken

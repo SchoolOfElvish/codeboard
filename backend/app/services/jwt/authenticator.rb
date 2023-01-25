@@ -8,11 +8,11 @@ module Jwt
       token = access_token || Jwt::Authenticator.authenticate_header(
         headers
       )
-      raise Errors::Jwt::MissingToken unless token.present?
+      raise Errors::Jwt::MissingToken if token.blank?
 
       decoded_token = Jwt::Decoder.decode!(token)
       user = Jwt::Authenticator.authenticate_user_from_token(decoded_token)
-      raise Errors::Unauthorized unless user.present?
+      raise Errors::Unauthorized if user.blank?
 
       [user, decoded_token]
     end
@@ -41,8 +41,8 @@ module Jwt
 
       def logout!(user:, decoded_token:)
         Jwt::Revoker.revoke(
-          decoded_token: decoded_token,
-          user: user
+          decoded_token:,
+          user:
         )
       end
     end

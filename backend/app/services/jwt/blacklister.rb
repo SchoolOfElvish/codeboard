@@ -6,13 +6,13 @@ module Jwt
 
     def blacklist!(jti:, exp:, user:)
       user.blacklisted_tokens.create!(
-        jti: jti,
-        exp: Time.at(exp)
+        jti:,
+        exp: Time.zone.at(exp)
       )
     end
 
     def blacklisted?(jti:)
-      BlacklistedToken.exists?(jti: jti)
+      BlacklistedToken.exists?(jti:)
     end
   end
 end
