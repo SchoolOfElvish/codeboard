@@ -3,11 +3,11 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
-  before_action :authenticate
+  before_action :authenticate!
 
   private
 
-  def authenticate
+  def authenticate!
     current_user, decoded_token = Jwt::Authenticator.call(
       headers: request.headers,
       access_token: params[:access_token] # authenticate from header OR params
