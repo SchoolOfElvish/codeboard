@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "dry/monads/result"
-require "dry/monads/try"
-require "dry/monads/do"
-require "dry/monads/do/all"
+require 'dry/monads/result'
+require 'dry/monads/try'
+require 'dry/monads/do'
+require 'dry/monads/do/all'
 
 # Base operation class. Provides dry-monads do notation and Result monads.
 #
