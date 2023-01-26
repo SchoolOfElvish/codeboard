@@ -1,6 +1,5 @@
 <script lang="ts">
 	import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
-	import Alert from '$components/Alert.svelte';
 	import wretch from 'wretch';
 	import user from '$stores/user';
 
@@ -10,6 +9,7 @@
 	let password = '';
 	let passwordConfirmation = '';
 
+	let isLoading = false;
 	let errors: Error = {};
 
 	type ResponseData = {
@@ -21,9 +21,10 @@
 		[key: string]: string[];
 	};
 
-	const api = wretch('http://localhost:3000/api');
+	const api = wretch('http://localhost:3000/api')
 
 	const createAccount = async () => {
+		isLoading = true;
 		const response = await api
 			.url('/v1/sign-up')
 			.post({ firstName, lastName, email, password, passwordConfirmation })
@@ -31,6 +32,7 @@
 			.json<ResponseData>();
 
 		if (response) {
+			isLoading = false;
 			user.setToken(response.token);
 			user.setRefreshToken(response.refresh_token);
 		}
@@ -162,7 +164,7 @@
 					</div>
 
 					<div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-						<CreateAccountButton on:click={createAccount} isLoading={false} />
+						<CreateAccountButton on:click={createAccount} {isLoading} />
 
 						<p class="mt-4 text-sm text-gray-500 sm:mt-0">
 							Already have an account?

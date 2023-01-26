@@ -9,12 +9,12 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-    alias: {
-      $components: './src/components',
-      $utils: './src/utils',
-      $features: './src/features',
-      $stores: './src/stores',
-    }
+		alias: {
+			$components: './src/components',
+			$utils: './src/utils',
+			$features: './src/features',
+			$stores: './src/stores'
+		}
 	}
 };
 
