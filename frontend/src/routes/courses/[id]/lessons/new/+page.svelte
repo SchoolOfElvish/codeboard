@@ -17,7 +17,6 @@
       isFormEmpty = false
     }
   }
-
   $: checkForm(title, description)
 
 </script>
@@ -25,7 +24,6 @@
 <style>
 
 </style>
-  {$page.params.id}
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-lg text-center">
     <h1 class="text-2xl font-bold sm:text-3xl">Create lesson:</h1>
@@ -35,11 +33,12 @@
     <div>
       <label for="title" class="sr-only">title</label>
 
-      <div class="relative">
+      <div class="relative ">
         <input
+          minlength="4"
           bind:value={title}
-          type="string"
-          class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+          type="text"
+          class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm invalid:border-red-500"
           placeholder="Enter lesson title"
         />
       </div>
@@ -50,8 +49,9 @@
       <div class="relative">
         <input
         bind:value={description}
-          type="text"
-          class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+          type="text-area"
+          maxlength="255"
+          class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm invalid:border-red-500"
           placeholder="Enter lesson description"
         />
       </div>
