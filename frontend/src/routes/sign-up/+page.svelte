@@ -1,7 +1,8 @@
 <script lang="ts">
-	import useFetch from '$utils/fetch';
 	import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
 	import Alert from '$components/Alert.svelte';
+	import wretch from 'wretch';
+	import user from '$stores/user';
 
 	let firstName = '';
 	let lastName = '';
@@ -9,7 +10,7 @@
 	let password = '';
 	let passwordConfirmation = '';
 
-	let setErrors = {};
+	let errors: Error = {};
 
 	type ResponseData = {
 		token: string;
@@ -17,50 +18,22 @@
 	};
 
 	type Error = {
-		[key: string]: string;
+		[key: string]: string[];
 	};
 
-	type FormValues = {
-		firstName: string;
-		lastName: string;
-		email: string;
-		password: string;
-		passwordConfirmation: string;
-	};
-
-	async function request<T>(url: string, config: RequestInit): Promise<T> {
-		const response = await fetch(url, config);
-		return await response.json();
-	}
-
-	export function assertIsError(error: unknown): asserts error is Error {
-		if (!(error instanceof Error)) {
-			throw error;
-		}
-	}
-
-	$: console.log(setErrors);
-
-	const { fetch: createAccountRequest, isLoading } = useFetch<ResponseData, FormValues>({
-		path: '/v1/sign-up',
-		method: 'post'
-	});
+	const api = wretch('http://localhost:3000/api');
 
 	const createAccount = async () => {
-		try {
-			const user = await request<ResponseData>('/api/users/42', {});
-		} catch (error) {
-		}
+		const response = await api
+			.url('/v1/sign-up')
+			.post({ firstName, lastName, email, password, passwordConfirmation })
+			.error(422, async (error) => (errors = JSON.parse(error.message).error))
+			.json<ResponseData>();
 
-		/* const response = await createAccountRequest({ */
-		/*   body: { */
-		/*     firstName, */
-		/*     lastName, */
-		/*     email, */
-		/*     password, */
-		/*     passwordConfirmation */
-		/*   } */
-		/* }); */
+		if (response) {
+			user.setToken(response.token);
+			user.setRefreshToken(response.refresh_token);
+		}
 	};
 </script>
 
@@ -99,23 +72,20 @@
 					Welcome to CodeBoard 👨‍💻
 				</h1>
 
-				<!-- <p class="mt-4 leading-relaxed text-gray-500"> -->
-				<!-- 	Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam, -->
-				<!-- 	quibusdam aperiam voluptatum. -->
-				<!-- </p> -->
-
-				{#if Object.keys(setErrors).length > 0}
+				{#if Object.keys(errors).length > 0}
 					<div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
 						<strong class="block font-medium text-red-700"> Something went wrong </strong>
 
 						<p class="mt-2 text-sm text-red-700">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt assumenda quia ad
-							cupiditate culpa recusandae provident aperiam aliquam vero! Dolorem.
+							{#each Object.keys(errors) as key}
+								{key}: {errors[key].join(', ')}
+								<br />
+							{/each}
 						</p>
 					</div>
 				{/if}
 
-				<form action="#" class="mt-8 grid grid-cols-6 gap-6">
+				<form class="mt-8 grid grid-cols-6 gap-6">
 					<div class="col-span-6 sm:col-span-3">
 						<label for="FirstName" class="block text-sm font-medium text-gray-700">
 							First Name
@@ -192,7 +162,7 @@
 					</div>
 
 					<div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-						<CreateAccountButton on:click={createAccount} {isLoading} />
+						<CreateAccountButton on:click={createAccount} isLoading={false} />
 
 						<p class="mt-4 text-sm text-gray-500 sm:mt-0">
 							Already have an account?

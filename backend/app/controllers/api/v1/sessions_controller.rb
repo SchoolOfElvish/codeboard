@@ -8,6 +8,7 @@ module Api
       skip_before_action :authenticate!, only: %i[sign_up sign_in]
 
       def sign_up
+        sleep 4.seconds
         case register_user
         in Success[token, refresh_token]
           render json: { token:, refresh_token: }, status: :created
