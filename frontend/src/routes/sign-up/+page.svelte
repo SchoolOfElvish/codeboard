@@ -21,7 +21,7 @@
 		[key: string]: string[];
 	};
 
-	const api = wretch('http://localhost:3000/api')
+	const api = wretch('http://localhost:3000/api');
 
 	const createAccount = async () => {
 		isLoading = true;
