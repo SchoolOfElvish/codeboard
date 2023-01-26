@@ -1,19 +1,31 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   let title = ''
   let description = ''
   const createLesson = () =>{
-   fetch("http://localhost:3000/api/v1/courses/:course_id/lessons/new", {
+   fetch(`http://localhost:3000/api/v1/courses/${$page.params.id}/lessons/new`, {
     method: "POST",
     body: JSON.stringify({title,description}),
    })
   }
-  
+  let isFormEmpty = true
+  const checkForm = (title, description)=>{
+    if(title == '' || description == ''){
+      isFormEmpty = true
+    }
+    else{ 
+      isFormEmpty = false
+    }
+  }
+
+  $: checkForm(title, description)
+
 </script>
 
 <style>
 
 </style>
-
+  {$page.params.id}
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-lg text-center">
     <h1 class="text-2xl font-bold sm:text-3xl">Create lesson:</h1>
@@ -47,7 +59,8 @@
 
     <div class="flex items-center justify-between">
       <button
-      on:click={createLesson}
+        on:click={createLesson}
+        disabled={isFormEmpty}
         type="submit"
         class="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
       >
