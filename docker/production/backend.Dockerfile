@@ -22,6 +22,7 @@ ENV BUNDLE_USER_CACHE=vendor/bundle/caches
 ENV RAILS_ENV=production
 
 COPY --chown=backend:backend backend/Gemfile backend/Gemfile.lock ./
+
 RUN bundle config set --local deployment true; \
   bundle config set --local without development test
 
