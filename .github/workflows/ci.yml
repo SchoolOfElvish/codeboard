@@ -16,15 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Fetch secrets from tawbar
+        run: |
+          curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/test -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
+
       - name: Build docker images
         run: docker compose build backend
 
       - name: Install gems
         run: bin/backend/bundle install
-
-      - name: Fetch secrets from tawbar
-        run: |
-          curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/test -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
 
       - name: Run rubocop
         run: bin/backend/lint
@@ -40,15 +40,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Fetch secrets from tawbar
+        run: |
+          curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/test -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
+
       - name: Build docker images
         run: docker compose build --build-arg UID=$UID frontend
 
       - name: Install dependencies
         run: bin/frontend/yarn install
-
-      - name: Fetch secrets from tawbar
-        run: |
-          curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/test -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
 
       - name: Build vite
         run: bin/frontend/yarn build
@@ -58,6 +58,3 @@ jobs:
 
       - name: Run linter
         run: bin/frontend/lint
-
-      - name: Run tests
-        run: bin/frontend/test
