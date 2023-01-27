@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_01_25_195802) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "jti"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -21,18 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_195802) do
     t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
   end
 
-  create_table "lessons", force: :cascade do |t|
-    t.integer "course_id", null: false
-    t.string "title"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_lessons_on_course_id"
-  end
-
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "crypted_token"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
@@ -54,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_195802) do
 
   create_table "whitelisted_tokens", force: :cascade do |t|
     t.string "jti"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,7 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_195802) do
   end
 
   add_foreign_key "blacklisted_tokens", "users"
-  add_foreign_key "lessons", "courses"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "whitelisted_tokens", "users"
 end
