@@ -1,15 +1,10 @@
 name: Delivery
-#
-# on:
-#   workflow_run:
-#     workflows: CI
-#     branches: main
-#     types: completed
 
 on:
-  push:
-    branches:
-      - modify-delivery-process
+  workflow_run:
+    workflows: CI
+    branches: main
+    types: completed
 
 jobs:
   deploy:
@@ -26,7 +21,6 @@ jobs:
       run: |
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
-
 
     - name: Build and push Docker images
       run: |
