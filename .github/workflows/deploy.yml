@@ -1,9 +1,9 @@
-name: Deploy to ghcr.io
-
+name: "Deploy"
 on:
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -15,6 +15,11 @@ jobs:
 
     - name: Login to Github Container Registry
       run: echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+
+    - name: Fetch secrets from tawbar
+      run: |
+        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
+        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
 
     - name: Build and Push Docker Images
       run: |
@@ -28,5 +33,6 @@ jobs:
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
+          cd /SchoolOfElvish/codeboard
           docker compose -f docker-compose.yml -f production.yml pull
           docker compose -f docker-compose.yml -f production.yml up -d
