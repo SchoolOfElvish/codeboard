@@ -1,18 +1,31 @@
-version: "3.9"
-
 services:
   backend:
-    image: ghcr.io/schoolofelvish/codeboard_backend
-    restart: always
-    build:
-      dockerfile: docker/production/backend.Dockerfile
+    image: ghcr.io/schoolofelvish/codeboard_backend:latest
+    volumes:
+      - backend_tmp:/backend/tmp
+    command: bin/rails s -b 0.0.0.0
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    logging:
+      driver: none
 
   frontend:
-    image: ghcr.io/schoolofelvish/codeboard_frontend
-    restart: always
-    build:
-      context: .
-      dockerfile: docker/production/frontend.Dockerfile
+    image: ghcr.io/schoolofelvish/codeboard_frontend:latest
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "3001:3001"
 
   nginx:
     image: nginx:latest
@@ -25,37 +38,9 @@ services:
       - frontend
       - backend
 
-  # redis:
-  #   image: redis:7.0.5
-  #   restart: always
-
-  # sidekiq:
-  #   build:
-  #     context: .
-  #     dockerfile: docker/development/sidekiq.Dockerfile
-  #   volumes:
-  #     - ./backend:/sidekiq:cached
-  #     - sidekiq_tmp:/sidekiq/tmp
-  #     - bundle:/sidekiq/vendor
-  #   ports:
-  #     - "3002:3000"
-  #   env_file:
-  #     - ./backend/.env
-  #   command: bundle exec sidekiq -C config/sidekiq.yml
-  #   depends_on:
-  #     - db
-  #     - redis
-
 volumes:
-  bundle:
   db_data:
-  node_modules:
   backend_tmp:
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: uid=1000,gid=1000
-  sidekiq_tmp:
     driver_opts:
       type: tmpfs
       device: tmpfs
