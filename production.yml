@@ -2,11 +2,13 @@ version: "3.9"
 
 services:
   backend:
+    image: ghcr.io/schoolofelvish/codeboard_backend
     restart: always
     build:
       dockerfile: docker/production/backend.Dockerfile
 
   frontend:
+    image: ghcr.io/schoolofelvish/codeboard_frontend
     restart: always
     build:
       context: .

@@ -1,0 +1,32 @@
+name: Deploy to ghcr.io
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to Github Container Registry
+      run: echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+
+    - name: Build and Push Docker Images
+      run: |
+        docker compose -f docker-compose.yml -f production.yml build
+        docker compose -f docker-compose.yml -f production.yml push
+
+    - name: SSH into VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        script: |
+          docker compose -f docker-compose.yml -f production.yml pull
+          docker compose -f docker-compose.yml -f production.yml up -d
