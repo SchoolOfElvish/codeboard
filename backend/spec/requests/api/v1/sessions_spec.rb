@@ -13,14 +13,14 @@ RSpec.describe 'Api::V1::Sessions' do
       before { create(:user, email: params[:email]) }
 
       it 'returns an error' do
-        post('/api/v1/sign_up', params:)
+        post('/api/v1/sign-up', params:)
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
     context 'when user does not exist' do
       it 'creates a new user' do
-        post('/api/v1/sign_up', params:)
+        post('/api/v1/sign-up', params:)
         expect(response).to have_http_status(:created)
       end
     end
@@ -30,12 +30,12 @@ RSpec.describe 'Api::V1::Sessions' do
       let(:result) { { 'error' => { 'password_confirmation' => ["doesn't match Password"] } } }
 
       it "doesn't create a new user" do
-        post('/api/v1/sign_up', params:)
+        post('/api/v1/sign-up', params:)
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'returns an error' do
-        post('/api/v1/sign_up', params:)
+        post('/api/v1/sign-up', params:)
         expect(JSON.parse(response.body)).to eq(result)
       end
     end
