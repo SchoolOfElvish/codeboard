@@ -7,7 +7,7 @@
       <nav aria-label="Site Nav" class="hidden md:block">
         <ul class="flex items-center gap-6 text-sm">
           <li>
-            <a class="text-rose-500 transition hover:text-rose-500/75" href="/">
+            <a class="text-rose-500 transition hover:text-rose-500/75" href="/groups/new">
               Create group
             </a>
           </li>
