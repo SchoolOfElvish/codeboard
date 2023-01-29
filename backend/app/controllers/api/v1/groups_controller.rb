@@ -9,9 +9,15 @@ module Api
                 @group = Group.new (group_params)
             end
 
+            def save
+                @group.save
+            end
+
             private
                 def groups_params
                     params.require(:group).permit(:name, :user_id)
+                end
+            end
 
         end
     end
