@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_07_180204) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +28,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_180204) do
     t.index ["jti"], name: "index_blacklisted_tokens_on_jti", unique: true
     t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
   end
+
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+
+  end
+
 
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "crypted_token"
