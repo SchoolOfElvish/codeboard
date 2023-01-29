@@ -38,5 +38,5 @@ jobs:
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
           cd ~/SchoolOfElvish/codeboard
-          docker compose -f docker-compose.yml -f production.yml pull
-          docker compose -f docker-compose.yml -f production.yml up -d
+          docker compose -f production.yml pull
+          docker compose -f production.yml up -d
