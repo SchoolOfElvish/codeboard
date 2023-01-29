@@ -1,31 +1,22 @@
+version: "3.9"
+
 services:
   backend:
     image: ghcr.io/schoolofelvish/codeboard_backend:latest
-    volumes:
-      - backend_tmp:/backend/tmp
-    command: bin/rails s -b 0.0.0.0
-    ports:
-      - "3000:3000"
+    restart: always
     env_file:
       - ./backend/.env
-    depends_on:
-      - db
-
-  db:
-    image: postgres:14
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
-    logging:
-      driver: none
+    build:
+      dockerfile: docker/production/backend.Dockerfile
 
   frontend:
     image: ghcr.io/schoolofelvish/codeboard_frontend:latest
+    restart: always
     env_file:
       - ./frontend/.env
-    ports:
-      - "3001:3001"
+    build:
+      context: .
+      dockerfile: docker/production/frontend.Dockerfile
 
   nginx:
     image: nginx:latest
@@ -38,9 +29,27 @@ services:
       - frontend
       - backend
 
+  db:
+    image: postgres:14
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: codeboard_production
+    logging:
+      driver: none
+
 volumes:
+  bundle:
   db_data:
+  node_modules:
   backend_tmp:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: uid=1000,gid=1000
+  sidekiq_tmp:
     driver_opts:
       type: tmpfs
       device: tmpfs
