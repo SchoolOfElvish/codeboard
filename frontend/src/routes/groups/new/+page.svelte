@@ -38,7 +38,7 @@
 		<div class="flex items-center justify-between">
 			<button
 				type="submit"
-				class="ml-3 inline-block rounded-lg bg-rose-500 px-5 py-3 text-sm font-medium text-white"
+				class="inline-block rounded-lg bg-rose-500 px-5 py-3 text-sm font-medium text-white"
 			>
 				Create Group
 			</button>
