@@ -39,13 +39,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_180204) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
-  
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
   end
 
 
