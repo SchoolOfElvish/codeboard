@@ -1,10 +1,10 @@
 {
-	"navbar": {
-		"menu": {
-			"create_course": "Create course",
-			"create_group": "Create group",
-			"dashboard": "Dashboard"
-		},
-		"common": "hello"
-	}
+  "navbar": {
+    "menu": {
+      "create_course": "Create course",
+      "create_group": "Create group",
+      "dashboard": "Dashboard"
+    },
+    "common": "hello"
+  }
 }
