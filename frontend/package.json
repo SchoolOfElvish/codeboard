@@ -37,5 +37,6 @@
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.1.4",
 		"wretch": "^2.4.1"
-	}
+	},
+	"packageManager": "yarn@3.3.1"
 }
