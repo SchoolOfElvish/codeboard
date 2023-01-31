@@ -21,7 +21,7 @@
 	export let name: string;
 	export let classes = '';
 
-	let Component: typeof SvelteComponentTyped<{}>;
+	let Component: typeof SvelteComponentTyped;
 
 	onMount(async () => {
 		Component = (await import(`./${name}/${type}.svelte`)).default;

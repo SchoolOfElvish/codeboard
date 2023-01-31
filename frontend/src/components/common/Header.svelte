@@ -3,10 +3,12 @@
 	import { page } from '$app/stores';
 	import { to } from '$lib/routes';
 	import { _ } from 'svelte-i18n';
-	import { locale, locales } from 'svelte-i18n';
+	import { locale } from 'svelte-i18n';
 	import { Transition } from '@rgossiaux/svelte-headlessui';
 
-  $: if ($locale == 'en-GB') { $locale = 'en'; }
+	$: if ($locale == 'en-GB') {
+		$locale = 'en';
+	}
 
 	let isDropdownOpen = false;
 </script>
@@ -46,7 +48,7 @@
 							class:current={$page.route.id === to.groups.new()}
 							class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 						>
-              {$_('navbar.menu.create_group')}
+							{$_('navbar.menu.create_group')}
 						</a>
 					</div>
 				</div>
@@ -160,7 +162,7 @@ Heroicon name: outline/bars-3
 
 Menu open: "hidden", Menu closed: "block"
 -->
-					<Icon name="Bars3" class="block h-6 w-6" />
+					<Icon name="Bars3" classes="block h-6 w-6" />
 					<!--
 Heroicon name: outline/x-mark
 

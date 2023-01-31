@@ -3,7 +3,7 @@
 		"menu": {
 			"create_course": "Создать курс",
 			"create_group": "Создать группу",
-      "dashboard": "Панель управления"
+			"dashboard": "Панель управления"
 		},
 		"common": "hello"
 	}

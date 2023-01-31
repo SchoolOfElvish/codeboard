@@ -3,7 +3,7 @@
 		"menu": {
 			"create_course": "Create course",
 			"create_group": "Create group",
-      "dashboard": "Dashboard"
+			"dashboard": "Dashboard"
 		},
 		"common": "hello"
 	}
