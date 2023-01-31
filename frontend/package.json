@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.1.4",
+		"svelte-i18n": "^3.6.0",
 		"wretch": "^2.4.1"
 	},
 	"packageManager": "yarn@3.3.1"
