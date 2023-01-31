@@ -117,8 +117,46 @@
             />
           </div>
 
-          <div class="col-span-6">
-            <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
+					<p class="col-span-6 sm:col-span-6 block text-sm font-medium text-gray-700 ">Chose a role:</p>
+						<div class="col-span-6 sm:col-span-3 top-0">
+							<input
+								type="radio"
+								name="ColorOption"
+								value="ColorBlue"
+								id="ColorBlue"
+								class="peer hidden"
+							/>
+					
+							<label
+								for="ColorBlue"
+								class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+							>
+								<p class="text-sm font-medium">Student</p>
+							</label>
+						</div>
+					
+						<div class="col-span-6 sm:col-span-3">
+							<input
+								type="radio"
+								name="ColorOption"
+								value="ColorGold"
+								id="ColorGold"
+								class="peer hidden"
+							/>
+					
+							<label
+								for="ColorGold"
+								class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+							>
+								<p class="text-sm font-medium">Teacher</p>
+							</label>
+						</div>
+					
+					
+
+					
+					<div class="col-span-6">
+						<label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
 
             <input
               type="email"
