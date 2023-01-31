@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "menu": {
+      "create_course": "Создать курс",
+      "create_group": "Создать группу",
+      "dashboard": "Панель управления"
+    },
+    "common": "hello"
+  }
+}

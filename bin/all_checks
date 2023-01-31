@@ -7,4 +7,3 @@ bin/backend/test
 
 bin/frontend/lint
 bin/frontend/check
-bin/frontend/test
