@@ -5,6 +5,12 @@
       "create_group": "Создать группу",
       "dashboard": "Панель управления"
     },
-    "common": "hello"
+    "user_menu": {
+      "profile": "Профиль",
+      "settings": "Настройки",
+      "logout": "Выйти"
+    },
+    "sign_in": "Войти",
+    "sign_up": "Зарегистрироваться"
   }
 }

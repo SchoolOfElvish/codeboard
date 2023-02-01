@@ -2,6 +2,8 @@
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
   import wretch from 'wretch';
   import user from '$stores/user';
+  import { goto } from '$app/navigation';
+  import { to } from '$lib/routes';
 
   let firstName = '';
   let lastName = '';
@@ -33,13 +35,12 @@
 
     if (response) {
       isLoading = false;
-      user.setToken(response.token);
-      user.setRefreshToken(response.refresh_token);
+      user.set({ token: response.token, refreshToken: response.refresh_token });
+      goto(to.root());
     }
   };
 </script>
 
-<div class="mt-5" />
 <section class="bg-white">
   <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
     <aside class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
