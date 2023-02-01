@@ -227,4 +227,19 @@ To: "transform opacity-0 scale-95"
   .current {
     @apply bg-gray-900 text-white;
   }
+
+  /* .enter {
+    transition: ease-out duration-100;
+    transform: opacity-0 scale-95;
+  }
+  .enter-active {
+    transform: opacity-100 scale-100;
+  }
+  .leave {
+    transition: ease-in duration-75;
+    transform: opacity-100 scale-100;
+  }
+  .leave-active {
+    transform: opacity-0 scale-95;
+  } */
 </style>
