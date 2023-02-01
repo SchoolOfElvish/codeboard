@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_180204) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "token_issued_at"
+    t.date "birthdate"
     t.string "last_name", default: "", null: false
     t.enum "role", null: false, enum_type: "users_role"
     t.datetime "token_issued_at"

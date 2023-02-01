@@ -1,4 +1,17 @@
 <script lang="ts">
+  import wretch from 'wretch';
+
+  const api = wretch('http://localhost:3000/api');
+
+  let birthdate:string;
+  $: console.log(birthdate);
+
+  const submitBirthdate = async () => {
+    const response = await api
+      .url('/v1/users/me')
+      .post({birthdate})
+      .json();
+  }
 </script>
 
 <div class="lg:grid lg:grid-cols-12 lg:gap-x-5 container mx-auto mt-2">
@@ -139,16 +152,19 @@
           </div>
         </div>
 
+        <!-- Datapicker -->
+
         <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
           <div class="shadow sm:overflow-hidden sm:rounded-md">
             <div class="space-y-6 bg-white py-6 px-4 sm:p-6">
               <div>
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
-                  Input your birthday date
+                  Input your birthdate
                 </h3>
                 <form>
                   <div class="date-picker">
                     <input
+                      bind:value={birthdate}
                       class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       type="date"
                       id="party"
@@ -161,6 +177,7 @@
                       <button
                         type="submit"
                         class="mt-1 inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white invalid:border-red-500"
+                        on:click|preventDefault={submitBirthdate}
                       >
                         <span class="text-date-picker">Submit</span>
                       </button>
@@ -171,23 +188,8 @@
             </div>
           </div>
         </div>
+
       </div>
     </form>
   </div>
 </div>
-<!-- <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-lg text-center">
-    <h2 class="text-2xl font-bold sm:text-3xl">Input your birthday date</h2>
-    <form>
-      <div class="date-picker">
-        <input class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="date"  placeholder="mj/dj/YYYY" id="party" name="party" min="1900-01-01" max="2099-01-01" required>
-      </div>
-      <div>
-        <button type="submit"
-                class="mt-1 inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white invalid:border-red-500">
-          <span class = "text-date-picker">Submit</span>
-        </button>
-      </div>
-    </form>
-  </div>
-</div> -->

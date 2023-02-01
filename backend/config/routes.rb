@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post '/sign-out', to: 'sessions#sign_out'
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
+      post 'users/me', to: 'users#update'
     end
   end
 end
