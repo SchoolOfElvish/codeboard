@@ -5,12 +5,12 @@
   import { goto } from '$app/navigation';
   import { to } from '$lib/routes';
 
-	let firstName = '';
-	let lastName = '';
-	let email = '';
-	let password = '';
-	let passwordConfirmation = '';
-	let role = 1;
+  let firstName = '';
+  let lastName = '';
+  let email = '';
+  let password = '';
+  let passwordConfirmation = '';
+  let role = 1;
 
   let isLoading = false;
   let errors: Error = {};
@@ -26,13 +26,13 @@
 
   const api = wretch('http://localhost:3000/api');
 
-	const createAccount = async () => {
-		isLoading = true;
-		const response = await api
-			.url('/v1/sign-up')
-			.post({ firstName, lastName, email, password, passwordConfirmation, role})
-			.error(422, async (error) => (errors = JSON.parse(error.message).error))
-			.json<ResponseData>();
+  const createAccount = async () => {
+    isLoading = true;
+    const response = await api
+      .url('/v1/sign-up')
+      .post({ firstName, lastName, email, password, passwordConfirmation, role })
+      .error(422, async (error) => (errors = JSON.parse(error.message).error))
+      .json<ResponseData>();
 
     if (response) {
       isLoading = false;
@@ -118,46 +118,47 @@
             />
           </div>
 
-					<p class="col-span-6 sm:col-span-6 block text-sm font-medium text-gray-700 ">Chose a role:</p>
-						<div class="col-span-6 sm:col-span-3 top-0">
-							<input
-								type="radio"
-								name="role"
-								id="Student"
-								class="peer hidden"
-								bind:group={role} value= "0"
-							/>
-					
-							<label
-								for="Student"
-								class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
-							>
-								<p class="text-sm font-medium">Student</p>
-							</label>
-						</div>
-					
-						<div class="col-span-6 sm:col-span-3">
-							<input
-								type="radio"
-								name="role"
-								id="Teacher"
-								class="peer hidden"
-								bind:group={role} value= "1"
-							/>
-					
-							<label
-								for="Teacher"
-								class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
-							>
-								<p class="text-sm font-medium">Teacher</p>
-							</label>
-						</div>
-					
-					
+          <p class="col-span-6 sm:col-span-6 block text-sm font-medium text-gray-700 ">
+            Chose a role:
+          </p>
+          <div class="col-span-6 sm:col-span-3 top-0">
+            <input
+              type="radio"
+              name="role"
+              id="Student"
+              class="peer hidden"
+              bind:group={role}
+              value="0"
+            />
 
-					
-					<div class="col-span-6">
-						<label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
+            <label
+              for="Student"
+              class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+            >
+              <p class="text-sm font-medium">Student</p>
+            </label>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <input
+              type="radio"
+              name="role"
+              id="Teacher"
+              class="peer hidden"
+              bind:group={role}
+              value="1"
+            />
+
+            <label
+              for="Teacher"
+              class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+            >
+              <p class="text-sm font-medium">Teacher</p>
+            </label>
+          </div>
+
+          <div class="col-span-6">
+            <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
 
             <input
               type="email"
