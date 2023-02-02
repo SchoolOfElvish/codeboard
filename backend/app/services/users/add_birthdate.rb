@@ -5,7 +5,7 @@ module Users
     def call(birthdate:, user:)
       @birthdate = birthdate
       @user = user
-      
+
       add_birthdate
     end
 
@@ -16,7 +16,5 @@ module Users
     def add_birthdate
       user.update(birthdate:) ? Success() : Failure()
     end
-
-    
   end
 end

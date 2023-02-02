@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class UsersController < ApplicationController
@@ -9,7 +11,6 @@ module Api
           user: current_user
         )
       end
-
     end
   end
 end
