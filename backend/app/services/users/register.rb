@@ -18,9 +18,9 @@ module Users
     private
 
     def create_user
-      user = User.create(role:, last_name:, first_name:, email:, password:, password_confirmation:)
+      user = User.new(role:, last_name:, first_name:, email:, password:, password_confirmation:)
 
-      user.valid? ? Success(user) : Failure(user.errors)
+      user.save ? Success(user) : Failure(user.errors)
     end
 
     def issue_token(user)
