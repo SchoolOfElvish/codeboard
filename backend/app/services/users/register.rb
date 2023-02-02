@@ -18,7 +18,7 @@ module Users
 
     def create_user
       user = User.create(last_name:, first_name:, email:, password:, password_confirmation:)
-
+      
       user.valid? ? Success(user) : Failure(user.errors)
     end
 
