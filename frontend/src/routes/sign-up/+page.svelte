@@ -44,8 +44,10 @@
 
     if (response) {
       isLoading = false;
-      user.set({ token: response.token, refreshToken: response.refresh_token });
-      goto(to.root());
+      if(response.token){
+        user.set({ token: response.token, refreshToken: response.refresh_token });
+        goto(to.root());
+      }
     }
   };
 </script>
