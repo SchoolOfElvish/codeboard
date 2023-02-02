@@ -24,6 +24,7 @@ module Api
 
       def register_user
         Users::Register.new.call(
+          role: params[:role],
           first_name: params[:firstName],
           last_name: params[:lastName],
           email: params[:email],
