@@ -11,6 +11,8 @@ module Users
 
     private
 
+    attr_reader :email, :password, :password_confirmation
+
     def create_user
       user = User.new(user_info)
       user.save ? Success(user) : Failure(user.errors)

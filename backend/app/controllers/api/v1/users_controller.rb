@@ -4,8 +4,9 @@ module Api
       include Dry::Monads::Result::Mixin
 
       def update
-        User::Add_Birthdate.new.call(
-          birthdate: params[:birthdate]
+        Users::AddBirthdate.new.call(
+          birthdate: params[:birthdate],
+          user: current_user
         )
       end
 

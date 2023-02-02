@@ -1,4 +1,5 @@
 <script lang="ts">
+  import user from '$stores/user';
   import wretch from 'wretch';
 
   const api = wretch('http://localhost:3000/api');
@@ -9,6 +10,7 @@
   const submitBirthdate = async () => {
     const response = await api
       .url('/v1/users/me')
+      .headers({'Authorization':`Bearer ${$user.token}`})
       .post({birthdate})
       .json();
   }
