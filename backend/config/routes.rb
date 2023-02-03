@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
       post 'users/me', to: 'users#update'
+      patch 'users/me', to: 'users#update'
     end
   end
 end

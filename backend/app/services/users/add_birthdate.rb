@@ -14,7 +14,7 @@ module Users
     attr_reader :birthdate, :user
 
     def add_birthdate
-      user.update(birthdate:) ? Success() : Failure()
+      user.update(birthdate:) ? Success() : Failure(:user_not_updated)
     end
   end
 end

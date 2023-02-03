@@ -5,7 +5,7 @@ module Jwt
     module_function
 
     def expiry
-      2.months
+      2.hours
     end
   end
 end
