@@ -7,7 +7,7 @@
 
   let birthdate: string;
   let isSuccess = false;
-  
+
   $: isSuccess;
 
   const submitBirthdate = async () => {
@@ -40,7 +40,7 @@
 
           Current: "text-indigo-500 group-hover:text-indigo-500", Default: "text-gray-400 group-hover:text-gray-500"
         -->
-        <Icon name="UserCircle"  />
+        <Icon name="UserCircle" />
         <span class="truncate">Account</span>
       </a>
 
@@ -49,7 +49,7 @@
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <!-- Heroicon name: outline/key -->
-        <Icon name="Key"  />
+        <Icon name="Key" />
         <span class="truncate">Password</span>
       </a>
 
@@ -58,7 +58,7 @@
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <!-- Heroicon name: outline/credit-card -->
-        <Icon name="CreditCard"  />
+        <Icon name="CreditCard" />
         <span class="truncate">Plan &amp; Billing</span>
       </a>
 
@@ -67,7 +67,7 @@
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <!-- Heroicon name: outline/user-group -->
-        <Icon name="UserGroup"/>
+        <Icon name="UserGroup" />
         <span class="truncate">Team</span>
       </a>
 
@@ -76,7 +76,7 @@
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <!-- Heroicon name: outline/squares-plus -->
-        <Icon name="SquaresPlus"/>
+        <Icon name="SquaresPlus" />
         <span class="truncate">Integrations</span>
       </a>
     </nav>
@@ -88,7 +88,7 @@
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: mini/check-circle -->
-            <Icon name="CheckCircle"/>
+            <Icon name="CheckCircle" />
           </div>
           <div class="ml-3">
             <p class="text-sm font-medium text-green-800">Successfully uploaded</p>

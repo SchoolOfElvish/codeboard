@@ -7,10 +7,10 @@ module Api
 
       def update
         case add_birthdate
-          in Success()
-            head :no_content
-          in Failure[error]
-            render json: { error: }, status: :unprocessable_entity
+        in Success()
+          head :no_content
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
           end
       end
 
