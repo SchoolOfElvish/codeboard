@@ -20,6 +20,10 @@
       isSuccess = true;
     }
   };
+
+  const closeAlert = () => {
+    isSuccess = false;
+  };
 </script>
 
 <div class="lg:grid lg:grid-cols-12 lg:gap-x-5 container mx-auto mt-2">
@@ -176,6 +180,7 @@
               <button
                 type="button"
                 class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
+                on:click|preventDefault={closeAlert}
               >
                 <span class="sr-only">Dismiss</span>
                 <!-- Heroicon name: mini/x-mark -->
