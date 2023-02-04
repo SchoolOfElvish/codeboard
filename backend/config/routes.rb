@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       end
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
-      resources :courses
+      resources :courses, only: [:create]
     end
   end
 end

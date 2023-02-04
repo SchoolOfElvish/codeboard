@@ -4,7 +4,7 @@ module Api
   module V1
     class CoursesController < ApplicationController
       def create
-        @course = current_user.course.new(course_params)
+        @course = current_user.course.create(course_params)
 
         if @course.save
           json_response(@course, :created)
