@@ -10,7 +10,7 @@
   let email = '';
   let password = '';
   let passwordConfirmation = '';
-  let role = 1;
+  let role = '';
 
   let isLoading = false;
   let errors: Error = {};
@@ -128,7 +128,7 @@
               id="Student"
               class="peer hidden"
               bind:group={role}
-              value="0"
+              value="STUDENT"
             />
 
             <label
@@ -146,7 +146,7 @@
               id="Teacher"
               class="peer hidden"
               bind:group={role}
-              value="1"
+              value="TEACHER"
             />
 
             <label

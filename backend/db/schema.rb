@@ -14,6 +14,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "users_role", ["STUDENT", "TEACHER"]
+
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "jti"
     t.bigint "user_id", null: false
@@ -43,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "last_name", default: "", null: false
-    t.integer "role", default: 0
+    t.enum "role", null: false, enum_type: "users_role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate!
 
+  wrap_parameters format: []
+
   private
 
   def authenticate!

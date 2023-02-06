@@ -3,14 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Sessions' do
-  let(:role) { 1 }
-  let(:password) { 'qwerty123' }
-  let(:password_confirmation) { password }
-
   describe 'POST /sign_up' do
     let(:params) do
-      { lastName: 'test_last_name', firstName: 'test_first_name', role:, email: 'test@gmail.com', password:,
-        passwordConfirmation: password_confirmation }
+      { lastName: 'test_last_name', firstName: 'test_first_name', role: 'STUDENT', email: 'test@gmail.com',
+        password: 'qwerty123', passwordConfirmation: 'qwerty123' }
     end
 
     context 'when user already exists' do
