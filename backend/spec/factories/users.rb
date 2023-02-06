@@ -7,5 +7,6 @@ FactoryBot.define do
     password_confirmation { password }
     last_name { Faker::Name.last_name }
     first_name { Faker::Name.first_name }
+    role { 'STUDENT' }
   end
 end

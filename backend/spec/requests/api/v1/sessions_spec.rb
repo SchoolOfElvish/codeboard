@@ -6,8 +6,11 @@ RSpec.describe 'Api::V1::Sessions' do
   describe 'POST /sign_up' do
     let(:params) do
       { lastName: 'test_last_name', firstName: 'test_first_name', role: 'STUDENT', email: 'test@gmail.com',
-        password: 'qwerty123', passwordConfirmation: 'qwerty123' }
+        password:, passwordConfirmation: password_confirmation }
     end
+
+    let(:password) { 'qwerty123' }
+    let(:password_confirmation) { password }
 
     context 'when user already exists' do
       before { create(:user, email: params[:email]) }
