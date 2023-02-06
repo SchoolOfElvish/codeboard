@@ -42,4 +42,19 @@ RSpec.describe Users::Register do
       expect(service).to be_failure
     end
   end
+
+  context 'when password confirmation not passed', skip: 'TTD for bug' do
+    let(:params) do
+      { email: 'test@gmail.com', password: 'qwerty123', firstName: 'testfirst',
+        lastName: 'testlast', role: 'STUDENT' }
+    end
+
+    it 'does not create new user' do
+      expect { service }.not_to change(User, :count)
+    end
+
+    it 'returns failure result' do
+      expect(service).to be_failure
+    end
+  end
 end
