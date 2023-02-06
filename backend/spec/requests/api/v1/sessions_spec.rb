@@ -3,15 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Sessions' do
+  let(:role) { 1 }
+  let(:password) { 'qwerty123' }
+  let(:password_confirmation) { password }
+
   describe 'POST /sign_up' do
-    let(:last_name) { 'testlastname' }
-    let(:first_name) { 'testfirstname' }
-    let(:role) { 1 }
-    let(:password) { 'qwerty123' }
-    let(:email) { 'test@gmail.com' }
-    let(:password_confirmation) { password }
     let(:params) do
-      { lastName: first_name, firstName: last_name, role:, email:, password:,
+      { lastName: 'test_last_name', firstName: 'test_first_name', role:, email: 'test@gmail.com', password:,
         passwordConfirmation: password_confirmation }
     end
 

@@ -23,14 +23,11 @@ module Api
       private
 
       def register_user
-        Users::Register.new.call(
-          role: params[:role],
-          first_name: params[:firstName],
-          last_name: params[:lastName],
-          email: params[:email],
-          password: params[:password],
-          password_confirmation: params[:passwordConfirmation]
-        )
+        Users::Register.new.call(user_params)
+      end
+
+      def user_params
+        params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
       end
     end
   end
