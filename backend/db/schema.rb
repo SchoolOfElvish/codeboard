@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_192210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_blacklisted_tokens_on_jti", unique: true
     t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -48,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
     t.datetime "updated_at", null: false
     t.string "last_name", default: "", null: false
     t.enum "role", null: false, enum_type: "users_role"
+    t.datetime "token_issued_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -63,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_200515) do
   end
 
   add_foreign_key "blacklisted_tokens", "users"
+  add_foreign_key "courses", "users"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "whitelisted_tokens", "users"
 end
