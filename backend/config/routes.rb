@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       post '/sign-out', to: 'sessions#sign_out'
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
+      resources :groups do
+        resources only: [:new, :create]
+      end
     end
   end
 end

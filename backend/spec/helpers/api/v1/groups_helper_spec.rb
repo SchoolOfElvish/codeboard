@@ -11,5 +11,5 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe GroupsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  #subject(:group1) { described_class.create({name: "SAWQ", user_id: 1})}
 end
