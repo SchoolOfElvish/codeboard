@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module RequestSpecHelper
-  include FactoryBot::Syntax::Methods
 
   def auth_user
     user = create(:user)
