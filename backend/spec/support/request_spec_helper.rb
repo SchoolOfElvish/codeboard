@@ -1,8 +1,8 @@
 module RequestSpecHelper
   
-  def auth_user(user)
-    get '/users/confirm', params: {token: user.confirmation_token}
-    post '/users/login', params: {email: user.email, password: 'password'}
-    return json['auth_token']
+  def auth_user
+    user = create(:user)
+    token = Jwt::Issuer.call(user)[0]
+    return {'Authorization' => "Bearer #{token}"}
   end
 end
