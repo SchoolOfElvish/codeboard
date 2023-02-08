@@ -2,11 +2,8 @@
 
 module Users
   class Register < Core::Service
-    def call(email:, password:, password_confirmation:)
-      @email = email
-      @password = password
-      @password_confirmation = password_confirmation
-
+    def call(user_params)
+      @user_params = user_params
       user = yield create_user
       token, refresh_token = yield issue_token(user)
       Success[token, refresh_token]
@@ -15,9 +12,19 @@ module Users
     private
 
     def create_user
-      user = User.create(email:, password:, password_confirmation:)
+      user = User.new(user_info)
+      user.save ? Success(user) : Failure(user.errors)
+    end
 
-      user.valid? ? Success(user) : Failure(user.errors)
+    def user_info
+      {
+        role: user_params[:role],
+        first_name: user_params[:firstName],
+        last_name: user_params[:lastName],
+        email: user_params[:email],
+        password: user_params[:password],
+        password_confirmation: user_params[:passwordConfirmation]
+      }
     end
 
     def issue_token(user)
@@ -25,6 +32,6 @@ module Users
       Success[token, refresh_token.token]
     end
 
-    attr_reader :email, :password, :password_confirmation
+    attr_reader :user_params
   end
 end

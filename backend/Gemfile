@@ -86,3 +86,5 @@ gem 'dry-monads', '~> 1.6'
 gem 'rack-cors', '~> 1.1'
 
 gem 'pg', '~> 1.4'
+
+gem 'pry', '~> 0.14.2'

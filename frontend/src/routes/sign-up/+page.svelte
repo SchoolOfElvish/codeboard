@@ -10,6 +10,7 @@
   let email = '';
   let password = '';
   let passwordConfirmation = '';
+  let role = '';
 
   let isLoading = false;
   let errors: Error = {};
@@ -29,7 +30,7 @@
     isLoading = true;
     const response = await api
       .url('/v1/sign-up')
-      .post({ firstName, lastName, email, password, passwordConfirmation })
+      .post({ firstName, lastName, email, password, passwordConfirmation, role })
       .error(422, async (error) => (errors = JSON.parse(error.message).error))
       .json<ResponseData>();
 
@@ -115,6 +116,45 @@
               bind:value={lastName}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
+          </div>
+
+          <p class="col-span-6 sm:col-span-6 block text-sm font-medium text-gray-700 ">
+            Chose a role:
+          </p>
+          <div class="col-span-6 sm:col-span-3 top-0">
+            <input
+              type="radio"
+              name="role"
+              id="Student"
+              class="peer hidden"
+              bind:group={role}
+              value="STUDENT"
+            />
+
+            <label
+              for="Student"
+              class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+            >
+              <p class="text-sm font-medium">Student</p>
+            </label>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <input
+              type="radio"
+              name="role"
+              id="Teacher"
+              class="peer hidden"
+              bind:group={role}
+              value="TEACHER"
+            />
+
+            <label
+              for="Teacher"
+              class="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white"
+            >
+              <p class="text-sm font-medium">Teacher</p>
+            </label>
           </div>
 
           <div class="col-span-6">

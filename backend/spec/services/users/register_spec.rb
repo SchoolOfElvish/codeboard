@@ -6,7 +6,8 @@ RSpec.describe Users::Register do
   subject(:service) { described_class.new.call(**params) }
 
   let(:params) do
-    { email: 'test@gmail.com', password: 'qwerty123', password_confirmation: 'qwerty123' }
+    { email: 'test@gmail.com', password: 'qwerty123', passwordConfirmation: 'qwerty123', firstName: 'testfirst',
+      lastName: 'testlast', role: 'STUDENT' }
   end
 
   context 'when params are valid' do
@@ -28,7 +29,25 @@ RSpec.describe Users::Register do
   end
 
   context 'when params are invalid' do
-    let(:params) { { email: '', password: '', password_confirmation: '' } }
+    let(:params) do
+      { email: '', password: '', password_confirmation: '', first_name: 'testfirst',
+        last_name: 'testlast', role: 'STUDENT' }
+    end
+
+    it 'does not create new user' do
+      expect { service }.not_to change(User, :count)
+    end
+
+    it 'returns failure result' do
+      expect(service).to be_failure
+    end
+  end
+
+  context 'when password confirmation not passed', skip: 'TTD for bug' do
+    let(:params) do
+      { email: 'test@gmail.com', password: 'qwerty123', firstName: 'testfirst',
+        lastName: 'testlast', role: 'STUDENT' }
+    end
 
     it 'does not create new user' do
       expect { service }.not_to change(User, :count)
