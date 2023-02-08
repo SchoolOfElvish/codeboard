@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe Users::AddBirthdate do
+RSpec.describe Users::Update do
   include Dry::Monads::Result::Mixin
-  subject(:add_birthdate) { described_class.new.call(birthdate:, user:) }
+  subject(:add_birthdate) { described_class.new.call(user:, birthdate:) }
 
   let(:user) { create(:user) }
   let(:birthdate) { nil }
@@ -14,7 +14,7 @@ RSpec.describe Users::AddBirthdate do
 
   context 'when user does not have birthdate' do
     it 'returns Success result' do
-      expect(add_birthdate).to eq(Success())
+      expect(add_birthdate).to be_success
     end
 
     it 'does not update user birthdate' do
@@ -32,7 +32,7 @@ RSpec.describe Users::AddBirthdate do
     end
 
     it 'returns Success result' do
-      expect(add_birthdate).to eq(Success())
+      expect(add_birthdate).to be_success
     end
   end
 end

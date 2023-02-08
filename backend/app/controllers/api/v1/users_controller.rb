@@ -14,10 +14,12 @@ module Api
           end
       end
 
+      private
+
       def add_birthdate
-        Users::AddBirthdate.new.call(
-          birthdate: params[:birthdate],
-          user: current_user
+        Users::Update.new.call(
+          user: current_user,
+          birthdate: params[:birthdate]
         )
       end
     end

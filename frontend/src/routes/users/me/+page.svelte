@@ -8,8 +8,6 @@
   let birthdate: string;
   let isSuccess = false;
 
-  $: isSuccess;
-
   const submitBirthdate = async () => {
     const response = await api
       .url('/v1/users/me')
@@ -151,11 +149,11 @@
                     />
                     <div class="inline-block">
                       <button
-                        type="submit"
-                        class="mt-1 inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white invalid:border-red-500"
+                        type="button"
+                        class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         on:click|preventDefault={submitBirthdate}
                       >
-                        <span class="text-date-picker">Submit</span>
+                        Submit
                       </button>
                     </div>
                   </div>
