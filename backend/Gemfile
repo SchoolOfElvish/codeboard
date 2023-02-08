@@ -55,7 +55,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
   gem 'faker', '~> 3.1'
-  gem 'pry', '~> 0.14.1'
+  gem 'pry', '~> 0.14.2'
   gem 'rspec-rails', '~> 6.0'
   gem 'rubocop', '~> 1.44', require: false
   gem 'rubocop-rails', '~> 2.17', require: false
@@ -63,7 +63,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'pry', '~> 0.14.2'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
@@ -88,8 +87,3 @@ gem 'dry-monads', '~> 1.6'
 gem 'rack-cors', '~> 1.1'
 
 gem 'pg', '~> 1.4'
-
-gem 'pry', '~> 0.14.2'
-
-gem 'pry', '~> 0.14.2'
-
