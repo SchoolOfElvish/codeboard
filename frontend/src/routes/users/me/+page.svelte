@@ -27,17 +27,11 @@
 <div class="lg:grid lg:grid-cols-12 lg:gap-x-5 container mx-auto mt-2">
   <aside class="py-6 px-2 sm:px-6 lg:col-span-3 lg:py-0 lg:px-0">
     <nav class="space-y-1">
-      <!-- Current: "bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
       <a
         href="#"
         class="bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
         aria-current="page"
       >
-        <!--
-          Heroicon name: outline/user-circle
-
-          Current: "text-indigo-500 group-hover:text-indigo-500", Default: "text-gray-400 group-hover:text-gray-500"
-        -->
         <Icon name="UserCircle" />
         <span class="truncate">Account</span>
       </a>
@@ -46,7 +40,6 @@
         href="#"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
-        <!-- Heroicon name: outline/key -->
         <Icon name="Key" />
         <span class="truncate">Password</span>
       </a>
@@ -55,7 +48,6 @@
         href="#"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
-        <!-- Heroicon name: outline/credit-card -->
         <Icon name="CreditCard" />
         <span class="truncate">Plan &amp; Billing</span>
       </a>
@@ -64,7 +56,6 @@
         href="#"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
-        <!-- Heroicon name: outline/user-group -->
         <Icon name="UserGroup" />
         <span class="truncate">Team</span>
       </a>
@@ -73,7 +64,6 @@
         href="#"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
-        <!-- Heroicon name: outline/squares-plus -->
         <Icon name="SquaresPlus" />
         <span class="truncate">Integrations</span>
       </a>
@@ -85,7 +75,6 @@
       <div class="rounded-md bg-green-50 p-4">
         <div class="flex">
           <div class="flex-shrink-0">
-            <!-- Heroicon name: mini/check-circle -->
             <Icon name="CheckCircle" />
           </div>
           <div class="ml-3">
@@ -99,18 +88,7 @@
                 on:click|preventDefault={closeAlert}
               >
                 <span class="sr-only">Dismiss</span>
-                <!-- Heroicon name: mini/x-mark -->
-                <svg
-                  class="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
-                  />
-                </svg>
+                <Icon name="XMark" />
               </button>
             </div>
           </div>
