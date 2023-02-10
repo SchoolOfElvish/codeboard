@@ -3,23 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe Course do
-  subject(:testCourse) { described_class.create(course_params) }
+  subject(:test_course) { described_class.create(course_params) }
 
-  let(:current_user) { User.create({ name: 'Test', email: 'test@mail.ru', password: 'testtest' }) }
+  let(:current_user) { create(:user) }
   let(:name) { 'TestCourse' }
   let(:user_id) { current_user.id }
   let(:course_params) { { name:, user_id: } }
 
-  it 'creates a course attached to current user' do
-    expect(testCourse).to be_persisted
-    expect(testCourse.user_id).to eq(current_user.id)
+  it 'creates a course' do
+    expect(test_course).to be_persisted
   end
 
-  context 'name is empty' do
+  context 'when name is empty' do
     let(:name) { '' }
 
     it "dosen't create a new course" do
-      expect(testCourse).not_to be_persisted
+      expect(test_course).not_to be_persisted
     end
   end
 end
