@@ -21,4 +21,20 @@ RSpec.describe Course do
       expect(test_course).not_to be_persisted
     end
   end
+
+  context 'when name is long' do
+    let(:name) { 'q' * 256 }
+
+    it 'create a new course' do
+      expect(test_course).to be_persisted
+    end
+  end
+
+  context 'when name is too long' do
+    let(:name) { 'q' * 257 }
+
+    it "dosen't create a new course" do
+      expect(test_course).not_to be_persisted
+    end
+  end
 end

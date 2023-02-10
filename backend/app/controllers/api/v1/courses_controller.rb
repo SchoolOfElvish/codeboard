@@ -3,16 +3,22 @@
 module Api
   module V1
     class CoursesController < ApplicationController
+      include Dry::Monads::Result::Mixin
+
       def create
-        @course = Courses::Create.new.call(params: course_params, user: current_user)
-        if @course.persisted?
-          render json: course_params.to_json, status: :created
-        else
-          render json: course_params.to_json, status: :unprocessable_entity
+        case course_creation
+        in Success(course)
+          render json: course, status: :created
+        in Failure(error)
+          render json: error, status: :unprocessable_entity
         end
       end
 
       private
+
+      def course_creation
+        Courses::Create.new.call(user: current_user, params: course_params)
+      end
 
       def course_params
         params.permit(:name)

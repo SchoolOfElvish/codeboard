@@ -6,8 +6,7 @@ module Courses
       @params = params
       @user = user
       course.user_id = user.id
-      course.save
-      course
+      course.save ? Success(course) : Failure(course.errors)
     end
 
     private
