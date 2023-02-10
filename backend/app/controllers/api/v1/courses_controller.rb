@@ -4,19 +4,18 @@ module Api
   module V1
     class CoursesController < ApplicationController
       def create
-        @course = current_user.courses.create(course_params)
-
-        # if @course.save
-        #   json_response(@course, :created)
-        # else
-        #   json_response(@course, :unprocessable_entity)
-        # end
+        @course = Courses::Create.new.call(params: course_params, user: current_user)
+        if @course.persisted?
+          render json: course_params.to_json, status: :created
+        else
+          render json: course_params.to_json, status: :unprocessable_entity
+        end
       end
 
       private
 
       def course_params
-        params.permit(:name, :user_id).merge(user: current_user)
+        params.permit(:name)
       end
     end
   end
