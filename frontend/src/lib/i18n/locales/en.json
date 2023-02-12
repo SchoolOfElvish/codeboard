@@ -3,7 +3,8 @@
     "menu": {
       "create_course": "Create course",
       "create_group": "Create group",
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "my_courses": "Courses"
     },
     "user_menu": {
       "profile": "Your Profile",

@@ -22,6 +22,10 @@
           href: '/'
         },
         {
+          name: $_('navbar.menu.my_courses'),
+          href: to.courses.my()
+        },
+        {
           name: $_('navbar.menu.create_course'),
           href: to.courses.new()
         },

@@ -3,7 +3,8 @@
     "menu": {
       "create_course": "Создать курс",
       "create_group": "Создать группу",
-      "dashboard": "Панель управления"
+      "dashboard": "Панель управления",
+      "my_courses": "Курсы"
     },
     "user_menu": {
       "profile": "Профиль",
