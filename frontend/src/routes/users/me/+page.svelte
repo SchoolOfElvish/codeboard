@@ -28,7 +28,7 @@
   <aside class="py-6 px-2 sm:px-6 lg:col-span-3 lg:py-0 lg:px-0">
     <nav class="space-y-1">
       <a
-        href="#"
+        href="/"
         class="bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
         aria-current="page"
       >
@@ -37,7 +37,7 @@
       </a>
 
       <a
-        href="#"
+        href="/"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <Icon name="Key" />
@@ -45,7 +45,7 @@
       </a>
 
       <a
-        href="#"
+        href="/"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <Icon name="CreditCard" />
@@ -53,7 +53,7 @@
       </a>
 
       <a
-        href="#"
+        href="/"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <Icon name="UserGroup" />
@@ -61,7 +61,7 @@
       </a>
 
       <a
-        href="#"
+        href="/"
         class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
       >
         <Icon name="SquaresPlus" />
