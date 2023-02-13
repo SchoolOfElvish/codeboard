@@ -313,7 +313,7 @@ DEPENDENCIES
   jbuilder
   jwt (~> 2.6)
   pg (~> 1.4)
-  pry (~> 0.14.2)
+  pry (~> 0.14.1)
   puma (~> 5.0)
   rack-cors (~> 1.1)
   rails (~> 7.0.4, >= 7.0.4.1)
