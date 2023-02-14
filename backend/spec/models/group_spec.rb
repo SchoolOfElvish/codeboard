@@ -12,6 +12,10 @@ RSpec.describe Group, type: :model do
     expect(group1).to be_persisted
   end
 
+  it 'realy creates a group' do
+    expect { group1 }.to change { Group.count }.by(1)
+  end  
+
   context 'name is empty' do
     let(:name) { '' }
 

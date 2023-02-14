@@ -11,10 +11,6 @@ RSpec.describe 'Api::V1::Groups' do
         post('/api/v1/groups', params:, headers:)
         expect(response).to have_http_status(:created)
     end
-
-    it "realy creates a group" do
-        expect { result }.to change( Group.count ).from(0).to(1)
-    end  
     
     context 'when name is empty' do
         let(:name) { '' }
