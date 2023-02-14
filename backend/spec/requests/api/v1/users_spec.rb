@@ -3,32 +3,29 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Sessions' do
-  describe 'POST /me' do
+  describe 'PUT /me' do
     let(:params) do
-      { lastName: 'test_last_name', firstName: 'test_first_name', role: 'STUDENT', email: 'test@gmail.com',
-        password:, passwordConfirmation: password_confirmation, birthdate: birthdate }
+      { user:, birthdate: }
     end
-
-    let(:password) { 'qwerty123' }
     let(:password_confirmation) { password }
     let(:birthdate) { nil }
+    let(:user) { create(:user) }
 
-    before { create(:user, email: params[:email]) }
+    before { user }
 
-    context 'when birthdate is not provided' do
-      it 'returns an error' do
-        post('/api/v1/update', birthdate: nil )
-        expect(response).to have_http_status(:unprocessable_entity)
+    context 'when birthdate is not nil' do
+      it 'returns an 204' do
+        put('/api/v1//users/me', headers: auth_header_for(user), params:)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context 'when birthdate is provided' do
-      let(:birthdate) { Time.zone.now }
+      let(:birthdate) { Time.zone.today }
 
       it 'updates the user birthdate' do
-        post('/api/v1/update', birthdate: )
-        expect(response).to have_http_status(:no_content)
-        expect(current_user.reload.birthdate).to eq(birthdate)
+        put('/api/v1//users/me', headers: auth_header_for(user), params:)
+        expect(user.reload.birthdate).to eq(birthdate)
       end
     end
   end
