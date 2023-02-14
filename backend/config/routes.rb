@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
       resources :groups do
-        resources only: [:new, :create]
+        resources only: %i[new create]
       end
     end
   end

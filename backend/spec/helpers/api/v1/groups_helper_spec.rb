@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
@@ -10,6 +12,3 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe GroupsHelper, type: :helper do
-  #subject(:group1) { described_class.create({name: "SAWQ", user_id: 1})}
-end

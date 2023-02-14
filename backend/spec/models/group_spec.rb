@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Group, type: :model do
-  subject(:group1) { Group.create(group_params)}
+RSpec.describe Group do
+  subject(:group1) { described_class.create(group_params) }
 
   let(:current_user) { create(:user) }
-  let(:name) { "SAWQ" }
+  let(:name) { 'SAWQ' }
   let(:user_id) { current_user.id }
   let(:group_params) { { name:, user_id: } }
 
@@ -13,8 +15,8 @@ RSpec.describe Group, type: :model do
   end
 
   it 'realy creates a group' do
-    expect { group1 }.to change { Group.count }.by(1)
-  end  
+    expect { group1 }.to change(described_class, :count).by(1)
+  end
 
   context 'name is empty' do
     let(:name) { '' }
@@ -39,5 +41,4 @@ RSpec.describe Group, type: :model do
       expect(group1).not_to be_persisted
     end
   end
-
 end
