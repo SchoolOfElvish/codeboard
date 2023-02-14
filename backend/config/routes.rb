@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       patch 'users/me', to: 'users#update'
       resource :user, only: [:update]
       put 'users/me', to: 'users#update'
+      resource :users, only: [:update], path: 'users/me'
     end
   end
 end
