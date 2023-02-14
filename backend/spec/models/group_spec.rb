@@ -18,7 +18,7 @@ RSpec.describe Group do
     expect { group1 }.to change(described_class, :count).by(1)
   end
 
-  context 'name is empty' do
+  context 'when name is empty' do
     let(:name) { '' }
 
     it "dosen't create a group" do
@@ -26,7 +26,7 @@ RSpec.describe Group do
     end
   end
 
-  context 'name is < 4' do
+  context 'when name is < 4' do
     let(:name) { 'SAQ' }
 
     it "dosen't create a group" do
@@ -34,7 +34,7 @@ RSpec.describe Group do
     end
   end
 
-  context 'OVER 20 symbols' do
+  context 'when OVER 20 symbols' do
     let(:name) { 'SAWQFSAWQFSAWQFSAWQFf' }
 
     it "dosen't create a group" do
