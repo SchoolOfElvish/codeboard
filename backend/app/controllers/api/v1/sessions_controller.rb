@@ -20,6 +20,10 @@ module Api
 
       def sign_out; end
 
+      def refresh
+        Jwt::Refresher.refresh!(token_info)
+      end
+
       private
 
       def register_user
@@ -28,6 +32,14 @@ module Api
 
       def user_params
         params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
+      end
+
+      def token_info
+        {
+          decoder_token: params[:token],
+          refresh_token: params[:refresh_token],
+          user: current_user
+        }
       end
     end
   end

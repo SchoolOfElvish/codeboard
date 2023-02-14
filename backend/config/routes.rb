@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post '/sign-up', to: 'sessions#sign_up'
       post '/sign-in', to: 'sessions#sign_in'
       post '/sign-out', to: 'sessions#sign_out'
+      get '/refresh', to: 'sessions#refresh'
     end
   end
 end
