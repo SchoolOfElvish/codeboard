@@ -4,7 +4,6 @@ module Jwt
   module Refresher
     module_function
 
-    # rubocop:disable Metrics/MethodLength
     def refresh!(refresh_token:, decoded_token:, user:)
       raise Errors::Jwt::MissingToken, token: 'refresh' unless refresh_token.present? || decoded_token.nil?
 
@@ -21,6 +20,5 @@ module Jwt
 
       [new_access_token, new_refresh_token]
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

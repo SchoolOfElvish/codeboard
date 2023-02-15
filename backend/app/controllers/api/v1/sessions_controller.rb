@@ -5,7 +5,7 @@ module Api
     class SessionsController < ApplicationController
       include Dry::Monads::Result::Mixin
 
-      skip_before_action :authenticate!, only: %i[sign_up sign_in]
+      skip_before_action :authenticate!, only: %i[sign_up sign_in refresh]
 
       def sign_up
         case register_user
@@ -29,6 +29,10 @@ module Api
         end
       end
 
+      def hello
+        head :ok
+      end
+
       private
 
       def register_user
@@ -36,7 +40,11 @@ module Api
       end
 
       def refresh_token
-        Sessions::Refresher.call
+        Sessions::Refresher.new.call(token_params:)
+      end
+
+      def token_params
+        params.permit(:token, :refreshToken)
       end
 
       def user_params
