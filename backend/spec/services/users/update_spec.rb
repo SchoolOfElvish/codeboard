@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Users::Update do
-  include Dry::Monads::Result::Mixin
   subject(:add_birthdate) { described_class.new.call(user:, birthdate:) }
 
   let(:user) { create(:user) }

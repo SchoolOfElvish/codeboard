@@ -11,13 +11,10 @@ Rails.application.routes.draw do
       post '/sign-up', to: 'sessions#sign_up'
       post '/sign-in', to: 'sessions#sign_in'
       post '/sign-out', to: 'sessions#sign_out'
+      resource :users, only: [:update] do
+        put 'me', to: 'users#update'
+      end
       post '/refresh', to: 'sessions#refresh'
       post 'hello', to: 'sessions#hello'
-      post 'users/me', to: 'users#update'
-      patch 'users/me', to: 'users#update'
-      resource :user, only: [:update]
-      put 'users/me', to: 'users#update'
-      resource :users, only: [:update], path: 'users/me'
-    end
   end
 end
