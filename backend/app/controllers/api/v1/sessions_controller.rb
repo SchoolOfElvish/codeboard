@@ -21,7 +21,12 @@ module Api
       def sign_out; end
 
       def refresh
-        Jwt::Refresher.refresh!(token_info)
+        case refresh_token
+        in Success[token, refresh_token]
+          render json: { token:, refresh_token: }, status: :created
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
+        end
       end
 
       private
@@ -30,16 +35,12 @@ module Api
         Users::Register.new.call(user_params)
       end
 
-      def user_params
-        params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
+      def refresh_token
+        Sessions::Refresher.call
       end
 
-      def token_info
-        {
-          decoder_token: params[:token],
-          refresh_token: params[:refresh_token],
-          user: current_user
-        }
+      def user_params
+        params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
       end
     end
   end
