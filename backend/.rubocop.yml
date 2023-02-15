@@ -20,3 +20,6 @@ Style/Documentation:
 AllCops:
   SuggestExtensions: true
   NewCops: enable
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
