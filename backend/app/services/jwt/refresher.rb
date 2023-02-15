@@ -8,9 +8,7 @@ module Jwt
     def refresh!(refresh_token:, decoded_token:, user:)
       raise Errors::Jwt::MissingToken, token: 'refresh' unless refresh_token.present? || decoded_token.nil?
 
-      existing_refresh_token = user.refresh_tokens.find_by(
-        token: refresh_token
-      )
+      existing_refresh_token = user.refresh_tokens.search_by_token(refresh_token)
       raise Errors::Jwt::InvalidToken, token: 'refresh' if existing_refresh_token.blank?
 
       jti = decoded_token.fetch(:jti)
