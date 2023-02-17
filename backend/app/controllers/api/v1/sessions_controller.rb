@@ -16,7 +16,9 @@ module Api
         end
       end
 
-      def sign_in; end
+      def sign_in
+        
+      end
 
       def sign_out; end
 
