@@ -1,6 +1,5 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
-  /* import wretch from 'wretch'; */
   import user from '$stores/user';
   import { goto } from '$app/navigation';
   import { to } from '$lib/routes';
@@ -33,8 +32,8 @@
       email,
       password,
       passwordConfirmation,
-      role,
-    })
+      role
+    });
 
     const response = await result.json<ResponseData>();
 
@@ -43,7 +42,7 @@
       user.set({ token: response.token, refreshToken: response.refresh_token });
       goto(to.root());
     }
-  }
+  };
 </script>
 
 <section class="bg-white">
