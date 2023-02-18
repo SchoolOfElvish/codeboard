@@ -1,9 +1,10 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
-  import wretch from 'wretch';
+  /* import wretch from 'wretch'; */
   import user from '$stores/user';
   import { goto } from '$app/navigation';
   import { to } from '$lib/routes';
+  import { post } from '$utils/fetch';
 
   let firstName = '';
   let lastName = '';
@@ -24,22 +25,25 @@
     [key: string]: string[];
   };
 
-  const api = wretch('http://localhost:3000/api');
-
   const createAccount = async () => {
     isLoading = true;
-    const response = await api
-      .url('/v1/sign-up')
-      .post({ firstName, lastName, email, password, passwordConfirmation, role })
-      .error(422, async (error) => (errors = JSON.parse(error.message).error))
-      .json<ResponseData>();
+    const result = await post('/v1/sign-up', {
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirmation,
+      role,
+    })
+
+    const response = await result.json<ResponseData>();
 
     if (response) {
       isLoading = false;
       user.set({ token: response.token, refreshToken: response.refresh_token });
       goto(to.root());
     }
-  };
+  }
 </script>
 
 <section class="bg-white">
