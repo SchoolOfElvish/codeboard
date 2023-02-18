@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Sessions::Refresher, type: :service do
-  subject(:refresh) { described_class.new.call(token_params:, user:) }
+  subject(:refresh) { described_class.new.call(token_params:) }
 
   let(:user) { create(:user) }
   let(:issuer) { Jwt::Issuer.call(user) }
@@ -11,7 +11,7 @@ RSpec.describe Sessions::Refresher, type: :service do
   let(:token_params) do
     {
       token: issuer[0],
-      refresh_token: issuer[1].token
+      refreshToken: issuer[1].token
     }
   end
 
