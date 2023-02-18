@@ -17,5 +17,7 @@ class ApplicationController < ActionController::Base
 
     @current_user = current_user
     @decoded_token = decoded_token
+  rescue JWT::ExpiredSignature
+    head :unauthorized
   end
 end

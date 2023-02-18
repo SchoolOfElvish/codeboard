@@ -19,8 +19,8 @@ jobs:
 
     - name: Fetch secrets from tawbar
       run: |
-        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
-        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./frontend/.env
+        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_FRONTEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_FRONTEND_API_KEY }}' -o ./frontend/.env
+        curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./backend/.env
 
     - name: Build and push Docker images
       run: |

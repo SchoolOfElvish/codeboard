@@ -6,7 +6,7 @@
 
 <article class="mx-auto max-w-7xl overflow-hidden rounded-lg border border-gray-100 shadow-sm">
   <div class="p-4 sm:p-6">
-    <a href="#">
+    <a href="/">
       <h3 class="text-lg font-medium text-gray-900">Course 1</h3>
     </a>
 
@@ -17,7 +17,7 @@
       dignissimos. Molestias explicabo corporis voluptatem?
     </p>
 
-    <a href="#" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600">
+    <a href="/" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600">
       Find out more
 
       <span aria-hidden="true" class="block transition group-hover:translate-x-0.5"> &rarr; </span>
