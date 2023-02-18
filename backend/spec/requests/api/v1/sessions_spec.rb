@@ -85,6 +85,14 @@ RSpec.describe 'Api::V1::Sessions' do
         post('/api/v1/refresh', params:)
         expect(JSON.parse(response.body)).to eq({ 'error' => 'token_cannot_be_decoded' })
       end
+    context 'when token and refresh token are valid' do
+      it 'returns 200 OK'
+      it 'returns new token pair'
+    end
+
+    context 'when token and refresh token are not valid' do
+      it 'returns unprocessable_entity'
+      it 'returns an error'
     end
   end
 end
