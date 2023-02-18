@@ -41,6 +41,22 @@ RSpec.describe User do
     end
   end
 
+  context "when password doesn't exist" do
+    let(:user_params) { { last_name:, first_name:, email:, password_confirmation:, role: } }
+
+    it "doesn't create user" do
+      expect(user).not_to be_persisted
+    end
+  end
+
+  context "when password_confirmation doesn't exist" do
+    let(:user_params) { { last_name:, first_name:, email:, password:, role: } }
+
+    it "doesn't create user" do
+      expect(user).not_to be_persisted
+    end
+  end
+
   context "when role doesn't exist" do
     let(:user_params) { { last_name:, first_name:, email:, password:, password_confirmation: } }
 
