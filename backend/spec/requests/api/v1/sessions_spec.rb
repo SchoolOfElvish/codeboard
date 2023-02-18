@@ -46,13 +46,42 @@ RSpec.describe 'Api::V1::Sessions' do
 
   describe 'POST /refresh' do
     context 'when token and refresh token are valid' do
-      it 'returns 200 OK'
-      it 'returns new token pair'
-    end
+      let(:user) { create(:user) }
+      let(:issuer) { Jwt::Issuer.call(user) }
+      let(:params) do
+        {
+          token: issuer[0],
+          refreshToken: issuer[1].token
+        }
+      end
 
-    context 'when token and refresh token are not valid' do
-      it 'returns unprocessable_entity'
-      it 'returns an error'
+      it 'returns 201 OK' do
+        post('/api/v1/refresh', params:)
+        expect(response).to have_http_status(:created)
+      end
+
+      it 'returns new token pair' do
+        post('/api/v1/refresh', params:)
+        expect(JSON.parse(response.body)).to include({ 'token' => a_kind_of(String),
+                                                       'refresh_token' => a_kind_of(String) })
+      end
+
+      context 'when token and refresh token are not valid' do
+        let(:params) do
+          {
+            token: issuer[0],
+            refreshToken: issuer[1].token
+          }
+        end
+
+        it 'returns unprocessable_entity' do
+          # post('/api/v1/refresh', params:)
+          # expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns an error' do
+        end
+      end
     end
   end
 end

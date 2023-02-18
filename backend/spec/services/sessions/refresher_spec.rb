@@ -15,7 +15,7 @@ RSpec.describe Sessions::Refresher, type: :service do
     }
   end
 
-  context 'when tokens are refreshed', skip: 'WIP' do
+  context 'when tokens are refreshed' do
     it 'returns success' do
       expect(refresh).to be_success
     end
