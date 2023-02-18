@@ -43,7 +43,7 @@ RSpec.describe Users::Register do
     end
   end
 
-  context 'when password confirmation not passed', skip: 'TTD for bug' do
+  context 'when password confirmation not passed' do
     let(:params) do
       { email: 'test@gmail.com', password: 'qwerty123', firstName: 'testfirst',
         lastName: 'testlast', role: 'STUDENT' }
