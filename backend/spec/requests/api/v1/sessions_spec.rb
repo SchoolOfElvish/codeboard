@@ -69,18 +69,20 @@ RSpec.describe 'Api::V1::Sessions' do
       context 'when token and refresh token are not valid' do
         let(:params) do
           {
-            token: issuer[0],
-            refreshToken: issuer[1]
+            token: 'dasd',
+            refreshToken: 'dsda'
           }
-       
         end
 
         it 'returns unprocessable_entity' do
           post('/api/v1/refresh', params:)
-          expect(response).to raise_error()
+          expect(response).to have_http_status(:unprocessable_entity)
         end
 
-        it 'returns an error'
+        it 'returns an error' do
+          post('/api/v1/refresh', params:)
+          expect(JSON.parse(response.body)).to eq({ 'error' => 'token_cannot_be_decoded' })
+        end
       end
     end
   end
