@@ -70,17 +70,17 @@ RSpec.describe 'Api::V1::Sessions' do
         let(:params) do
           {
             token: issuer[0],
-            refreshToken: issuer[1].token
+            refreshToken: issuer[1]
           }
+       
         end
 
         it 'returns unprocessable_entity' do
-          # post('/api/v1/refresh', params:)
-          # expect(response).to have_http_status(:unprocessable_entity)
+          post('/api/v1/refresh', params:)
+          expect(response).to raise_error()
         end
 
-        it 'returns an error' do
-        end
+        it 'returns an error'
       end
     end
   end
