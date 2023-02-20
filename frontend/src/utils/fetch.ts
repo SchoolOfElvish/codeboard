@@ -1,12 +1,15 @@
 import wretch, { type Wretch } from 'wretch';
 import user from '$stores/user';
 import { get as storeGet } from 'svelte/store';
+import { browser } from '$app/environment'
 
 export type FetchMethod = 'get' | 'post' | 'put' | 'delete';
 
-import { PUBLIC_BACKEND_URL } from '$env/static/public';
+import { PUBLIC_BACKEND_URL_SSR, PUBLIC_BACKEND_URL_CLIENT } from '$env/static/public';
 
-const api = wretch(`${PUBLIC_BACKEND_URL}/api`);
+const url = browser ? `${PUBLIC_BACKEND_URL_CLIENT}/api` : `${PUBLIC_BACKEND_URL_SSR}/api`
+
+const api = wretch(url);
 
 interface ResponseData {
   token: string;
