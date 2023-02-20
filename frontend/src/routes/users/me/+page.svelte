@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import user from '$stores/user';
+  import { put } from '$utils/fetch';
   import wretch from 'wretch';
 
   const api = wretch('http://localhost:3000/api');
@@ -9,10 +10,10 @@
   let isSuccess = false;
 
   const submitBirthdate = async () => {
-    const response = await api
-      .url('/v1/users/me')
-      .headers({ Authorization: `Bearer ${$user.token}` })
-      .post({ birthdate });
+    const response = await put('/v1/users/me', {birthdate})
+      // .url('/v1/users/me')
+      // .headers({ Authorization: `Bearer ${$user.token}` })
+      // .post({ birthdate });
 
     if (response) {
       isSuccess = true;

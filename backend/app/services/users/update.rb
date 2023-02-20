@@ -3,10 +3,8 @@
 module Users
   class Update < Core::Service
     def call(user:, birthdate:)
-      binding.pry
       @user = user
       @birthdate = birthdate
-
       add_birthdate
     end
 
