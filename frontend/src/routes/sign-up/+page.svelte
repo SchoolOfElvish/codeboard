@@ -35,7 +35,12 @@
       role
     });
 
-    const response = await result.json<ResponseData>();
+    const response = await result
+      .error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        error;
+      })
+      .json<ResponseData>();
 
     if (response) {
       isLoading = false;
