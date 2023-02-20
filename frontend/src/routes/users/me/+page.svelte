@@ -1,19 +1,11 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import user from '$stores/user';
   import { put } from '$utils/fetch';
-  import wretch from 'wretch';
-
-  const api = wretch('http://localhost:3000/api');
-
   let birthdate: string;
   let isSuccess = false;
 
   const submitBirthdate = async () => {
-    const response = await put('/v1/users/me', {birthdate})
-      // .url('/v1/users/me')
-      // .headers({ Authorization: `Bearer ${$user.token}` })
-      // .post({ birthdate });
+    const response = await put('/v1/users/me', { birthdate });
 
     if (response) {
       isSuccess = true;
