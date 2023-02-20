@@ -45,9 +45,10 @@ RSpec.describe 'Api::V1::Sessions' do
   end
 
   describe 'POST /refresh' do
+    let(:user) { create(:user) }
+    let(:issuer) { Jwt::Issuer.call(user) }
+
     context 'when token and refresh token are valid' do
-      let(:user) { create(:user) }
-      let(:issuer) { Jwt::Issuer.call(user) }
       let(:params) do
         {
           token: issuer[0],
@@ -65,24 +66,24 @@ RSpec.describe 'Api::V1::Sessions' do
         expect(JSON.parse(response.body)).to include({ 'token' => a_kind_of(String),
                                                        'refresh_token' => a_kind_of(String) })
       end
+    end
 
-      context 'when token and refresh token are not valid' do
-        let(:params) do
-          {
-            token: 'dasd',
-            refreshToken: 'dsda'
-          }
-        end
+    context 'when token and refresh token are not valid' do
+      let(:params) do
+        {
+          token: 'dasd',
+          refreshToken: 'dsda'
+        }
+      end
 
-        it 'returns unprocessable_entity' do
-          post('/api/v1/refresh', params:)
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
+      it 'returns unprocessable_entity' do
+        post('/api/v1/refresh', params:)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
 
-        it 'returns an error' do
-          post('/api/v1/refresh', params:)
-          expect(JSON.parse(response.body)).to eq({ 'error' => 'token_cannot_be_decoded' })
-        end
+      it 'returns an error' do
+        post('/api/v1/refresh', params:)
+        expect(JSON.parse(response.body)).to eq({ 'error' => 'token_cannot_be_decoded' })
       end
     end
   end
