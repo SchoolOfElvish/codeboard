@@ -39,7 +39,7 @@
   const userMenuItems: UserMenuItem[] = [
     {
       name: $_('navbar.user_menu.profile'),
-      href: '/'
+      href: '/users/me'
     },
     {
       name: $_('navbar.user_menu.settings'),
