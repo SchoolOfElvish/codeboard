@@ -1,11 +1,29 @@
 <script lang="ts">
+  import user from '$stores/user';
   import { post } from '$utils/fetch';
+  import { goto } from '$app/navigation';
+  import { to } from '$lib/routes';
 
   let email = '';
   let password = '';
 
+  type ResponseData = {
+    token: string;
+    refresh_token: string;
+  };
+
   const logIn = async() => {
-    const response = await post('/v1/sign-in', {email, password});
+    const result = await post('/v1/sign-in', {email, password});
+
+    const response = await result.json<ResponseData>();
+
+    if (response) {
+      if (response.token) {
+        user.set({ token: response.token, refreshToken: response.refresh_token });
+        // goto(to.root());
+        window.location.href=to.root();
+      }
+    }
   }
 </script>
 
