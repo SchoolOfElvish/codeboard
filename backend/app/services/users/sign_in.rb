@@ -8,15 +8,15 @@ module Users
       @password = user_params[:password]
       @user = find_user(@email)
       validate_password(@password)
-      token, refresh_token = yield issue_token(user)
+      token, refresh_token = yield issue_token(@user)
       Success[token, refresh_token]
     end
 
     private
     
     def find_user(email)
-      user = User.find_by(email)
-      user ? Success(user) : Failure(user.errors) 
+      user = User.find_by(email: email.to_s)
+      # user ? Success(user) : Failure(user.errors) 
     end
 
     def validate_password(password)

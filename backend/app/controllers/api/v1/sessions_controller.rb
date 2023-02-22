@@ -17,7 +17,11 @@ module Api
       end
 
       def sign_in
-        
+        case log_in
+          in Success[token, refresh_token]
+          in Failure[error]
+            render json: { error: }, status: :unprocessable_entity
+        end
       end
 
       def sign_out; end
@@ -37,6 +41,10 @@ module Api
 
       private
 
+      def log_in
+        Users::SignIn.new.call(login_params)
+      end
+
       def register_user
         Users::Register.new.call(user_params)
       end
@@ -51,6 +59,10 @@ module Api
 
       def user_params
         params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
+      end
+
+      def login_params
+        params.permit(:email, :password)
       end
     end
   end
