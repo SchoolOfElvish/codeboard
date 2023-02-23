@@ -19,7 +19,7 @@ module Users
 
     def find_user(email)
       user = User.find_by(email: email.to_s)
-      user ? Success(user) : Failure('no user find')
+      user ? Success(user) : Failure('User not found')
     end
 
     def validate_password(password)
