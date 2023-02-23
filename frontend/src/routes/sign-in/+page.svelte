@@ -2,9 +2,16 @@
   import user from '$stores/user';
   import { post } from '$utils/fetch';
   import { to } from '$lib/routes';
+  import { _ } from 'svelte-i18n';
 
   let email = '';
   let password = '';
+
+  let errors: Error = {};
+
+  type Error = {
+    [key: string]: string;
+  };
 
   type ResponseData = {
     token: string;
@@ -14,7 +21,12 @@
   const logIn = async () => {
     const result = await post('/v1/sign-in', { email, password });
 
-    const response = await result.json<ResponseData>();
+    const response = await result
+      .error(403, async (error) => {
+        errors = JSON.parse(error.message).error;
+        error;
+      })
+      .json<ResponseData>();
 
     if (response) {
       if (response.token) {
@@ -33,15 +45,27 @@
       alt="Your Company"
     />
     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-      Sign in to your account
+      {$_('pages.sign_in.title')}
     </h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    {#if Object.keys(errors).length > 0}
+      <div role="alert" class="rounded border-l-4 border-red-500 bg-red-100 p-3 mb-2">
+        <strong class="block font-medium text-red-700"> Something went wrong </strong>
+
+        <p class="mt-2 text-sm text-red-700">
+          {$_(`pages.sign_in.errors.${errors}`)}
+        </p>
+      </div>
+    {/if}
+
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <form class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >{$_('pages.sign_in.email')}</label
+          >
           <div class="mt-1">
             <input
               id="email"
@@ -56,7 +80,9 @@
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >{$_('pages.sign_in.password')}</label
+          >
           <div class="mt-1">
             <input
               id="password"
@@ -78,12 +104,14 @@
               type="checkbox"
               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             />
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+            <label for="remember-me" class="ml-2 block text-sm text-gray-900"
+              >{$_('pages.sign_in.remember')}</label
+            >
           </div>
 
           <div class="text-sm">
             <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500"
-              >Forgot your password?</a
+              >{$_('pages.sign_in.forgot')}</a
             >
           </div>
         </div>
@@ -93,7 +121,7 @@
             type="submit"
             on:click={logIn}
             class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >Sign in</button
+            >{$_('pages.sign_in.sign_in_button')}</button
           >
         </div>
       </form>
