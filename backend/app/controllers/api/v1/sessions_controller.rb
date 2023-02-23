@@ -18,10 +18,10 @@ module Api
 
       def sign_in
         case log_in
-          in Success[token, refresh_token]
-            render json: { token:, refresh_token: }, status: :created
-          in Failure[error]
-            render json: { error: }, status: :unprocessable_entity
+        in Success[token, refresh_token]
+          render json: { token:, refresh_token: }, status: :created
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
         end
       end
 
@@ -43,7 +43,7 @@ module Api
       private
 
       def log_in
-        Users::SignIn.new.call(login_params)
+        Users::SignIn.new.call(email: user_params[:email], password: user_params[:password])
       end
 
       def register_user
@@ -60,10 +60,6 @@ module Api
 
       def user_params
         params.permit(:role, :firstName, :lastName, :email, :password, :passwordConfirmation)
-      end
-
-      def login_params
-        params.permit(:email, :password)
       end
     end
   end

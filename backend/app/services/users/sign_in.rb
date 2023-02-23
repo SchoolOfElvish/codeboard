@@ -2,31 +2,37 @@
 
 module Users
   class SignIn < Core::Service
-    def call(user_params)
-      @user_params = user_params
-      @email = user_params[:email]
-      @password = user_params[:password]
-      @user = find_user(@email)
-      validate_password(@password)
-      token, refresh_token = yield issue_token(@user)
-      Success[token, refresh_token]
+    def call(email:, password:)
+      @email = email
+      @password = password
+      @user = yield find_user(@email)
+      validation = validate_password(@password)
+      if validation.instance_of?(Dry::Monads::Result::Success)
+        token, refresh_token = yield issue_token(@user)
+        Success[token, refresh_token]
+      else
+        validation
+      end
     end
 
     private
-    
+
     def find_user(email)
       user = User.find_by(email: email.to_s)
-      # user ? Success(user) : Failure(user.errors) 
+      user ? Success(user) : Failure('no user find')
     end
 
     def validate_password(password)
-      @user.valid_password?(password)
+      if @user.valid_password?(password)
+        Success()
+      else
+        Failure('Wrong password')
+      end
     end
 
     def issue_token(user)
       token, refresh_token = Jwt::Issuer.call(user)
       Success[token, refresh_token.token]
     end
-
   end
 end

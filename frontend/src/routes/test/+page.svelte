@@ -29,7 +29,7 @@
     user.set({ token: response.token, refreshToken: response.refresh_token });
   };
 
-  const refreshTokens = async (_error: Error, req: any, data: Record<string, string>) => {
+  const refreshTokens = async (_error: Error, req: unknown, data: Record<string, string>) => {
     await getToken();
     return req
       .auth(`Bearer ${$user.token}`)

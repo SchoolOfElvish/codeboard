@@ -3,7 +3,7 @@ import { writable as internal, get, type Writable } from 'svelte/store';
 declare type Updater<T> = (value: T) => T;
 declare type StoreDict<T> = { [key: string]: Writable<T> };
 
-const stores: StoreDict<any> = {};
+const stores: StoreDict<unknown> = {};
 
 interface Serializer<T> {
   parse(text: string): T;

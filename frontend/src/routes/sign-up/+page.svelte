@@ -1,7 +1,6 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
   import user from '$stores/user';
-  import { goto } from '$app/navigation';
   import { to } from '$lib/routes';
   import { post } from '$utils/fetch';
 
@@ -46,7 +45,7 @@
       isLoading = false;
       if (response.token) {
         user.set({ token: response.token, refreshToken: response.refresh_token });
-        goto(to.root());
+        window.location.href = to.root();
       }
     }
   };
