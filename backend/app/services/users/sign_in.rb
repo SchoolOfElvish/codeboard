@@ -16,7 +16,7 @@ module Users
     attr_reader :email, :password, :user
 
     def find_user(email)
-      user = User.find_by(email: email)
+      user = User.find_by(email:)
       user ? Success(user) : Failure(:user_not_found)
     end
 
