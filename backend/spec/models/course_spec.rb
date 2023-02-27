@@ -37,4 +37,12 @@ RSpec.describe Course do
       expect(test_course).not_to be_persisted
     end
   end
+
+  context 'when user does not exist' do
+    let(:user_id) { 123 }
+
+    it "dosen't create a new course" do
+      expect(test_course).not_to be_persisted
+    end
+  end
 end

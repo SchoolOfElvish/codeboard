@@ -21,6 +21,11 @@ RSpec.describe 'Api::V1::Courses' do
         post('/api/v1/courses', params:, headers:)
         expect(response).to have_http_status(:unprocessable_entity)
       end
+
+      it 'return an error' do
+        post('/api/v1/courses', params:, headers:)
+        expect(JSON.parse(response.body)['errors']).to match(["Name can't be blank"])
+      end
     end
   end
 end
