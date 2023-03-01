@@ -5,9 +5,9 @@ module Users
     def call(email:, password:)
       @email = email
       @password = password
-      @user = yield find_user(@email)
-      yield validate_password(@password)
-      token, refresh_token = yield issue_token(@user)
+      user = yield find_user(email)
+      yield validate_password(password, user)
+      token, refresh_token = yield issue_token(user)
       Success[token, refresh_token]
     end
 
@@ -20,7 +20,7 @@ module Users
       user ? Success(user) : Failure(:user_not_found)
     end
 
-    def validate_password(password)
+    def validate_password(password, user)
       if user.valid_password?(password)
         Success()
       else

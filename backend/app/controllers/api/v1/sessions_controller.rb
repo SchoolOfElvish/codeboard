@@ -36,10 +36,6 @@ module Api
         end
       end
 
-      def hello
-        head :ok
-      end
-
       private
 
       def log_in
