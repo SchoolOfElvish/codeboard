@@ -1,8 +1,25 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { put } from '$utils/fetch';
+  import { get, put } from '$utils/fetch';
+  let firstName: string;
+  // let firstName = "jaba";
+  let lastName: string;
+  let email: string;
   let birthdate: string;
   let isSuccess = false;
+
+  type ResponseData = {
+    email: string;
+  }
+
+  $: console.log(email);  
+  const getProfileData = async () => {
+    
+    const response = await (await get('/v1/users/me')).json<ResponseData>();
+    console.log("response $response");
+    email = response.email;
+    
+  }
 
   const submitBirthdate = async () => {
     const response = await put('/v1/users/me', { birthdate });
@@ -282,6 +299,8 @@
                 >First name</label
               >
               <input
+                bind:value={firstName}
+                on:click={getProfileData}
                 type="text"
                 name="first-name"
                 id="first-name"
@@ -303,11 +322,12 @@
               />
             </div>
 
-            <div class="col-span-6 sm:col-span-6">
+            <div class="col-span-6 sm:col-span-4 col-start-1 col-end-4">
               <label for="email-address" class="block text-sm font-medium text-gray-700"
                 >Email address</label
               >
               <input
+                bind:value={email}
                 type="text"
                 name="email-address"
                 id="email-address"
@@ -382,7 +402,7 @@
 
             <!-- Datapicker -->
 
-            <div class="col-span-4 sm:col-span-3 lg:col-span-2">
+            <div class="col-span-4 sm:col-span-3 lg:col-span-3 col-start-1 col-end-2">
               <label for="postal-code" class="block text-sm font-medium text-gray-700"
                 >Input your birtdate</label
               >
