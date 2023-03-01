@@ -13,5 +13,19 @@
     },
     "sign_in": "Sign in",
     "sign_up": "Sign up"
+  },
+  "pages": {
+    "sign_in": {
+      "errors": {
+        "wrong_password": "Wrong Password",
+        "user_not_found": "User with this email not found"
+      },
+      "title": "Sign in to your account",
+      "email": "Email address",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgot": "Forgot your password?",
+      "sign_in_button": "Sign in"
+    }
   }
 }

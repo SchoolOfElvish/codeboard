@@ -13,5 +13,19 @@
     },
     "sign_in": "Войти",
     "sign_up": "Зарегистрироваться"
+  },
+  "pages": {
+    "sign_in": {
+      "errors": {
+        "wrong_password": "Неверный пароль",
+        "user_not_found": "Пользователь с таким email не найден"
+      },
+      "title": "Войти в личный кабинет",
+      "email": "Email адрес",
+      "password": "Пароль",
+      "remember": "Запомнить",
+      "forgot": "Забыли пароль?",
+      "sign_in_button": "Войти"
+    }
   }
 }

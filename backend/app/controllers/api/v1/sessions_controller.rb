@@ -16,7 +16,14 @@ module Api
         end
       end
 
-      def sign_in; end
+      def sign_in
+        case log_in
+        in Success[token, refresh_token]
+          render json: { token:, refresh_token: }, status: :created
+        in Failure[error]
+          render json: { error: }, status: :forbidden
+        end
+      end
 
       def sign_out; end
 
@@ -29,11 +36,11 @@ module Api
         end
       end
 
-      def hello
-        head :ok
-      end
-
       private
+
+      def log_in
+        Users::SignIn.new.call(email: user_params[:email], password: user_params[:password])
+      end
 
       def register_user
         Users::Register.new.call(user_params)

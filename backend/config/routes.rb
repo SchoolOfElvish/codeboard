@@ -15,7 +15,6 @@ Rails.application.routes.draw do
         put 'me', to: 'users#update'
       end
       post '/refresh', to: 'sessions#refresh'
-      post 'hello', to: 'sessions#hello'
       resources :courses, only: [:create]
     end
   end
