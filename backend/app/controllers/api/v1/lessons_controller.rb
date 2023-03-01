@@ -20,7 +20,7 @@ module Api
       end
 
       def lesson_params
-        params.permit(:course_id, :title, :text)
+        params.permit(:course_id, :title, :description)
       end
     end
   end
