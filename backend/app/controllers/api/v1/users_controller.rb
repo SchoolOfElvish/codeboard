@@ -14,6 +14,15 @@ module Api
           end
       end
 
+      def getData
+        case get_data
+        in Success[email]
+          render json: {email:}, status: :created
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def add_birthdate
@@ -22,6 +31,11 @@ module Api
           birthdate: params[:birthdate]
         )
       end
+
+      def get_data
+        Users::GetData.new.call(user: current_user)
+      end
+      
     end
   end
 end
