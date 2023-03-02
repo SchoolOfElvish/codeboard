@@ -5,6 +5,15 @@ module Api
     class UsersController < ApplicationController
       include Dry::Monads::Result::Mixin
 
+      def show
+        case receive_user_data
+        in Success[user_data]
+          render json: user_data, status: :ok
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
+        end
+      end
+
       def update
         case add_birthdate
         in Success()
@@ -12,16 +21,6 @@ module Api
         in Failure[error]
           render json: { error: }, status: :unprocessable_entity
           end
-      end
-
-      def show
-        # binding.pry 
-        case get_user_data
-        in Success[user_data]
-          render json: user_data, status: :ok
-        in Failure[error]
-          render json: { error: }, status: :unprocessable_entity
-        end
       end
 
       private
@@ -33,10 +32,9 @@ module Api
         )
       end
 
-      def get_user_data
+      def receive_user_data
         Users::GetUserData.new.call(user: current_user)
       end
-      
     end
   end
 end

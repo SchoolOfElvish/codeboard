@@ -1,9 +1,9 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import { put } from '$utils/fetch';
-  import type { PageLoad } from './$types';
+  import type { PageData} from './$types';
 
-  export let data: PageLoad;
+  export let data: PageData;
 
   console.log(data);
 

@@ -1,9 +1,9 @@
-import type { PageLoad } from './$types';
 import { get } from '$utils/fetch';
+import type { PageLoad  } from './$types';
 
 type ResponseData = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   birthdate: string;
 };
