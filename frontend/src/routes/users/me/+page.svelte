@@ -294,7 +294,7 @@
           </div>
 
           <div class="grid grid-cols-6 gap-6">
-            <div class="col-span-6 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3 ">
               <label for="first-name" class="block text-sm font-medium text-gray-700"
                 >First name</label
               >
@@ -322,7 +322,7 @@
               />
             </div>
 
-            <div class="col-span-6 sm:col-span-4 col-start-1 col-end-4">
+            <div class="col-span-6 sm:col-span-3">
               <label for="email-address" class="block text-sm font-medium text-gray-700"
                 >Email address</label
               >
@@ -402,7 +402,7 @@
 
             <!-- Datapicker -->
 
-            <div class="col-span-4 sm:col-span-3 lg:col-span-3 col-start-1 col-end-2">
+            <div class="col-span-4 sm:col-span-3 sm:col-start-1 sm:col-end-3">
               <label for="postal-code" class="block text-sm font-medium text-gray-700"
                 >Input your birtdate</label
               >
