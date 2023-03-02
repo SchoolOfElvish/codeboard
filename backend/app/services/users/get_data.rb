@@ -3,8 +3,7 @@
 module Users
   class GetData < Core::Service
     def call(user:)
-      @user = user
-      Success(user.email)
+      Success[user.email, user.first_name, user.last_name, user.birthdate]
     end
   end
 end
