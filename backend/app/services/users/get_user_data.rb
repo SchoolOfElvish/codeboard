@@ -3,7 +3,13 @@
 module Users
   class GetUserData < Core::Service
     def call(user:)
-      Success[user.email, user.first_name, user.last_name, user.birthdate]
+      user_data = {
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        birthdate: user.birthdate
+      }
+      Success(user_data)
     end
   end
 end
