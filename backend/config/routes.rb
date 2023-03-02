@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post '/sign-out', to: 'sessions#sign_out'
       resource :users, only: [:update] do
         put 'me', to: 'users#update'
-        get 'me', to: 'users#getData'
+        get 'me', to: 'users#show'
       end
       post '/refresh', to: 'sessions#refresh'
       resources :courses, only: [:create] do
