@@ -14,8 +14,8 @@ module Api
           end
       end
 
-      def getData
-        case get_data
+      def show
+        case get_user_data
         in Success[email, first_name, last_name, birthdate]
           render json: {email:, first_name:, last_name:, birthdate:}, status: :created
         in Failure[error]
@@ -32,8 +32,8 @@ module Api
         )
       end
 
-      def get_data
-        Users::GetData.new.call(user: current_user)
+      def get_user_data
+        Users::GetUserData.new.call(user: current_user)
       end
       
     end

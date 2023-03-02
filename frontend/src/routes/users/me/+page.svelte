@@ -7,13 +7,6 @@
 
   console.log(data);
 
-  type ResponseData = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    birthdate: string;
-  }
-
   let firstName = data.response.first_name;
   let lastName = data.response.last_name;
   let email = data.response.email;
