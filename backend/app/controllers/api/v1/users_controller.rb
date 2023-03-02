@@ -15,9 +15,10 @@ module Api
       end
 
       def show
+        # binding.pry 
         case get_user_data
-        in Success[email, first_name, last_name, birthdate]
-          render json: {email:, first_name:, last_name:, birthdate:}, status: :created
+        in Success[user_data]
+          render json: user_data, status: :ok
         in Failure[error]
           render json: { error: }, status: :unprocessable_entity
         end
