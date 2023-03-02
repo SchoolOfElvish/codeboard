@@ -16,8 +16,8 @@ module Api
 
       def getData
         case get_data
-        in Success[email]
-          render json: {email:}, status: :created
+        in Success[email, first_name, last_name, birthdate]
+          render json: {email:, first_name:, last_name:, birthdate:}, status: :created
         in Failure[error]
           render json: { error: }, status: :unprocessable_entity
         end

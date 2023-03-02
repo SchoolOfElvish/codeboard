@@ -1,25 +1,24 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import { get, put } from '$utils/fetch';
-  let firstName: string;
-  // let firstName = "jaba";
-  let lastName: string;
-  let email: string;
-  let birthdate: string;
-  let isSuccess = false;
+  import type {PageLoad} from './$types';
+
+  export let data: PageLoad;
+
+  console.log(data);
 
   type ResponseData = {
+    firstName: string;
+    lastName: string;
     email: string;
+    birthdate: string;
   }
 
-  $: console.log(email);  
-  const getProfileData = async () => {
-    
-    const response = await (await get('/v1/users/me')).json<ResponseData>();
-    console.log("response $response");
-    email = response.email;
-    
-  }
+  let firstName = data.response.first_name;
+  let lastName = data.response.last_name;
+  let email = data.response.email;
+  let birthdate = data.response.birthdate;
+  let isSuccess = false;
 
   const submitBirthdate = async () => {
     const response = await put('/v1/users/me', { birthdate });
@@ -300,7 +299,6 @@
               >
               <input
                 bind:value={firstName}
-                on:click={getProfileData}
                 type="text"
                 name="first-name"
                 id="first-name"
@@ -314,6 +312,7 @@
                 >Last name</label
               >
               <input
+                bind:value={lastName}
                 type="text"
                 name="last-name"
                 id="last-name"
