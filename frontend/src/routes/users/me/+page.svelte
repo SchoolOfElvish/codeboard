@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import { put } from '$utils/fetch';
-  import type { PageData} from './$types';
+  import type { PageData } from './$types';
 
   export let data: PageData;
 
@@ -14,7 +14,11 @@
   let isSuccess = false;
 
   const submitBirthdate = async () => {
-    const response = await put('/v1/users/me', { birthdate });
+    const response = await put('/v1/users/me', {
+      first_name: firstName,
+      last_name: lastName,
+      birthdate: birthdate
+    });
 
     if (response) {
       isSuccess = true;
@@ -27,12 +31,12 @@
 </script>
 
 <!-- https://tailwindui.com/components/application-ui/forms/form-layouts -->
-<div class="lg:grid lg:grid-cols-12 lg:gap-x-5 container mx-auto mt-2">
+<div class="lg:grid lg:grid-cols-12 lg:gap-x-5 mt-2 max-w-screen-xl container mx-auto">
   <aside class="py-6 px-2 sm:px-6 lg:col-span-3 lg:py-0 lg:px-0">
     <nav class="space-y-1">
       <a
         href="/"
-        class="bg-gray-50 text-indigo-700 hover:bg-white hover:text-indigo-700 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
+        class="bg-gray-200 text-indigo-700 hover:bg-white hover:text-indigo-700 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
         aria-current="page"
       >
         <svg

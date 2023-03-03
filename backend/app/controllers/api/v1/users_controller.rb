@@ -15,25 +15,29 @@ module Api
       end
 
       def update
-        case add_birthdate
+        case update_user_info
         in Success()
           head :no_content
         in Failure[error]
           render json: { error: }, status: :unprocessable_entity
-          end
+        end
       end
 
       private
 
-      def add_birthdate
-        Users::Update.new.call(
+      def update_user_info
+        Users::UpdateUserInfo.new.call(
           user: current_user,
-          birthdate: params[:birthdate]
+          user_params: user_info_params
         )
       end
 
       def receive_user_data
         Users::GetUserData.new.call(user: current_user)
+      end
+
+      def user_info_params
+        params.permit(:first_name, :last_name, :birthdate)
       end
     end
   end
