@@ -5,7 +5,7 @@ module Api
     class LessonsController < ApplicationController
       include Dry::Monads::Result::Mixin
       def create
-        case lesson_creation
+        case create_lesson
         in Success(lesson)
           render json: lesson, status: :created
         in Failure(error)
@@ -15,7 +15,7 @@ module Api
 
       private
 
-      def lesson_creation
+      def create_lesson
         Lessons::Create.new.call(params: lesson_params)
       end
 
