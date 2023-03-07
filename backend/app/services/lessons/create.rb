@@ -3,8 +3,7 @@
 module Lessons
   class Create < Core::Service
     def call(params:)
-      @params = params
-      @course = Course.find_by(id: params[:course_id])
+      @params = params # expected parameters in params: course_id, title, description
       lesson.save ? Success(lesson) : Failure(lesson.errors)
     end
 

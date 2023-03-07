@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :lesson do
-    course { nil }
+    course
     title { 'MyString' }
     description { 'MyText' }
   end

@@ -3,14 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Lesson do
-  let(:lesson) do
-    described_class.new(title: 'Lesson Title',
-                        description: 'Lesson Description',
-                        course:)
-  end
-
+  let(:lesson) { create(:lesson) }
   let(:user) { create(:user) }
-  let(:course) { Course.create(name: 'Course Name', user:) }
+  let(:course) { create(:course, user:) }
 
   describe 'validations' do
     it 'valid value' do
