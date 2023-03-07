@@ -11,10 +11,6 @@
   let birthdate = data.response.birthdate;
   let isSuccess = false;
 
-  type Error = {
-    [key: string]: string;
-  };
-
   const submitUserData = async () => {
     const result = await put('/v1/users/me', {
       first_name: firstName,
