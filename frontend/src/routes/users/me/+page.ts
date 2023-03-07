@@ -1,6 +1,8 @@
 import { get } from '$utils/fetch';
 import type { PageLoad } from './$types';
 
+export const ssr = false;
+
 type ResponseData = {
   first_name: string;
   last_name: string;

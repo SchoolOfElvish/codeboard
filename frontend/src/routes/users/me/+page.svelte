@@ -5,22 +5,24 @@
 
   export let data: PageData;
 
-  console.log(data);
-
   let firstName = data.response.first_name;
   let lastName = data.response.last_name;
   let email = data.response.email;
   let birthdate = data.response.birthdate;
   let isSuccess = false;
 
-  const submitBirthdate = async () => {
-    const response = await put('/v1/users/me', {
+  type Error = {
+    [key: string]: string;
+  };
+
+  const submitUserData = async () => {
+    const result = await put('/v1/users/me', {
       first_name: firstName,
       last_name: lastName,
       birthdate: birthdate
     });
 
-    if (response) {
+    if (result) {
       isSuccess = true;
     }
   };
@@ -247,7 +249,7 @@
           <button
             type="button"
             class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            on:click|preventDefault={submitBirthdate}
+            on:click|preventDefault={submitUserData}
           >
             Save
           </button>
