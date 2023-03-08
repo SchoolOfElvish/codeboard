@@ -2,7 +2,8 @@
   import Icon from '$components/icons/Icon.svelte';
   import { put } from '$utils/fetch';
   import type { PageData } from './$types';
-
+  import { _ } from 'svelte-i18n';
+  $: console.log(isSuccess);
   export let data: PageData;
 
   let firstName = data.response.first_name;
@@ -10,6 +11,11 @@
   let email = data.response.email;
   let birthdate = data.response.birthdate;
   let isSuccess = false;
+  let errors: Error = {};
+
+  type Error = {
+    [key: string]: string[];
+  };
 
   const submitUserData = async () => {
     const result = await put('/v1/users/me', {
@@ -18,7 +24,14 @@
       birthdate: birthdate
     });
 
-    if (result) {
+    const response = await result
+      .error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        error;
+      })
+      .json();
+
+    if (Object.keys(errors).length == 0) {
       isSuccess = true;
     }
   };
@@ -141,7 +154,17 @@
   </aside>
 
   <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
-    {#if isSuccess == true}
+    {#if Object.keys(errors).length > 0}
+      <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
+        <strong class="block font-medium text-red-700"> Something went wrong </strong>
+        <p class="mt-2 text-sm text-red-700">
+          {#each Object.keys(errors) as key}
+            {key}: {errors[key].join(', ')}
+            <br />
+          {/each}
+        </p>
+      </div>
+    {:else if isSuccess == true}
       <div class="rounded-md bg-green-100 p-4">
         <div class="flex">
           <div class="flex-shrink-0">
@@ -165,7 +188,6 @@
         </div>
       </div>
     {/if}
-
     <form action="#" method="POST">
       <div class="shadow sm:overflow-hidden sm:rounded-md">
         <div class="space-y-6 bg-white py-6 px-4 sm:p-6">
