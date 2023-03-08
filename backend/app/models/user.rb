@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :whitelisted_tokens, dependent: :delete_all
   has_many :blacklisted_tokens, dependent: :delete_all
   has_many :courses, dependent: :delete_all
+  has_many :lessons, through: :courses
 end

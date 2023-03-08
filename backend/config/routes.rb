@@ -12,7 +12,9 @@ Rails.application.routes.draw do
         put 'me', to: 'users#update'
       end
       post '/refresh', to: 'sessions#refresh'
-      resources :courses, only: [:create]
+      resources :courses, only: [:create] do
+        resources :lessons, only: [:create]
+      end
     end
   end
 end

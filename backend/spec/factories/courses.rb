@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :course do
-    title { 'MyString' }
-    user { nil }
+    name { 'MyString' }
+    user
   end
 end
