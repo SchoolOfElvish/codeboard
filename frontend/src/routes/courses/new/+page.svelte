@@ -24,7 +24,7 @@
     <div class="flex items-center justify-between">
       <button
         type="submit"
-        class="inline-block rounded-lg bg-rose-500 px-5 py-3 text-sm font-medium text-white"
+        class="inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         Create course
       </button>
