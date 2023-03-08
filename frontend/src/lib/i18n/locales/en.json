@@ -26,13 +26,6 @@
       "remember": "Remember me",
       "forgot": "Forgot your password?",
       "sign_in_button": "Sign in"
-    },
-    "users": {
-      "me": {
-        "errors": {
-          "first_name": "First name"
-        }
-      }
     }
   }
 }
