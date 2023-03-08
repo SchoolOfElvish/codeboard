@@ -2,17 +2,16 @@
   import Icon from '$components/icons/Icon.svelte';
   import { put } from '$utils/fetch';
   import type { PageData } from './$types';
-  import { _ } from 'svelte-i18n';
-  $: console.log(isSuccess);
   export let data: PageData;
+
+  type OperationStatus = 'success' | 'failure' | 'incompleted';
 
   let firstName = data.response.first_name;
   let lastName = data.response.last_name;
   let email = data.response.email;
   let birthdate = data.response.birthdate;
-  let isSuccess = false;
+  let status: OperationStatus = 'incompleted';
   let errors: Error = {};
-
   type Error = {
     [key: string]: string[];
   };
@@ -24,20 +23,17 @@
       birthdate: birthdate
     });
 
-    const response = await result
+    result
       .error(422, async (error) => {
         errors = JSON.parse(error.message).error;
-        error;
+        status = 'failure';
+        return error;
       })
-      .json();
-
-    if (Object.keys(errors).length == 0) {
-      isSuccess = true;
-    }
+      .res(() => (status = 'success'));
   };
 
   const closeAlert = () => {
-    isSuccess = false;
+    status = 'incompleted';
   };
 </script>
 
@@ -154,17 +150,19 @@
   </aside>
 
   <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
-    {#if Object.keys(errors).length > 0}
-      <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
-        <strong class="block font-medium text-red-700"> Something went wrong </strong>
-        <p class="mt-2 text-sm text-red-700">
-          {#each Object.keys(errors) as key}
-            {key}: {errors[key].join(', ')}
-            <br />
-          {/each}
-        </p>
-      </div>
-    {:else if isSuccess == true}
+    {#if status === 'failure'}
+      {#if Object.keys(errors).length > 0}
+        <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
+          <strong class="block font-medium text-red-700"> Something went wrong </strong>
+          <p class="mt-2 text-sm text-red-700">
+            {#each Object.keys(errors) as key}
+              {key}: {errors[key].join(', ')}
+              <br />
+            {/each}
+          </p>
+        </div>
+      {/if}
+    {:else if status === 'success'}
       <div class="rounded-md bg-green-100 p-4">
         <div class="flex">
           <div class="flex-shrink-0">
