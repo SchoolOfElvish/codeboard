@@ -21,7 +21,7 @@ module Users
     end
 
     def update_info
-      user.update(user_info) ? Success() : Failure(:user_not_updated)
+      user.update(user_info) ? Success() : Failure(user.errors)
     end
   end
 end
