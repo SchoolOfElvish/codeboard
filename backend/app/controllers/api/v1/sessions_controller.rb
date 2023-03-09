@@ -25,7 +25,14 @@ module Api
         end
       end
 
-      def sign_out; end
+      def sign_out
+        case log_out
+        in Success
+          render json: nil, status: :ok
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
+        end
+      end
 
       def refresh
         case refresh_token
@@ -37,6 +44,10 @@ module Api
       end
 
       private
+
+      def log_out
+        Users::SignOut.new.call(user: current_user, token: token_params[:token])
+      end
 
       def log_in
         Users::SignIn.new.call(email: user_params[:email], password: user_params[:password])
