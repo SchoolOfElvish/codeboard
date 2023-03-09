@@ -87,4 +87,19 @@ RSpec.describe 'Api::V1::Sessions' do
       end
     end
   end
+
+  describe 'POST /sign_out' do
+    let(:user) { create(:user) }
+    let(:token) { Jwt::Issuer.call(user)[0] }
+    let(:decoded_token) { Jwt::Decoder.decode!(token) }
+    let(:headers) { auth_header_for(user) }
+    let(:params) { { user:, decoded_token: } }
+
+    context 'when user logged' do
+      it 'sign out request successfull' do
+        post('/api/v1/sign-out', params:, headers:)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end
