@@ -57,12 +57,7 @@ RSpec.describe User do
     end
   end
   
-  context "when group created" do
-    let(:author_id) { current_user.id }
-    let(:group_params) { { name:, author_id: } }
-
-    it "return users group" do
-      expect(groups).to change(described_class, :count).by(1)
-    end
+  describe 'associations' do
+    it { is_expected.to have_many(:groups) }
   end
 end
