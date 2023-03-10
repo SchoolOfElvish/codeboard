@@ -10,7 +10,7 @@ module Api
         in Success(group)
           render json: group, status: :created
         in Failure[error]
-          render json: { errors: error }, status: :unprocessable_entity
+          render json: { errors: error.messages }, status: :unprocessable_entity
         end
       end
 

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :group do
-    a = FactoryBot.create(:user)
-    b = Group.create(name: "Sawq", author_id: a.id)
+    name { 'English Group' }
+    author { association :user }
   end
 end

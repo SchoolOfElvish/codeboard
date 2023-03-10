@@ -21,6 +21,11 @@ RSpec.describe 'Api::V1::Groups' do
       post('/api/v1/groups', params:, headers:)
       expect(response).to have_http_status(:unprocessable_entity)
     end
+
+    it 'return an error' do
+      post('/api/v1/groups', params:, headers:)
+      expect(JSON.parse(response.body)['errors']).to match({"name"=>["is too short (minimum is 4 characters)"]})
+    end
   end
 
   context 'when name < 4 symbols' do
