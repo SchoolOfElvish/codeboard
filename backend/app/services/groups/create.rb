@@ -5,8 +5,7 @@ module Groups
     def call(params:, user:)
       @params = params
       @user = user
-      group = yield create_group
-      Success(group)
+      create_group
     end
 
     private

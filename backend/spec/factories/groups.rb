@@ -2,9 +2,7 @@
 
 FactoryBot.define do
   factory :group do
-    author_last_name { 'Sawq' }
-    author { association :author, last_name: author_last_name }
-    name { 'MyString' }
-    user_id { 1 }
+    a = FactoryBot.create(:user)
+    b = Group.create(name: "Sawq", author_id: a.id)
   end
 end

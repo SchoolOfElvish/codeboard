@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         resources :lessons, only: [:create]
       end
       resources :courses, only: [:create]
-      resources :groups, only: %i[create show update destroy]
+      resources :groups, only: %i[create]
     end
   end
 end

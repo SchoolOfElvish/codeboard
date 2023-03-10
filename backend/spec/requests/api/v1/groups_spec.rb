@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Groups' do
-  describe 'post /create'
   let(:user) { create(:user) }
   let(:name) { 'Sawq' }
   let(:author_id) { user.id }

@@ -56,4 +56,13 @@ RSpec.describe User do
       expect(user).not_to be_persisted
     end
   end
+  
+  context "when group created" do
+    let(:author_id) { current_user.id }
+    let(:group_params) { { name:, author_id: } }
+
+    it "return users group" do
+      expect(groups).to change(described_class, :count).by(1)
+    end
+  end
 end
