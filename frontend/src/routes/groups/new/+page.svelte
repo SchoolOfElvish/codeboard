@@ -1,6 +1,12 @@
-<script>
-  let title = '';
-  let email = '';
+<script lang="ts">
+  import { post } from "$utils/fetch";
+
+  let title: string;
+  let email: string;
+
+  const createGroup = async () => {
+    const result = await post('/v1/groups/', {email, title});
+  }
 </script>
 
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -38,6 +44,7 @@
     <div class="flex items-center justify-between">
       <button
         type="submit"
+        on:click={createGroup}
         class="inline-block rounded-lg bg-rose-500 px-5 py-3 text-sm font-medium text-white"
       >
         Create Group

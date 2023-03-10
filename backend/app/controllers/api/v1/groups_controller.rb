@@ -8,7 +8,7 @@ module Api
       def create
         case group_creation
         in Success(group)
-          render json: course, status: :created
+          render json: group, status: :created
         in Failure(error)
           render json: { errors: error.messages }, status: :unprocessable_entity
         end
@@ -17,11 +17,11 @@ module Api
       private
 
       def group_creation
-        Courses::Create.new.call(user: current_user, params: course_params)
+        Groups::Create.new.call(user: current_user, params: group_params)
       end
 
       def group_params
-        params.permit(:title)
+        params.permit(:title,:email)
       end
     end
   end
