@@ -24,7 +24,7 @@ RSpec.describe 'Api::V1::Groups' do
 
     it 'return an error' do
       post('/api/v1/groups', params:, headers:)
-      expect(JSON.parse(response.body)['errors']).to match({"name"=>["is too short (minimum is 4 characters)"]})
+      expect(JSON.parse(response.body)['errors']).to match({ 'name' => ['is too short (minimum is 4 characters)'] })
     end
   end
 

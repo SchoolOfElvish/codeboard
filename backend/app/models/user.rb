@@ -13,6 +13,5 @@ class User < ApplicationRecord
   has_many :blacklisted_tokens, dependent: :delete_all
   has_many :courses, dependent: :delete_all
   has_many :lessons, through: :courses
-  has_many :groups, dependent: :delete_all
-  has_many :groups,  dependent: :delete_all, foreign_key: "author_id"
+  has_many :groups, dependent: :delete_all, foreign_key: 'author_id', inverse_of: false
 end
