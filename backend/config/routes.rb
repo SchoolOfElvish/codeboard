@@ -16,7 +16,6 @@ Rails.application.routes.draw do
         resources :lessons, only: [:create]
       end
       resources :courses, only: [:create]
-      post 'hello', to: 'sessions#hello'
       resources :groups, only: %i[create show update destroy]
     end
   end

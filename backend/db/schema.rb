@@ -36,6 +36,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_172954) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_groups_on_author_id"
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.string "title"
@@ -43,13 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_172954) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
-  end
-  create_table "groups", force: :cascade do |t|
-    t.string "name"
-    t.bigint "author_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_groups_on_author_id"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -90,8 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_172954) do
 
   add_foreign_key "blacklisted_tokens", "users"
   add_foreign_key "courses", "users"
-  add_foreign_key "lessons", "courses"
   add_foreign_key "groups", "users", column: "author_id"
+  add_foreign_key "lessons", "courses"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "whitelisted_tokens", "users"
 end

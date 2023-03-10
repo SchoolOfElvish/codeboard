@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Api::V1::Groups' do
   describe 'post /create'
   let(:user) { create(:user) }
-  let(:name) { 'SAWQ' }
+  let(:name) { 'Sawq' }
   let(:author_id) { user.id }
   let(:params) { { name:, author_id: } }
   let(:headers) { auth_header_for(user) }

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :group do
-    author_last_name { 'SAWQ' }
+    author_last_name { 'Sawq' }
     author { association :author, last_name: author_last_name }
     name { 'MyString' }
     user_id { 1 }

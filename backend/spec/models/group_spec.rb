@@ -6,7 +6,7 @@ RSpec.describe Group do
   subject(:group1) { described_class.create(group_params) }
 
   let(:current_user) { create(:user) }
-  let(:name) { 'SAWQ' }
+  let(:name) { 'Sawq' }
   let(:author_id) { current_user.id }
   let(:group_params) { { name:, author_id: } }
 
