@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       resources :courses, only: [:create] do
         resources :lessons, only: [:create]
       end
+      resources :groups, only: [:create] do
+      end
     end
   end
 end
