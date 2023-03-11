@@ -3,9 +3,7 @@
   import { del } from '$utils/fetch';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
-
-  let email = '';
-  let password = '';
+  import { redirect } from '@sveltejs/kit';
 
   let errors: Error = {};
 
@@ -28,11 +26,8 @@
       })
       .json<ResponseData>();
 
-    if (response) {
-      if (response.token) {
-        user.set({ token: response.token, refreshToken: response.refresh_token });
-        window.location.href = to.root();
-      }
+    if (response) { 
+      throw redirect(307, '/sign-in')
     }
   };
 </script>
@@ -45,7 +40,7 @@
       alt="Your Company"
     />
     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-      {$_('Sign out successful')}
+      {$_('Sign out')}
     </h2>
   </div>
 
