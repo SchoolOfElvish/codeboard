@@ -45,7 +45,7 @@
       alt="Your Company"
     />
     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-      {$_('pages.sign_out.title')}
+      {$_('Sign out successful')}
     </h2>
   </div>
 
@@ -61,70 +61,7 @@
     {/if}
 
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6">
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >{$_('pages.sign_in.email')}</label
-          >
-          <div class="mt-1">
-            <input
-              id="email"
-              name="email"
-              type="text"
-              autocomplete="email"
-              required
-              bind:value={email}
-              class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700"
-            >{$_('pages.sign_in.password')}</label
-          >
-          <div class="mt-1">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              required
-              bind:value={password}
-              class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            />
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900"
-              >{$_('pages.sign_in.remember')}</label
-            >
-          </div>
-
-          <div class="text-sm">
-            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500"
-              >{$_('pages.sign_in.forgot')}</a
-            >
-          </div>
-        </div>
-
-        <div>
-          <button
-            type="submit"
-            on:click={logOut}
-            class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >{$_('pages.sign_in.sign_in_button')}</button
-          >
-        </div>
-      </form>
+      
     </div>
   </div>
 </div>
