@@ -47,7 +47,7 @@
     },
     {
       name: $_('navbar.user_menu.logout'),
-      href: '/'
+      href: '/sign-out'
     }
   ];
 
