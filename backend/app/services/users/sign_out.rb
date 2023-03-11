@@ -16,7 +16,7 @@ module Users
     attr_reader :user, :token, :decoded_token
 
     def decode_token
-      Success(Jwt::Decoder.decode!(token, verify: false))
+      Success(Jwt::Decoder.decode!(token))
     rescue StandardError
       Failure(:token_cannot_be_decoded)
     end

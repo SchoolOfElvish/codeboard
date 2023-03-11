@@ -91,7 +91,6 @@ RSpec.describe 'Api::V1::Sessions' do
   describe 'DELETE /sign_out' do
     let(:user) { create(:user) }
     let(:token) { Jwt::Issuer.call(user)[0] }
-    # let(:decoded_token) { Jwt::Decoder.decode!(token) }
     let(:headers) { auth_header_for(user) }
     let(:params) { { user:, token: } }
 
@@ -99,6 +98,15 @@ RSpec.describe 'Api::V1::Sessions' do
       it 'sign out request successfull' do
         delete('/api/v1/sign-out', params:, headers:)
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when user is sign out' do
+      let(:decoded_token) { Jwt::Decoder.decode!(token) }
+
+      it 'token is in blacklist' do
+        delete('/api/v1/sign-out', params:, headers:)
+        expect(decoded_token[:user_id]).to eq(BlacklistedToken.last.user_id)
       end
     end
   end
