@@ -7,8 +7,8 @@ module Users
       @token = token
 
       decoded_token = yield decode_token
-      # binding.pry
-      logout
+      result = yield logout(decoded_token, user)
+      Success(result)
     end
 
     private
@@ -21,7 +21,7 @@ module Users
       Failure(:token_cannot_be_decoded)
     end
 
-    def logout
+    def logout(decoded_token, user)
       Success(Jwt::Revoker.revoke(decoded_token:, user:))
     rescue StandardError
       Failure(:unprocessable_entity)
