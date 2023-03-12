@@ -12,9 +12,14 @@
   };
 
   type ResponseData = {
-    token: string;
-    refresh_token: string;
+    token?: string;
+    user?: string;
   };
+
+  interface logOut {
+  user?: string;
+  token?: string;
+}
 
   const logOut = async () => {
     const result = await delete('/v1/sign-out', { user, token });
