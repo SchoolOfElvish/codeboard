@@ -33,4 +33,8 @@ RSpec.describe Group do
       expect(group1).not_to be_persisted
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:author) }
+  end
 end
