@@ -3,8 +3,7 @@
   import { del } from '$utils/fetch';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
-  import { redirect } from '@sveltejs/kit';
-
+  
   let errors: Error = {};
 
   type Error = {
@@ -12,27 +11,29 @@
   };
 
   type ResponseData = {
-    token?: string;
-    user?: string;
+    token: string;
+    user: string;
   };
 
   interface logOut {
-  user?: string;
-  token?: string;
+  user: string;
+  token: string;
 }
 
   const logOut = async () => {
-    const result = await delete('/v1/sign-out', { user, token });
+    const result = await del('/v1/sign-out', { user, token });
 
     const response = await result
-      .error(403, async (error) => {
+      .error(422, async (error) => {
         errors = JSON.parse(error.message).error;
         error;
       })
       .json<ResponseData>();
 
     if (response) { 
-      throw redirect(307, '/sign-in')
+      if (response.ok) {
+        window.location.href = to.signIn();
+      }
     }
   };
 </script>
