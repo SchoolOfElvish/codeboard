@@ -56,4 +56,8 @@ RSpec.describe User do
       expect(user).not_to be_persisted
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:groups) }
+  end
 end
