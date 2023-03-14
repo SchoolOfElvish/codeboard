@@ -4,6 +4,8 @@
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
   
+  let user;
+  let token;
   let errors: Error = {};
 
   type Error = {
@@ -32,7 +34,7 @@
 
     if (response) { 
       if (response.ok) {
-        window.location.href = to.signIn();
+        window.location.href = to.root();
       }
     }
   };
@@ -62,7 +64,16 @@
     {/if}
 
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      
+      <form class="space-y-6">
+        <div>
+          <button
+            type="submit"
+            on:click={logOut}
+            class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >{$_('pages.sign_out.sign_in_button')}</button
+          >
+        </div>
+      </form>
     </div>
   </div>
 </div>
