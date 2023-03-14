@@ -6,10 +6,6 @@
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
 
-  // let firstName = data.response.first_name;
-  // let lastName = data.response.last_name;
-  // let email = data.response.email;
-  // let birthdate = data.response.birthdate;
   let { first_name: firstName, last_name: lastName, email, birthdate } = data.response;
   let status: OperationStatus = 'incompleted';
   let errors: Error = {};
@@ -47,7 +43,7 @@
         class="bg-gray-200 text-indigo-700 hover:bg-white hover:text-indigo-700 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
         aria-current="page"
       >
-         <Icon name = "UserCircle"/>
+        <Icon name="UserCircle" />
         <span class="truncate">Account</span>
       </a>
 
@@ -55,7 +51,7 @@
         href="/"
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
-        <Icon name = "Key"/>
+        <Icon name="Key" />
         <span class="truncate">Password</span>
       </a>
 
@@ -63,7 +59,7 @@
         href="/"
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
-        <Icon name = "CreditCard"/>
+        <Icon name="CreditCard" />
         <span class="truncate">Plan &amp; Billing</span>
       </a>
 
@@ -71,7 +67,7 @@
         href="/"
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
-        <Icon name = "UserGroup"/>
+        <Icon name="UserGroup" />
         <span class="truncate">Team</span>
       </a>
 
@@ -79,7 +75,7 @@
         href="/"
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
-        <Icon name = "SquaresPlus"/>
+        <Icon name="SquaresPlus" />
         <span class="truncate">Integrations</span>
       </a>
     </nav>

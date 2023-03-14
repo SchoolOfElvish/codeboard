@@ -5,15 +5,6 @@ module Api
     class ProfilesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
-      def update
-        case update_user_info
-        in Success(user)
-          head :no_content
-        in Failure[error]
-          render json: { error: }, status: :unprocessable_entity
-        end
-      end
-
       def show
         case receive_user_data
         in Success[user_data]
@@ -23,7 +14,16 @@ module Api
         end
       end
 
-      private 
+      def update
+        case update_user_info
+        in Success(user)
+          head :no_content
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
+        end
+      end
+
+      private
 
       def update_user_info
         Users::UpdateUserInfo.new.call(
