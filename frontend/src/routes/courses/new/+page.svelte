@@ -1,78 +1,68 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import { post } from '$utils/fetch';
-
+  type OperationStatus = 'success' | 'failure' | 'incompleted';
   let name = '';
-  let isSuccess = false;
-  let errorMessage = '';
+
+  let status: OperationStatus = 'incompleted';
+  let errors: Error = {};
+  type Error = {
+    [key: string]: string[];
+  };
 
   const handleSubmit = async () => {
     const result = await post('/v1/courses', { name });
-    const response = await result.res();
 
-    if (response.status === 201) {
-      isSuccess = true;
-    } else if (response.status === 422) {
-      isSuccess = true;
-      errorMessage = response.error.message;
-    }
+    result
+      .error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        status = 'failure';
+        return error;
+      })
+      .res(() => (status = 'success'));
   };
 
   const closeAlert = () => {
-    isSuccess = false;
-    errorMessage = '';
+    status = 'incompleted';
   };
 </script>
 
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-  {#if isSuccess}
-    {#if errorMessage != ''}
-      <div class="rounded-md bg-red-50 p-4">
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <Icon name="XCircle" />
-          </div>
-          <div class="ml-3">
-            <p class="text-sm font-medium text-red-800">{errorMessage}</p>
-          </div>
-          <div class="ml-auto pl-3">
-            <div class="-mx-1.5 -my-1.5">
-              <button
-                type="button"
-                class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
-                on:click|preventDefault={closeAlert}
-              >
-                <span class="sr-only">Dismiss</span>
-                <Icon name="XMark" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    {:else}
-      <div class="rounded-md bg-green-50 p-4">
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <Icon name="CheckCircle" />
-          </div>
-          <div class="ml-3">
-            <p class="text-sm font-medium text-green-800">Course created!</p>
-          </div>
-          <div class="ml-auto pl-3">
-            <div class="-mx-1.5 -my-1.5">
-              <button
-                type="button"
-                class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
-                on:click|preventDefault={closeAlert}
-              >
-                <span class="sr-only">Dismiss</span>
-                <Icon name="XMark" />
-              </button>
-            </div>
-          </div>
-        </div>
+  {#if status === 'failure'}
+    {#if Object.keys(errors).length > 0}
+      <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
+        <strong class="block font-medium text-red-700"> Something went wrong </strong>
+        <p class="mt-2 text-sm text-red-700">
+          {#each Object.keys(errors) as key}
+            {key}: {errors[key].join(', ')}
+            <br />
+          {/each}
+        </p>
       </div>
     {/if}
+  {:else if status === 'success'}
+    <div class="rounded-md bg-green-100 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <Icon name="CheckCircle" />
+        </div>
+        <div class="ml-3">
+          <p class="text-sm font-medium text-green-800">Successfully uploaded</p>
+        </div>
+        <div class="ml-auto pl-3">
+          <div class="-mx-1.5 -my-1.5">
+            <button
+              type="button"
+              class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
+              on:click|preventDefault={closeAlert}
+            >
+              <span class="sr-only">Dismiss</span>
+              <Icon name="XMark" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   {/if}
 
   <div class="mx-auto max-w-lg text-center">
