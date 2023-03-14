@@ -15,9 +15,11 @@
 
     result
       .error(422, async (error) => {
-        errors = JSON.parse(error.message).error;
+        errors = JSON.parse(error.message).errors;
         status = 'failure';
+        console.log(JSON.parse(error.message))
         return error;
+        
       })
       .res(() => (status = 'success'));
   };
