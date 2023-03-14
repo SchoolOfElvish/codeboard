@@ -17,7 +17,6 @@ RSpec.describe 'Api::V1::Users' do
 
     context 'when birthdate is not nil' do
       it 'returns an 200' do
-        # binding.pry
         put('/api/v1/users/me', params: user_params, headers:)
         expect(response).to have_http_status(:no_content)
       end
