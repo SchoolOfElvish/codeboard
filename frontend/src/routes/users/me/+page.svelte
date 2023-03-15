@@ -2,6 +2,7 @@
   import Icon from '$components/icons/Icon.svelte';
   import { put } from '$utils/fetch';
   import type { PageData } from './$types';
+  import { _ } from 'svelte-i18n';
   export let data: PageData;
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
@@ -44,7 +45,9 @@
         aria-current="page"
       >
         <Icon name="UserCircle" />
-        <span class="truncate">Account</span>
+        <span class="truncate">
+          {$_(`pages.users.me.account`)}
+        </span>
       </a>
 
       <a
@@ -52,7 +55,9 @@
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
         <Icon name="Key" />
-        <span class="truncate">Password</span>
+        <span class="truncate">
+          {$_(`pages.users.me.password`)}
+        </span>
       </a>
 
       <a
@@ -60,7 +65,9 @@
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
         <Icon name="CreditCard" />
-        <span class="truncate">Plan &amp; Billing</span>
+        <span class="truncate">
+          {$_(`pages.users.me.billing_plan`)}
+        </span>
       </a>
 
       <a
@@ -68,7 +75,9 @@
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
         <Icon name="UserGroup" />
-        <span class="truncate">Team</span>
+        <span class="truncate">
+          {$_(`pages.users.me.team`)}
+        </span>
       </a>
 
       <a
@@ -76,7 +85,9 @@
         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 group flex items-center rounded-md px-3 py-2 text-sm font-medium"
       >
         <Icon name="SquaresPlus" />
-        <span class="truncate">Integrations</span>
+        <span class="truncate">
+          {$_(`pages.users.me.integrations`)}
+        </span>
       </a>
     </nav>
   </aside>
@@ -122,16 +133,18 @@
       <div class="shadow sm:overflow-hidden sm:rounded-md">
         <div class="space-y-6 bg-white py-6 px-4 sm:p-6">
           <div>
-            <h3 class="text-base font-semibold leading-6 text-gray-900">Personal Information</h3>
+            <h3 class="text-base font-semibold leading-6 text-gray-900">
+              {$_(`pages.users.me.personal_information`)}
+            </h3>
             <p class="mt-1 text-sm text-gray-500">
-              Use a permanent address where you can recieve mail.
+              {$_(`pages.users.me.use_permament_email`)}
             </p>
           </div>
 
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3 ">
               <label for="first-name" class="block text-sm font-medium text-gray-700"
-                >First name</label
+                >{$_(`pages.users.me.first_name`)}</label
               >
               <input
                 bind:value={firstName}
@@ -145,7 +158,7 @@
 
             <div class="col-span-6 sm:col-span-3">
               <label for="last-name" class="block text-sm font-medium text-gray-700"
-                >Last name</label
+                >{$_(`pages.users.me.last_name`)}</label
               >
               <input
                 bind:value={lastName}
@@ -159,7 +172,7 @@
 
             <div class="col-span-6 sm:col-span-3">
               <label for="email-address" class="block text-sm font-medium text-gray-700"
-                >Email address</label
+                >{$_(`pages.users.me.email`)}</label
               >
               <input
                 bind:value={email}
@@ -175,7 +188,7 @@
 
             <div class="col-span-4 sm:col-span-3 sm:col-start-1 sm:col-end-3">
               <label for="postal-code" class="block text-sm font-medium text-gray-700"
-                >Input your birtdate</label
+                >{$_(`pages.users.me.input_birthdate`)}</label
               >
               <div class="date-picker">
                 <input
@@ -199,7 +212,7 @@
             class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             on:click|preventDefault={submitUserData}
           >
-            Save
+            {$_(`pages.users.me.save`)}
           </button>
         </div>
       </div>

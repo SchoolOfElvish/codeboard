@@ -26,6 +26,22 @@
       "remember": "Remember me",
       "forgot": "Forgot your password?",
       "sign_in_button": "Sign in"
+    },
+    "users": {
+      "me": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email address",
+        "input_birthdate": "Input your birtdate",
+        "save": "Save",
+        "account": "Account",
+        "password": "Password",
+        "billing_plan": "Plan & Billing",
+        "team": "Team",
+        "integrations": "Integrations",
+        "personal_information": "Personal Information",
+        "use_permament_email": "Use a permanent address where you can recieve mail."
+      }
     }
   }
 }
