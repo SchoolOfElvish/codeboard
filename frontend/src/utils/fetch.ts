@@ -31,7 +31,7 @@ const fetch = async (url: string, method: FetchMethod, data: Record<string, unkn
       requestWithMethod = request.put(data);
       break;
     case 'delete':
-      requestWithMethod = request.delete(data);
+      requestWithMethod = request.delete();
       break;
     default:
       throw new Error(`Unsupported HTTP method: ${method}`);
@@ -81,6 +81,6 @@ export const put = async (url: string, data: Record<string, unknown>) => {
   return fetch(url, 'put', data);
 };
 
-export const del = async (url: string, data: Record<string, unknown>) => {
-  return fetch(url, 'delete', data);
+export const del = async (url: string) => {
+  return fetch(url, 'delete', {});
 };

@@ -1,35 +1,23 @@
 <script lang="ts">
-  import user from '$stores/user';
-  import { get as storeGet } from 'svelte/store';
   import { del } from '$utils/fetch';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
 
-  let token = storeGet(user).token
+  let errors: Error = {};
 
-  // let errors: Error = {};
-
-  // type Error = {
-  //   [key: string]: string;
-  // };
-
-  // type ResponseData = {
-  //   token: string;
-  // };
-
-  // interface logOut {
-  // token: string;
-  // }
+  type Error = {
+    [key: string]: string;
+  };
 
   const logOut = async () => {
-    const result = await del('/v1/sign-out', { user, token });
+    const result = await del('/v1/sign-out');
 
-    // const response = await result
-    //   .error(422, async (error) => {
-    //     errors = JSON.parse(error.message).error;
-    //     error;
-    //   })
-    //   .json<ResponseData>();
+    const response = await result
+      .error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        error;
+      })
+      .json<ResponseData>();
 
     if (response) { 
       if (response.ok) {
@@ -52,7 +40,7 @@
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <!-- {#if Object.keys(errors).length > 0}
+    {#if Object.keys(errors).length > 0}
       <div role="alert" class="rounded border-l-4 border-red-500 bg-red-100 p-3 mb-2">
         <strong class="block font-medium text-red-700"> Something went wrong </strong>
 
@@ -60,7 +48,7 @@
           {$_(`pages.sign_out.errors.${errors}`)}
         </p>
       </div>
-    {/if} -->
+    {/if}
 
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <form class="space-y-6">
