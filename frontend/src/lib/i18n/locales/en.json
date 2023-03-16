@@ -48,9 +48,9 @@
       "errors": {
         "name": "Course name can't be blank"
       },
-      "title": "Create Course",
+      "title": "Create course",
       "input_label": "Enter course name",
-      "create_button": "Create Course",
+      "create_button": "Create course",
       "success_message": "Course created",
       "something_went_wrong": "Something went wrong"
     }
