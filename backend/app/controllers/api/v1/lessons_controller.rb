@@ -9,7 +9,7 @@ module Api
         in Success(lesson)
           render json: lesson, status: :created
         in Failure(error)
-          render json: { errors: error.full_messages }, status: :unprocessable_entity
+          render json: { errors: error.messages }, status: :unprocessable_entity
         end
       end
 
