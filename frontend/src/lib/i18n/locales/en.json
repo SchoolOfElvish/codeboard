@@ -27,6 +27,7 @@
       "forgot": "Forgot your password?",
       "sign_in_button": "Sign in"
     },
+
     "users": {
       "me": {
         "first_name": "First Name",
@@ -42,6 +43,16 @@
         "personal_information": "Personal Information",
         "use_permament_email": "Use a permanent address where you can recieve mail."
       }
+    },
+    "create_course": {
+      "errors": {
+        "name": "Course name can't be blank"
+      },
+      "title": "Create course",
+      "input_label": "Enter course name",
+      "create_button": "Create course",
+      "success_message": "Course created",
+      "something_went_wrong": "Something went wrong"
     }
   }
 }

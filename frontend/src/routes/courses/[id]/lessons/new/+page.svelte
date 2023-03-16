@@ -58,7 +58,7 @@
         on:click={createLesson}
         disabled={isFormEmpty}
         type="submit"
-        class="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+        class="ml-3 inline-block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
       >
         Create Lesson
       </button>

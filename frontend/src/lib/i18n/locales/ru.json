@@ -42,6 +42,16 @@
         "personal_information": "Персональная информация",
         "use_permament_email": "Используйте основной адрес электронной почты"
       }
+    },
+    "create_course": {
+      "errors": {
+        "name": "Название курса обязательно для заполнения"
+      },
+      "title": "Создать курс",
+      "input_label": "Введите название курса",
+      "create_button": "Создать курс",
+      "success_message": "Курс создан",
+      "something_went_wrong": "Что-то пошло не так"
     }
   }
 }
