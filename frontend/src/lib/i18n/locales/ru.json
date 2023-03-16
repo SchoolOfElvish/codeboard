@@ -26,6 +26,22 @@
       "remember": "Запомнить",
       "forgot": "Забыли пароль?",
       "sign_in_button": "Войти"
+    },
+    "users": {
+      "me": {
+        "first_name": "Имя",
+        "last_name": "Фамилия",
+        "email": "Email адрес",
+        "input_birthdate": "Дата рождения",
+        "save": "Сохранить",
+        "account": "Аккаунт",
+        "password": "Пароль",
+        "billing_plan": "Платежи",
+        "team": "Команда",
+        "integrations": "Сторонние интеграции",
+        "personal_information": "Персональная информация",
+        "use_permament_email": "Используйте основной адрес электронной почты"
+      }
     }
   }
 }
