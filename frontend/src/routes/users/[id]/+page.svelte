@@ -1,3 +1,10 @@
+<script lang="ts">
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  let { first_name: firstName, last_name: lastName, role, created_at } = data.response;
+</script>
 <!-- https://tailwindui.com/components/application-ui/page-examples/detail-screens#component-80034b9052ca551c25f7d731b7b3c6dd -->
 <div class="min-h-full">
   <main class="py-3">
@@ -17,10 +24,10 @@
           </div>
         </div>
         <div>
-          <h1 class="text-2xl font-bold text-gray-900">Ricardo Cooper</h1>
+          <h1 class="text-2xl font-bold text-gray-900">{firstName} {lastName}</h1>
           <p class="text-sm font-medium text-gray-500">
-            Applied for <a href="/" class="text-gray-900">Front End Developer</a> on
-            <time datetime="2020-08-25">August 25, 2020</time>
+            <b>{role}</b>
+            <time datetime="2020-08-25">since {created_at}</time>
           </p>
         </div>
       </div>
