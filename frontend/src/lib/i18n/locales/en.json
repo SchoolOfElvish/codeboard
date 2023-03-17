@@ -56,12 +56,12 @@
     },
     "create_group": {
       "errors": {
-        "title": "Title can't be less then 4 symbols",
+        "title": "Title can't be less then 4 symbols and can't be blank",
         "email": "Email can't be blank"
       },
       "Create group": "Create group",
       "email": "Input emails users want you invite",
-      "title": "Enter group name",
+      "title": "Enter group title",
       "create_button": "Create group",
       "success_message": "Group created",
       "something_went_wrong": "Something went wrong"
