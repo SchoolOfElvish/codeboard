@@ -1,6 +1,7 @@
 <script lang="ts">
   import { post } from '$utils/fetch';
   import Icon from '$components/icons/Icon.svelte';
+  import { _ } from 'svelte-i18n';
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
 
@@ -19,12 +20,14 @@
 
     result
       .error(422, async (error) => {
-        errors = JSON.parse(error.message).error;
+        errors = JSON.parse(error.message).errors;
         status = 'failure';
+        console.log(JSON.parse(error.message));
         return error;
       })
       .res(() => (status = 'success'));
   };
+
 
   const closeAlert = () => {
     status = 'incompleted';
