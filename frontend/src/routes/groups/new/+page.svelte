@@ -5,7 +5,7 @@
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
 
-  let title: string;
+  let name: string;
   let email: string;
   let status: OperationStatus = 'incompleted';
   let errors: Error = {};
@@ -15,7 +15,7 @@
 
   const createGroup = async () => {
     const result = await post('/v1/groups', {
-      name: title
+      name: name
     });
 
     result
@@ -81,15 +81,15 @@
     {/if}
   </div>
   <div class="mx-auto max-w-lg text-center">
-    <h1 class="text-2xl font-bold sm:text-3xl">{$_('pages.create_group.Create_Group')}</h1>
+    <h1 class="text-2xl font-bold sm:text-3xl">{$_('pages.create_group.create_group')}</h1>
   </div>
 
   <form action="" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
     <div>
-      <label for="title" class="sr-only">title</label>
+      <label for="name" class="sr-only">name</label>
       <div class="relative ">
         <input
-          bind:value={title}
+          bind:value={name}
           minlength="4"
           type="text"
           class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm invalid:border-red-500"
