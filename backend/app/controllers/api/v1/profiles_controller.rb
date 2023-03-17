@@ -10,7 +10,7 @@ module Api
         in Success[user_data]
           render json: user_data, status: :ok
         in Failure[error]
-          render json: { error: }, status: :unprocessable_entity
+          render json: { errors: error.full_messages }, status: :unprocessable_entity
         end
       end
 

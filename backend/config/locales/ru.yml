@@ -1,0 +1,18 @@
+ru:
+  hello: "ЕБАТЬ РАБОТАЕТ!"
+  activerecord:
+    models:
+      user:
+        one: "Пользователь"
+        other: "Пользователи"
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Email адрес"
+        role: "Роль"
+        password: "Пароль"
+    errors:
+      messages:
+        blank: "поле не может быть пустым"
+        too_short: "слишком короткое минимум %{count} символов"
