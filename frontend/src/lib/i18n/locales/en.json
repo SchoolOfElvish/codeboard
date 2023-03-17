@@ -56,8 +56,7 @@
     },
     "create_group": {
       "errors": {
-        "title": "Title can't be less then 4 symbols and can't be blank",
-        "email": "Email can't be blank"
+        "title": "Title can't be less then 4 symbols and can't be blank"
       },
       "Create group": "Create group",
       "email": "Input emails users want you invite",

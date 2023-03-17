@@ -34,7 +34,7 @@
 </script>
 
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-18">
-  <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
+  <div class="mx-auto max-w-lg p-3">
     {#if status === 'failure'}
       {#if Object.keys(errors).length > 0}
         <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
@@ -114,7 +114,7 @@
       <button
         type="submit"
         on:click={createGroup}
-        class="inline-block rounded-lg bg-rose-500 px-5 py-3 text-sm font-medium text-white"
+        class="inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         {$_('pages.create_group.create_button')}
       </button>
