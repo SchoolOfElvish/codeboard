@@ -26,7 +26,6 @@ module Api
       end
 
       def sign_out
-        @headers = request.headers
         case log_out
         in Success
           render json: nil, status: :ok
@@ -49,6 +48,7 @@ module Api
       attr_reader :headers
 
       def log_out
+        @headers = request.headers
         Users::SignOut.new.call(headers)
       end
 

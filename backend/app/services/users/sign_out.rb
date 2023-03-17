@@ -14,7 +14,7 @@ module Users
 
     private
 
-    attr_reader :headers, :token, :decoded_token, :user
+    attr_reader :headers
 
     def acceess_token
       Success(Jwt::Authenticator.authenticate_header(headers))
