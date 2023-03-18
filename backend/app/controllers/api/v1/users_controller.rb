@@ -8,10 +8,10 @@ module Api
       def show
         @user = User.find(user_params[:id])
         case receive_user_data(@user)
-          in Success[user_data]
-            render json: user_data, status: :ok
-          in Failure[error]
-            render json: { error: }, status: :unprocessable_entity
+        in Success[user_data]
+          render json: user_data, status: :ok
+        in Failure[error]
+          render json: { error: }, status: :unprocessable_entity
          end
       end
 
@@ -22,17 +22,15 @@ module Api
       end
 
       def receive_user_data(user)
-        user_data = 
-        {
-          first_name: user.first_name,
-          last_name: user.last_name,
-          role: user.role,
-          created_at: user.created_at.to_date
-        }
+        user_data =
+          {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            role: user.role,
+            created_at: user.created_at.to_date
+          }
         Success(user_data)
       end
-
-      
     end
   end
 end

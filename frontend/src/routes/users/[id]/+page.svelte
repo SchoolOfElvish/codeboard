@@ -5,6 +5,7 @@
 
   let { first_name: firstName, last_name: lastName, role, created_at } = data.response;
 </script>
+
 <!-- https://tailwindui.com/components/application-ui/page-examples/detail-screens#component-80034b9052ca551c25f7d731b7b3c6dd -->
 <div class="min-h-full">
   <main class="py-3">
@@ -34,10 +35,10 @@
       <div
         class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3"
       >
-        <button
+        <a
           type="button"
           class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >Edit profile</button
+          href="/users/me">Edit profile</a
         >
       </div>
     </div>
@@ -105,6 +106,7 @@
                 <h2 id="notes-title" class="text-lg font-medium text-gray-900">Notes</h2>
               </div>
               <div class="px-4 py-6 sm:px-6">
+                <!-- svelte-ignore a11y-no-redundant-roles -->
                 <ul role="list" class="space-y-8">
                   <li>
                     <div class="flex space-x-3">
@@ -128,7 +130,7 @@
                         <div class="mt-2 space-x-2 text-sm">
                           <span class="font-medium text-gray-500">4d ago</span>
                           <span class="font-medium text-gray-500">&middot;</span>
-                          <button type="button" class="font-medium text-gray-900">Reply</button>
+                          <!-- <button type="button" class="font-medium text-gray-900">Reply</button> -->
                         </div>
                       </div>
                     </div>
@@ -157,7 +159,7 @@
                         <div class="mt-2 space-x-2 text-sm">
                           <span class="font-medium text-gray-500">4d ago</span>
                           <span class="font-medium text-gray-500">&middot;</span>
-                          <button type="button" class="font-medium text-gray-900">Reply</button>
+                          <!-- <button type="button" class="font-medium text-gray-900">Reply</button> -->
                         </div>
                       </div>
                     </div>
@@ -186,7 +188,7 @@
                         <div class="mt-2 space-x-2 text-sm">
                           <span class="font-medium text-gray-500">4d ago</span>
                           <span class="font-medium text-gray-500">&middot;</span>
-                          <button type="button" class="font-medium text-gray-900">Reply</button>
+                          <!-- <button type="button" class="font-medium text-gray-900">Reply</button> -->
                         </div>
                       </div>
                     </div>
@@ -254,6 +256,7 @@
 
           <!-- Activity Feed -->
           <div class="mt-6 flow-root">
+            <!-- svelte-ignore a11y-no-redundant-roles -->
             <ul role="list" class="-mb-8">
               <li>
                 <div class="relative pb-8">
