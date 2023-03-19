@@ -2,6 +2,12 @@
   import { onMount } from 'svelte';
   import { get } from '$utils/fetch';
 
+  interface Course {
+  name: string;
+  user: {
+    first_name: string;
+  };
+}
   let searchQuery = '';
   let courses: Course[] = [];
 
@@ -12,11 +18,11 @@
   }
 
   function submitForm() {
-    if (searchQuery) {
-      const query = encodeURIComponent(searchQuery.trim());
-      get(`/courses?search=${query}`);
-    }
+  if (searchQuery) {
+    const query = encodeURIComponent(searchQuery.trim());
+    window.location.href = `/courses?search=${query}`;
   }
+}
 
   onMount(getCourses);
 </script>

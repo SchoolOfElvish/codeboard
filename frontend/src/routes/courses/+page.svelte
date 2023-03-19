@@ -13,7 +13,15 @@
   let courses = writable<Course[]>([]);
   let search = '';
 
+  async function submitForm() {
+    const query = encodeURIComponent(search.trim());
+    window.location.href = `/courses?search=${query}`;
+  }
+
   async function getCourses() {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    search = urlSearchParams.get('search') || '';
+
     const response = await get(`/v1/courses?search=${search}`);
     const data = await response.json();
     courses.set(data as Course[]);
@@ -27,7 +35,7 @@
     <h1 class="text-2xl font-bold sm:text-3xl">Courses:</h1>
   </div>
   <div class="mx-auto mt-8 max-w-xl">
-    <form on:submit|preventDefault={getCourses} class="sm:flex sm:gap-4">
+    <form on:submit|preventDefault={submitForm} class="sm:flex sm:gap-4">
       <div class="sm:flex-1">
         <label for="search" class="sr-only">Search courses</label>
 
