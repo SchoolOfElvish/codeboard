@@ -5,12 +5,18 @@ module Api
     class CoursesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
-      def show
-
-
+      def index
+        @courses = Course.all.map do |course|
+          {
+            name: course.name,
+            user: {
+              first_name: course.user.first_name
+            }
+          }
+        end
+        render json: @courses
       end
 
-      
       def create
         case course_creation
         in Success(course)
