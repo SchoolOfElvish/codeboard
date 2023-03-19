@@ -15,6 +15,10 @@
     "sign_up": "Sign up"
   },
   "pages": {
+    "root": {
+      "input_label": "Search for courses",
+      "search_button": "Search"
+    },
     "sign_in": {
       "errors": {
         "wrong_password": "Wrong Password",
@@ -64,6 +68,14 @@
       "create_button": "Create group",
       "success_message": "Group created",
       "something_went_wrong": "Something went wrong"
+    },
+    "courses": {
+      "title": "Courses:",
+      "input_label": "Search for courses",
+      "search_button": "Search",
+      "none_search": "Courses found: 0",
+      "author": "Author",
+      "find": "Learn more"
     }
   }
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { get } from '$utils/fetch';
+  import { _ } from 'svelte-i18n';
 
   interface Course {
     name: string;
@@ -48,7 +49,7 @@
 
           <input
             type="text"
-            placeholder="Search courses"
+            placeholder={$_(`pages.root.input_lable`)}
             class="w-full h-10 rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
             bind:value={searchQuery}
           />
@@ -58,7 +59,7 @@
           type="submit"
           class="inline-block h-10 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          <span class="text-sm font-medium"> Search </span>
+          <span class="text-sm font-medium">{$_(`pages.root.search_buttom`)}</span>
         </button>
       </form>
     </div>
