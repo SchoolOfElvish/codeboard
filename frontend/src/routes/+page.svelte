@@ -3,11 +3,11 @@
   import { get } from '$utils/fetch';
 
   interface Course {
-  name: string;
-  user: {
-    first_name: string;
-  };
-}
+    name: string;
+    user: {
+      first_name: string;
+    };
+  }
   let searchQuery = '';
   let courses: Course[] = [];
 
@@ -18,11 +18,11 @@
   }
 
   function submitForm() {
-  if (searchQuery) {
-    const query = encodeURIComponent(searchQuery.trim());
-    window.location.href = `/courses?search=${query}`;
+    if (searchQuery) {
+      const query = encodeURIComponent(searchQuery.trim());
+      window.location.href = `/courses?search=${query}`;
+    }
   }
-}
 
   onMount(getCourses);
 </script>
@@ -49,31 +49,16 @@
           <input
             type="text"
             placeholder="Search courses"
-            class="w-full rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
+            class="w-full h-10 rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
             bind:value={searchQuery}
           />
         </div>
 
         <button
           type="submit"
-          class="group mt-4 flex w-full items-center justify-center rounded-md bg-rose-600 px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
+          class="inline-block h-10 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           <span class="text-sm font-medium"> Search </span>
-
-          <svg
-            class="ml-3 h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
         </button>
       </form>
     </div>
