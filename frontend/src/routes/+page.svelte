@@ -1,3 +1,28 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { get } from '$utils/fetch';
+
+
+  let searchQuery = '';
+  let courses: Course[] = [];
+
+  async function getCourses() {
+    const response = await get('/v1/courses');
+    const data = await response.json();
+    courses = data as Course[];
+  }
+
+  function submitForm() {
+    if (searchQuery) {
+      const query = encodeURIComponent(searchQuery.trim());
+      get(`/courses?search=${query}`);
+    }
+  }
+
+  onMount(getCourses);
+</script>
+
+
 <section>
   <div class="p-8 md:p-12 lg:px-16 lg:py-24">
     <div class="mx-auto max-w-lg text-center">
@@ -13,14 +38,15 @@
     </div>
 
     <div class="mx-auto mt-8 max-w-xl">
-      <form action="/" class="sm:flex sm:gap-4">
+      <form action="/" class="sm:flex sm:gap-4" on:submit|preventDefault={submitForm}>
         <div class="sm:flex-1">
           <label for="email" class="sr-only">Email</label>
 
           <input
-            type="email"
-            placeholder="Email address"
+            type="text"
+            placeholder="Search courses"
             class="w-full rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
+            bind:value={searchQuery}
           />
         </div>
 
@@ -28,7 +54,7 @@
           type="submit"
           class="group mt-4 flex w-full items-center justify-center rounded-md bg-rose-600 px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
         >
-          <span class="text-sm font-medium"> Sign Up </span>
+          <span class="text-sm font-medium"> Search </span>
 
           <svg
             class="ml-3 h-5 w-5"

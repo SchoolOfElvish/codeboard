@@ -6,14 +6,7 @@ module Api
       include Dry::Monads::Result::Mixin
 
       def index
-        @courses = Course.all.map do |course|
-          {
-            name: course.name,
-            user: {
-              first_name: course.user.first_name
-            }
-          }
-        end
+        @courses = search_courses(Course.all)
         render json: @courses
       end
 
@@ -27,6 +20,18 @@ module Api
       end
 
       private
+
+      def search_courses(courses)
+        courses = courses.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
+        courses.map do |course|
+          {
+            name: course.name,
+            user: {
+              first_name: course.user.first_name
+            }
+          }
+        end
+      end
 
       def course_creation
         Courses::Create.new.call(user: current_user, params: course_params)
