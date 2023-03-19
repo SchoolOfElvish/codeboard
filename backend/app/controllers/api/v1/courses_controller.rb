@@ -5,6 +5,12 @@ module Api
     class CoursesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
+      def show
+
+
+      end
+
+      
       def create
         case course_creation
         in Success(course)
