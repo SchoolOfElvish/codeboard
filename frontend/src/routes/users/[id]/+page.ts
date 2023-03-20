@@ -1,7 +1,9 @@
 import { get } from '$utils/fetch';
+import { error } from '@sveltejs/kit';
 import type { RouteParams } from './$types';
 
 export const ssr = false;
+let errors: string;
 
 type ResponseData = {
   first_name: string;
@@ -11,6 +13,14 @@ type ResponseData = {
 };
 
 export const load = async ({ params }: { params: RouteParams }) => {
-  const response = await (await get(`/v1/users/${params.id}`)).json<ResponseData>();
-  return { response };
+  const response = await (
+    await get(`/v1/users/${params.id}`)
+  )
+    .error(404, (notFound) => {
+      errors = JSON.parse(notFound.message).error;
+      notFound;
+      throw error(404, errors);
+    })
+    .json<ResponseData>();
+  return { response, errors };
 };

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Profiles' do
+RSpec.describe 'Api::V1::ProfilesController' do
   describe 'PUT /me' do
     let(:user_params) do
       {

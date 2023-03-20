@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { PageData } from './$types';
-
   export let data: PageData;
 
   let { first_name: firstName, last_name: lastName, role, created_at } = data.response;
