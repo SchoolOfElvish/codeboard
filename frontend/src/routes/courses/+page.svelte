@@ -3,6 +3,7 @@
   import { writable } from 'svelte/store';
   import { get } from '$utils/fetch';
   import { _ } from 'svelte-i18n';
+  import { goto } from '$app/navigation';
 
   interface Course {
     name: string;
@@ -16,17 +17,24 @@
 
   async function submitForm() {
     const query = encodeURIComponent(search.trim());
-    window.location.href = `/courses?search=${query}`;
+    goto(`/courses?search=${query}`);
+
+    fetchCourses()
   }
 
   async function getCourses() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     search = urlSearchParams.get('search') || '';
 
+    fetchCourses()
+  }
+
+  async function fetchCourses() {
     const response = await get(`/v1/courses?search=${search}`);
-    const data = await response.json();
+    const data = await response.json<Course[]>();
     courses.set(data as Course[]);
   }
+
 
   onMount(getCourses);
 </script>

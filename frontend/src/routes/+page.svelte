@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { get } from '$utils/fetch';
   import { _ } from 'svelte-i18n';
+  import { goto } from '$app/navigation';
 
   interface Course {
     name: string;
@@ -14,14 +15,14 @@
 
   async function getCourses() {
     const response = await get('/v1/courses');
-    const data = await response.json();
+    const data = await response.json<Course[]>();
     courses = data as Course[];
   }
 
   function submitForm() {
     if (searchQuery) {
       const query = encodeURIComponent(searchQuery.trim());
-      window.location.href = `/courses?search=${query}`;
+      goto(`/courses?search=${query}`);
     }
   }
 

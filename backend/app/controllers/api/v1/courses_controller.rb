@@ -6,7 +6,7 @@ module Api
       include Dry::Monads::Result::Mixin
 
       def index
-        @courses = search_courses(Course.all)
+        @courses = search_courses(Course.all.limit(100))
         render json: @courses
       end
 
