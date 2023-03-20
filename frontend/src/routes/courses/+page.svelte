@@ -43,7 +43,7 @@
         <input
           type="text"
           id="search"
-          placeholder={$_(`pages.courses.input_lable`)}
+          placeholder={$_(`pages.courses.input_label`)}
           class="w-full h-10 rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
           bind:value={search}
         />
@@ -53,7 +53,7 @@
         type="submit"
         class="inline-block h-10 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
-        <span class="text-sm font-medium">{$_(`pages.courses.search_buttom`)}</span>
+        <span class="text-sm font-medium">{$_(`pages.courses.search_button`)}</span>
       </button>
     </form>
   </div>

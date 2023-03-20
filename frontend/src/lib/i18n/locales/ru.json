@@ -16,8 +16,8 @@
   },
   "pages": {
     "root": {
-      "input_lable": "Поиск курсов",
-      "search_buttom": "Поиск"
+      "input_label": "Поиск курсов",
+      "search_button": "Поиск"
     },
     "sign_in": {
       "errors": {
@@ -70,7 +70,7 @@
     },
     "courses": {
       "title": "Курсы:",
-      "input_lable": "Поиск курсов",
+      "input_label": "Поиск курсов",
       "search_buttom": "Поиск",
       "none_search": "Найдено курсов: 0",
       "author": "Автор",
