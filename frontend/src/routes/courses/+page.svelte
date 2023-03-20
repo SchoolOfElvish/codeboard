@@ -4,6 +4,7 @@
   import { get } from '$utils/fetch';
   import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
 
   interface Course {
     name: string;
@@ -19,14 +20,14 @@
     const query = encodeURIComponent(search.trim());
     goto(`/courses?search=${query}`);
 
-    fetchCourses()
+    fetchCourses();
   }
 
   async function getCourses() {
-    const urlSearchParams = new URLSearchParams(window.location.search);
+    const urlSearchParams = $page.url.searchParams;
     search = urlSearchParams.get('search') || '';
 
-    fetchCourses()
+    fetchCourses();
   }
 
   async function fetchCourses() {
@@ -34,7 +35,6 @@
     const data = await response.json<Course[]>();
     courses.set(data as Course[]);
   }
-
 
   onMount(getCourses);
 </script>
