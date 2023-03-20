@@ -1,4 +1,5 @@
 import { get } from '$utils/fetch';
+import type { RouteParams } from './$types';
 
 export const ssr = false;
 
@@ -9,7 +10,7 @@ type ResponseData = {
   created_at: Date;
 };
 
-export const load = async ({ params }) => {
+export const load = async ({ params }: { params: RouteParams }) => {
   const response = await (await get(`/v1/users/${params.id}`)).json<ResponseData>();
   return { response };
 };
