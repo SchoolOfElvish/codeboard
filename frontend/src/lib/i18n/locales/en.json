@@ -53,6 +53,17 @@
       "create_button": "Create course",
       "success_message": "Course created",
       "something_went_wrong": "Something went wrong"
+    },
+    "create_group": {
+      "errors": {
+        "title": "Title can't be less then 4 symbols and can't be blank"
+      },
+      "create_group": "Create group",
+      "email": "Input emails users want you invite",
+      "title": "Enter group title",
+      "create_button": "Create group",
+      "success_message": "Group created",
+      "something_went_wrong": "Something went wrong"
     }
   }
 }
