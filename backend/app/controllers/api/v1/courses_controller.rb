@@ -7,13 +7,13 @@ module Api
 
       def index
         @courses = search_courses(Course.includes(:user).all.limit(100))
-        render json: @courses
+        render json: prepare_json_for_list(@courses)
       end
 
       def create
         case course_creation
         in Success(course)
-          render json: course, status: :created
+          render json: prepare_json(course), status: :created
         in Failure(error)
           render json: { errors: error.messages }, status: :unprocessable_entity
         end
@@ -22,15 +22,25 @@ module Api
       private
 
       def search_courses(courses)
-        courses = courses.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
-        courses.map do |course|
-          {
-            name: course.name,
-            user: {
-              first_name: course.user.first_name
-            }
-          }
+        if params[:search].present?
+          courses.where('name LIKE ?', "%#{params[:search]}%")
+        else
+          courses
         end
+      end
+
+      def prepare_json_for_list(courses)
+        courses.map { |course| prepare_json(course) }
+      end
+
+      def prepare_json(course)
+        {
+          id: course.id,
+          name: course.name,
+          user: {
+            first_name: course.user.first_name
+          }
+        }
       end
 
       def course_creation
