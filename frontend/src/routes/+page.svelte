@@ -1,17 +1,16 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
-
+  import { to } from '$lib/routes';
 
   let searchQuery = '';
-  
+
   function submitForm() {
     if (searchQuery) {
       const query = encodeURIComponent(searchQuery.trim());
-      goto(`/courses?search=${query}`);
+      goto(to.courses.root({ search: query }));
     }
   }
-
 </script>
 
 <section>

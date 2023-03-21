@@ -3,22 +3,22 @@
   import { writable } from 'svelte/store';
   import { get } from '$utils/fetch';
   import { _ } from 'svelte-i18n';
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
+  import { to } from '$lib/routes';
 
   type Course = {
     name: string;
     user: {
       first_name: string;
     };
-  }
+  };
 
   let courses = writable<Course[]>([]);
   let search = '';
 
   async function submitForm() {
     const query = encodeURIComponent(search.trim());
-    goto(`/courses?search=${query}`);
+    to.courses.root({ search: query });
 
     fetchCourses();
   }
@@ -31,7 +31,7 @@
   }
 
   async function fetchCourses() {
-    const data = await ( await get(`/v1/courses?search=${search}`)).json<Course[]>();
+    const data = await (await get(`/v1/courses?search=${search}`)).json<Course[]>();
     courses.set(data);
   }
 
