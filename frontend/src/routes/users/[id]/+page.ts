@@ -13,14 +13,6 @@ type ResponseData = {
 };
 
 export const load = async ({ params }: { params: RouteParams }) => {
-  const response = await (
-    await get(`/v1/users/${params.id}`)
-  )
-    .error(404, (notFound) => {
-      errors = JSON.parse(notFound.message).error;
-      notFound;
-      throw error(404, errors);
-    })
-    .json<ResponseData>();
+  const response = await (await get(`/v1/users/${params.id}`)).json<ResponseData>();
   return { response, errors };
 };

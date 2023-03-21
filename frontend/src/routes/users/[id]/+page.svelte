@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { to } from '$lib/routes';
   import type { PageData } from './$types';
   export let data: PageData;
 
@@ -37,7 +38,7 @@
         <a
           type="button"
           class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          href="/users/me">Edit profile</a
+          href={to.users.me()}>Edit profile</a
         >
       </div>
     </div>
@@ -89,7 +90,7 @@
             </div>
             <div>
               <a
-                href="/"
+                href={to.root()}
                 class="block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg"
                 >Read full application</a
               >
@@ -118,7 +119,7 @@
                       </div>
                       <div>
                         <div class="text-sm">
-                          <a href="/" class="font-medium text-gray-900">Leslie Alexander</a>
+                          <a href="to.root()" class="font-medium text-gray-900">Leslie Alexander</a>
                         </div>
                         <div class="mt-1 text-sm text-gray-700">
                           <p>
@@ -146,7 +147,7 @@
                       </div>
                       <div>
                         <div class="text-sm">
-                          <a href="/" class="font-medium text-gray-900">Michael Foster</a>
+                          <a href="to.root()" class="font-medium text-gray-900">Michael Foster</a>
                         </div>
                         <div class="mt-1 text-sm text-gray-700">
                           <p>
@@ -175,7 +176,7 @@
                       </div>
                       <div>
                         <div class="text-sm">
-                          <a href="/" class="font-medium text-gray-900">Dries Vincent</a>
+                          <a href="to.root()" class="font-medium text-gray-900">Dries Vincent</a>
                         </div>
                         <div class="mt-1 text-sm text-gray-700">
                           <p>
@@ -218,7 +219,7 @@
                     </div>
                     <div class="mt-3 flex items-center justify-between">
                       <a
-                        href="/"
+                        href="to.root()"
                         class="group inline-flex items-start space-x-2 text-sm text-gray-500 hover:text-gray-900"
                       >
                         <svg
@@ -283,7 +284,7 @@
                     <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                       <div>
                         <p class="text-sm text-gray-500">
-                          Applied to <a href="/" class="font-medium text-gray-900"
+                          Applied to <a href="to.root()" class="font-medium text-gray-900"
                             >Front End Developer</a
                           >
                         </p>
@@ -323,7 +324,7 @@
                       <div>
                         <p class="text-sm text-gray-500">
                           Advanced to phone screening by <a
-                            href="/"
+                            href="to.root()"
                             class="font-medium text-gray-900">Bethany Blake</a
                           >
                         </p>
@@ -365,7 +366,7 @@
                       <div>
                         <p class="text-sm text-gray-500">
                           Completed phone screening with <a
-                            href="/"
+                            href="to.root()"
                             class="font-medium text-gray-900">Martha Gardner</a
                           >
                         </p>
@@ -404,8 +405,9 @@
                     <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                       <div>
                         <p class="text-sm text-gray-500">
-                          Advanced to interview by <a href="/" class="font-medium text-gray-900"
-                            >Bethany Blake</a
+                          Advanced to interview by <a
+                            href="to.root()"
+                            class="font-medium text-gray-900">Bethany Blake</a
                           >
                         </p>
                       </div>
@@ -441,8 +443,9 @@
                     <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                       <div>
                         <p class="text-sm text-gray-500">
-                          Completed interview with <a href="/" class="font-medium text-gray-900"
-                            >Katherine Snyder</a
+                          Completed interview with <a
+                            href="to.root()"
+                            class="font-medium text-gray-900">Katherine Snyder</a
                           >
                         </p>
                       </div>
