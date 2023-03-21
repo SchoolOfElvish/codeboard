@@ -2,12 +2,7 @@
   import { _ } from 'svelte-i18n';
   import { goto } from '$app/navigation';
 
-  interface Course {
-    name: string;
-    user: {
-      first_name: string;
-    };
-  }
+
   let searchQuery = '';
   
   function submitForm() {

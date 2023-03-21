@@ -6,7 +6,7 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  interface Course {
+  type Course = {
     name: string;
     user: {
       first_name: string;
@@ -31,9 +31,8 @@
   }
 
   async function fetchCourses() {
-    const response = await get(`/v1/courses?search=${search}`);
-    const data = await response.json<Course[]>();
-    courses.set(data as Course[]);
+    const data = await ( await get(`/v1/courses?search=${search}`)).json<Course[]>();
+    courses.set(data);
   }
 
   onMount(getCourses);
