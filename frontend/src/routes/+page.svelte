@@ -26,7 +26,6 @@
     }
   }
 
-  onMount(getCourses);
 </script>
 
 <section>
