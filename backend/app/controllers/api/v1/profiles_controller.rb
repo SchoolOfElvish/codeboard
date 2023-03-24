@@ -38,13 +38,14 @@ module Api
           last_name: current_user.last_name,
           email: current_user.email,
           birthdate: current_user.birthdate,
-          about_info: current_user.about_info
+          about_info: current_user.about_info, 
+          avatar: url_for(current_user.avatar_blob)
         }
         Success(user_data)
       end
 
       def user_info_params
-        params.permit(:first_name, :last_name, :birthdate, :about_info)
+        params.permit(:first_name, :last_name, :birthdate, :about_info, :avatar)
       end
     end
   end

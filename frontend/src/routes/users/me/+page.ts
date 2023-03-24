@@ -9,6 +9,7 @@ type ResponseData = {
   email: string;
   birthdate: string;
   about_info: string;
+  avatar: string;
 };
 
 export const load = (async () => {

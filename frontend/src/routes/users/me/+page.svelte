@@ -12,7 +12,8 @@
     last_name: lastName,
     email,
     birthdate,
-    about_info: aboutInfo
+    about_info: aboutInfo,
+    avatar
   } = data.response;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
@@ -96,7 +97,7 @@
     </nav>
   </aside>
 
-  <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
+  <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0 bg-white">
     {#if status === 'failure'}
       <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
         <strong class="block font-medium text-red-700"
@@ -134,7 +135,41 @@
       </div>
     {/if}
     <form action="#" method="POST">
-      <div class="shadow sm:overflow-hidden sm:rounded-md">
+      <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">
+            This information will be displayed publicly so be careful what you share.
+          </p>
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <label for="photo" class="block text-sm font-medium leading-6 text-gray-900"
+                >Photo</label
+              >
+              <div class="mt-2 flex items-center gap-x-3">
+                <svg
+                  class="h-12 w-12 text-gray-300"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <label
+                  for="file-upload"
+                  class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  >
+                  <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                  Change</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="space-y-6 bg-white py-6 px-4 sm:p-6">
           <div>
             <h3 class="text-base font-semibold leading-6 text-gray-900">
@@ -236,5 +271,6 @@
         </div>
       </div>
     </form>
+    <img src={avatar} alt="avatar" />
   </div>
 </div>
