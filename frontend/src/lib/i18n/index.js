@@ -9,7 +9,20 @@ if (browser) {
   console.log({ defaultLocale, navigator: window.navigator.language });
 }
 
+function localeValue() {
+  let value = browser && window.localStorage.getItem('locale')
+  if (value === null)
+  {value = browser ? window.navigator.language : defaultLocale}
+  };
+
+ export var localeValueresult = localeValue();
+  console.log(localeValueresult);
+
 init({
   fallbackLocale: defaultLocale,
-  initialLocale: browser ? window.navigator.language : defaultLocale
+  initialLocale: localeValueresult
 });
+
+
+
+
