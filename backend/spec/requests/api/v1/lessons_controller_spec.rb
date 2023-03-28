@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Lessons' do
+RSpec.describe 'Api::V1::LessonsController' do
   describe 'POST /api/v1/courses/:course_id/lessons' do
     let(:user) { create(:user) }
     let(:headers) { auth_header_for(user) }

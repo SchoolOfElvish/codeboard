@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :lessons, only: [:create]
       end
       resources :groups, only: [:create]
+      resources :users, only: [:show]
     end
   end
 end

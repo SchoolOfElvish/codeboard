@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Groups' do
+RSpec.describe 'Api::V1::GroupsController' do
   let(:user) { create(:user) }
   let(:name) { 'Sawq' }
   let(:author_id) { user.id }

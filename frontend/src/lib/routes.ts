@@ -14,6 +14,9 @@ export type Routes = {
   groups: {
     new: Route;
   };
+  users: {
+    me: Route;
+  };
 };
 
 export const to: Routes = {
@@ -27,5 +30,8 @@ export const to: Routes = {
   },
   groups: {
     new: buildPath('/groups/new')
+  },
+  users: {
+    me: buildPath('/users/me')
   }
 };
