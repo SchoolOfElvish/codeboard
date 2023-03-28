@@ -9,6 +9,7 @@ export type Routes = {
   courses: {
     my: Route;
     new: Route;
+    root: Route;
   };
   groups: {
     new: Route;
@@ -21,7 +22,8 @@ export const to: Routes = {
   signIn: buildPath('/sign-in'),
   courses: {
     new: buildPath('/courses/new'),
-    my: buildPath('/courses/my')
+    my: buildPath('/courses/my'),
+    root: buildPath('/courses')
   },
   groups: {
     new: buildPath('/groups/new')

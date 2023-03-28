@@ -15,6 +15,10 @@
     "sign_up": "Зарегистрироваться"
   },
   "pages": {
+    "root": {
+      "input_label": "Поиск курсов",
+      "search_button": "Поиск"
+    },
     "sign_in": {
       "errors": {
         "wrong_password": "Неверный пароль",
@@ -63,6 +67,14 @@
       "create_button": "Создать группу",
       "success_message": "Группа создана",
       "something_went_wrong": "Что-то пошло не так"
+    },
+    "courses": {
+      "title": "Курсы:",
+      "input_label": "Поиск курсов",
+      "search_buttom": "Поиск",
+      "none_search": "Найдено курсов: 0",
+      "author": "Автор",
+      "find": "Узнать больше"
     }
   }
 }
