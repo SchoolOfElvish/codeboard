@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Courses' do
+RSpec.describe 'Api::V1::CoursesController' do
   describe 'POST /create' do
     let(:user) { create(:user) }
     let(:name) { 'TestCourse' }
