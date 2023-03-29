@@ -8,11 +8,12 @@ ru:
     attributes:
       user:
         first_name: "Имя"
-        last_name: "Фамилия"
+        last_name: "Фамилия"  
         email: "Email адрес"
         role: "Роль"
         password: "Пароль"
     errors:
+      format: "%{attribute} %{message}"
       messages:
         blank: "не может быть пустым"
         too_short: "слишком короткое минимум %{count} символов"
