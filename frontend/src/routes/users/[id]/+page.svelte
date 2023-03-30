@@ -2,6 +2,7 @@
   import { to } from '$lib/routes';
   import type { PageData } from './$types';
   export let data: PageData;
+  import { _ } from 'svelte-i18n';
 
   let { first_name: firstName, last_name: lastName, role, created_at, about_info } = data.response;
 </script>
@@ -55,7 +56,7 @@
                 id="applicant-information-title"
                 class="text-lg font-medium leading-6 text-gray-900"
               >
-                About me 
+              {$_(`pages.users.me.about_me`)}
               </h2>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">{about_info}</p>
             </div>
