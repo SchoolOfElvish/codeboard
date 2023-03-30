@@ -78,7 +78,7 @@
                   <dt class="text-sm font-medium text-gray-500">Phone</dt>
                   <dd class="mt-1 text-sm text-gray-900">+1 555-555-5555</dd>
                 </div>
-                {#if about_info !== null}
+                {#if about_info !== '' && about_info !== null}
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">
                       {$_(`pages.users.me.about_me`)}
