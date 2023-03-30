@@ -7,7 +7,7 @@
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
 
-  let { first_name: firstName, last_name: lastName, email, birthdate } = data.response;
+  let { first_name: firstName, last_name: lastName, email, birthdate, about_info } = data.response;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
 
@@ -15,7 +15,8 @@
     const result = await put('/v1/users/me', {
       first_name: firstName,
       last_name: lastName,
-      birthdate: birthdate
+      birthdate: birthdate,
+      about_info: about_info
     });
 
     result
@@ -202,11 +203,15 @@
             </div>
             <!--BIO-->
             <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
-              <label for="bio" class="block text-sm font-medium text-gray-700">
-                Biorgaphy
-              </label>
+              <label for="bio" class="block text-sm font-medium text-gray-700"> About me </label>
               <div class="mt-1">
-                <textarea id="bio" name="bio" class=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="height: 90px;"></textarea>
+                <textarea
+                  bind:value={about_info}
+                  id="bio"
+                  name="bio"
+                  class=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  style="height: 90px;"
+                />
               </div>
             </div>
           </div>

@@ -10,13 +10,14 @@ module Users
 
     private
 
-    attr_reader :user, :user_params, :first_name, :last_name, :birthdate
+    attr_reader :user, :user_params, :first_name, :last_name, :birthdate, :about_info
 
     def user_info
       {
         first_name: user_params[:first_name],
         last_name: user_params[:last_name],
-        birthdate: user_params[:birthdate]
+        birthdate: user_params[:birthdate],
+        about_info: user_params[:about_info]
       }
     end
 
