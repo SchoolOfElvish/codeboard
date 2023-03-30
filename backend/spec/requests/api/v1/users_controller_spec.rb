@@ -10,7 +10,8 @@ RSpec.describe 'Api::V1::UsersController' do
         'first_name' => user.first_name,
         'last_name' => user.last_name,
         'role' => user.role,
-        'created_at' => user.created_at.to_date.to_s
+        'created_at' => user.created_at.to_date.to_s,
+        'about_info' => user.about_info
       }
     end
     let(:headers) { auth_header_for(user) }

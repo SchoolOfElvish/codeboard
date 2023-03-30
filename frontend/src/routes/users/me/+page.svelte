@@ -203,7 +203,9 @@
             </div>
             <!--BIO-->
             <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
-              <label for="bio" class="block text-sm font-medium text-gray-700"> {$_(`pages.users.me.about_me`)}</label>
+              <label for="bio" class="block text-sm font-medium text-gray-700">
+                {$_(`pages.users.me.about_me`)}</label
+              >
               <div class="mt-1">
                 <textarea
                   bind:value={about_info}

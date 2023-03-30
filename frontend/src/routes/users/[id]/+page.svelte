@@ -56,7 +56,7 @@
                 id="applicant-information-title"
                 class="text-lg font-medium leading-6 text-gray-900"
               >
-              {$_(`pages.users.me.about_me`)}
+                {$_(`pages.users.me.about_me`)}
               </h2>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">{about_info}</p>
             </div>
