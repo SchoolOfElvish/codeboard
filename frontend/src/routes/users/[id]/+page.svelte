@@ -3,7 +3,7 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
-  let { first_name: firstName, last_name: lastName, role, created_at } = data.response;
+  let { first_name: firstName, last_name: lastName, role, created_at, about_info } = data.response;
 </script>
 
 <!-- https://tailwindui.com/components/application-ui/page-examples/detail-screens#component-80034b9052ca551c25f7d731b7b3c6dd -->
@@ -55,9 +55,9 @@
                 id="applicant-information-title"
                 class="text-lg font-medium leading-6 text-gray-900"
               >
-                Applicant Information
+                About me 
               </h2>
-              <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">{about_info}</p>
             </div>
             <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
               <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
