@@ -15,6 +15,7 @@
     about_info: aboutInfo,
     avatar
   } = data.response;
+  let AvatarFile: File;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
 
@@ -136,11 +137,13 @@
     {/if}
     <form action="#" method="POST">
       <div class="space-y-12">
-        <div class="border-b border-gray-900/10 pb-12">
-          <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-          <p class="mt-1 text-sm leading-6 text-gray-600">
-            This information will be displayed publicly so be careful what you share.
-          </p>
+        <div class="space-y-6 bg-white py-6 px-4 sm:p-6 border-b">
+          <div>
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Profile</h3>
+            <p class="mt-1 text-sm text-gray-500">
+              This information will be displayed publicly so be careful what you share.
+            </p>
+          </div>
           <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div class="col-span-full">
               <label for="photo" class="block text-sm font-medium leading-6 text-gray-900"
@@ -162,8 +165,8 @@
                 <label
                   for="file-upload"
                   class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                  <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                >
+                  <input id="file-upload" name="file-upload" type="file" class="sr-only" />
                   Change</label
                 >
               </div>
