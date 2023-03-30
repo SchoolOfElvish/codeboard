@@ -200,6 +200,15 @@
                 />
               </div>
             </div>
+            <!--BIO-->
+            <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
+              <label for="bio" class="block text-sm font-medium text-gray-700">
+                Biorgaphy
+              </label>
+              <div class="mt-1">
+                <textarea id="bio" name="bio" class=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="height: 90px;"></textarea>
+              </div>
+            </div>
           </div>
         </div>
 
