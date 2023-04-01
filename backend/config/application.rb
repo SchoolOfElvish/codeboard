@@ -15,6 +15,8 @@ module Codeboard
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en ru]
     config.active_model.i18n_customize_full_message = true
+    
+    routes.default_url_options[:host] = 'localhost:3000'
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

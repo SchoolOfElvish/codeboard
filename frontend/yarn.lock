@@ -335,6 +335,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rails/activestorage@npm:^7.0.4-3":
+  version: 7.0.4
+  resolution: "@rails/activestorage@npm:7.0.4"
+  dependencies:
+    spark-md5: ^3.0.1
+  checksum: f99eaf856782babbf54a79fdf22e797592ad2a90e83b35125cd2c546c56b9f1c2ee8fc9e9b73098356fbfbca05ea2ba832207d455d3ed6e57513ba33ccb74ea2
+  languageName: node
+  linkType: hard
+
 "@rgossiaux/svelte-headlessui@npm:^1.0.2":
   version: 1.0.2
   resolution: "@rgossiaux/svelte-headlessui@npm:1.0.2"
@@ -546,6 +555,13 @@ __metadata:
   version: 2.0.6
   resolution: "@types/pug@npm:2.0.6"
   checksum: e8d09c3ddc7e6b87050a16d73694518f259a8ed74a0ab79b81b847baf89d92d44959ed68199966ac6f4a218c715c9bb3e4c86c8800d4868a4a674f4b21d2f01d
+  languageName: node
+  linkType: hard
+
+"@types/rails__activestorage@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@types/rails__activestorage@npm:7.0.1"
+  checksum: 01a4cc9dca1217b22110b81190b67f1daf30bb32f34acd02e65ac57d4993422039804f95d7db6538839ca0a33c9c506d257e6b3bc18d047992717b53ed88e637
   languageName: node
   linkType: hard
 
@@ -1760,11 +1776,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend@workspace:."
   dependencies:
+    "@rails/activestorage": ^7.0.4-3
     "@rgossiaux/svelte-headlessui": ^1.0.2
     "@sveltejs/adapter-auto": ^1.0.0
     "@sveltejs/adapter-node": ^1.1.4
     "@sveltejs/kit": ^1.0.0
     "@tailwindcss/forms": ^0.5.3
+    "@types/rails__activestorage": ^7.0.1
     "@typescript-eslint/eslint-plugin": ^5.45.0
     "@typescript-eslint/parser": ^5.45.0
     autoprefixer: ^10.4.13
@@ -3209,6 +3227,13 @@ __metadata:
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 59ce8640cf3f3124f64ac289012c2b8bd377c238e316fb323ea22fbfe83da07d81e000071d7242cad7a23cd91c7de98e4df8830ec3f133cb6133a5f6e9f67bc2
+  languageName: node
+  linkType: hard
+
+"spark-md5@npm:^3.0.1":
+  version: 3.0.2
+  resolution: "spark-md5@npm:3.0.2"
+  checksum: 5feebff0bfabcecf56ba03af3e38fdb068272ed41fbf0a94ff9ef65b9bb9cb1dd69be3684db6542e62497b1eac3ae324c07ac4dcb606465dc36ca048177077bf
   languageName: node
   linkType: hard
 

@@ -3,45 +3,29 @@
 module Api
   module V1
     class TestController < ApplicationController
-      include Dry::Monads::Result::Mixin
-
+        
       def update
-        case update_user_avatar()
-        in Success(user)
-          head :no_content
-        in Failure[error]
-          render json: { error: }, status: :unprocessable_entity
-        end
+        filename = avatar_params[:filename]
+        byte_size = avatar_params[:byte_size]
+        checksum = avatar_params[:checksum]
+        content_type = avatar_params[:content_type]
+        blob = ActiveStorage::Blob.create_before_direct_upload!(filename:, byte_size:, checksum:, content_type:)
+        
+        render json: {
+          url: blob.service_url_for_direct_upload(expires_in: 10.minutes),
+          headers: blob.service_headers_for_direct_upload.to_json,
+          blob_id: blob.id,
+          signed_blob_id: blob.signed_id,
+        }
+        
       end
 
       private
 
-      def update_user_avatar
-        base64_string = user_info_params[:avatar].to_s
-        file_data = Base64.decode64(base64_string.split(',')[1])
-        tempfile = Tempfile.new("uploaded_file")
-        file_type = base64_string.match(/data:(.*);base64/)[1]
-        file_name = user_info_params.keys.first
-        # binding.pry
-        tempfile.binmode
-        tempfile.write(file_data)
-        tempfile.rewind
-        uploaded_file = ActionDispatch::Http::UploadedFile.new(
-          tempfile: tempfile,
-          filename: file_name,
-          type: file_type
-        )
-
-        user = current_user
-        if user.avatar.attach(uploaded_file)
-          Success(user)
-        end
-        
-      end
-
-      def user_info_params
-        params.permit(:avatar)
-      end
+      def avatar_params
+        params.require(:avatar).permit(:filename, :byte_size, :checksum, :content_type)
+      end      
+      
     end
   end
 end

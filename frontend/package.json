@@ -35,8 +35,10 @@
   },
   "type": "module",
   "dependencies": {
+    "@rails/activestorage": "^7.0.4-3",
     "@rgossiaux/svelte-headlessui": "^1.0.2",
     "@sveltejs/adapter-node": "^1.1.4",
+    "@types/rails__activestorage": "^7.0.1",
     "svelte-i18n": "^3.6.0",
     "wretch": "^2.4.1"
   },
