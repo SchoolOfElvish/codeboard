@@ -1,0 +1,21 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: "Пользователь"
+        other: "Пользователи"
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"  
+        email: "Email адрес"
+        role: "Роль"
+        password: "Пароль"
+    errors:
+      format: "%{attribute} %{message}"
+      models:
+        user:
+          format: "Поле \"%{attribute}\" %{message}"
+      messages:
+        blank: "не может быть пустым"
+        too_short: "слишком короткое минимум %{count} символов"
