@@ -4,7 +4,13 @@
   export let data: PageData;
   import { _ } from 'svelte-i18n';
 
-  let { first_name: firstName, last_name: lastName, role, created_at, about_info } = data.response;
+  let {
+    first_name: firstName,
+    last_name: lastName,
+    role,
+    created_at,
+    about_info: aboutInfo
+  } = data.response;
 </script>
 
 <!-- https://tailwindui.com/components/application-ui/page-examples/detail-screens#component-80034b9052ca551c25f7d731b7b3c6dd -->
@@ -78,13 +84,13 @@
                   <dt class="text-sm font-medium text-gray-500">Phone</dt>
                   <dd class="mt-1 text-sm text-gray-900">+1 555-555-5555</dd>
                 </div>
-                {#if about_info !== '' && about_info !== null}
+                {#if aboutInfo}
                   <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">
                       {$_(`pages.users.me.about_me`)}
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900">
-                      {about_info}
+                      {aboutInfo}
                     </dd>
                   </div>
                 {/if}
