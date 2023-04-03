@@ -10,9 +10,6 @@
   let { first_name: firstName, last_name: lastName, email, birthdate } = data.response;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
-  // type Error = {
-  //   [key: string]: string[];
-  // };
 
   const submitUserData = async () => {
     const result = await put('/v1/users/me', {
@@ -95,7 +92,9 @@
   <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
     {#if status === 'failure'}
       <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
-        <strong class="block font-medium text-red-700"> Something went wrong </strong>
+        <strong class="block font-medium text-red-700"
+          >{$_(`pages.users.me.something_went_wrong`)}</strong
+        >
         <p class="mt-2 text-sm text-red-700">
           {#each errors as error}
             {error}

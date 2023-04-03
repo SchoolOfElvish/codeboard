@@ -20,7 +20,7 @@ module Api
           head :no_content
         in Failure[error]
           render json: { error: error.full_messages }, status: :unprocessable_entity
-        end
+          end
       end
 
       private

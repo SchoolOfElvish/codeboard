@@ -1,5 +1,4 @@
 ru:
-  hello: "ЕБАТЬ РАБОТАЕТ!"
   activerecord:
     models:
       user:
@@ -14,6 +13,9 @@ ru:
         password: "Пароль"
     errors:
       format: "%{attribute} %{message}"
+      models:
+        user:
+          format: "Поле \"%{attribute}\" %{message}"
       messages:
         blank: "не может быть пустым"
         too_short: "слишком короткое минимум %{count} символов"

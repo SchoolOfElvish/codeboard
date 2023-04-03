@@ -1,5 +1,4 @@
 en:
-  hello: "Hello world"
   activerecord:
     models:
       user:
@@ -12,9 +11,9 @@ en:
         email: "Email"
         role: "Role"
     errors:
-      format: "%{attribute} %{message}"
+      models:
+        user:
+          format: "\"%{attribute}\" %{message}"
       messages:
         blank: "can't be blank"
         too_short: "is too short (minimum is %{count} characters)"
-        
-      

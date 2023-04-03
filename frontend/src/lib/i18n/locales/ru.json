@@ -44,7 +44,8 @@
         "team": "Команда",
         "integrations": "Сторонние интеграции",
         "personal_information": "Персональная информация",
-        "use_permament_email": "Используйте основной адрес электронной почты"
+        "use_permament_email": "Используйте основной адрес электронной почты",
+        "something_went_wrong": "Что-то пошло не так"
       }
     },
     "create_course": {
