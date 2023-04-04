@@ -11,6 +11,7 @@ ru:
         email: "Email адрес"
         role: "Роль"
         password: "Пароль"
+        about_info: "Обо мне"
     errors:
       format: "%{attribute} %{message}"
       models:
