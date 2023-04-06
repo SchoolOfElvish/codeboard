@@ -10,6 +10,7 @@ type ResponseData = {
   last_name: string;
   role: string;
   created_at: Date;
+  about_info: string;
 };
 
 export const load = async ({ params }: { params: RouteParams }) => {

@@ -10,6 +10,7 @@ en:
         last_name: "Last Name"
         email: "Email"
         role: "Role"
+        about_info: "About me"
     errors:
       models:
         user:

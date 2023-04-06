@@ -45,7 +45,8 @@
         "integrations": "Сторонние интеграции",
         "personal_information": "Персональная информация",
         "use_permament_email": "Используйте основной адрес электронной почты",
-        "something_went_wrong": "Что-то пошло не так"
+        "something_went_wrong": "Что-то пошло не так",
+        "about_me": "Обо мне"
       }
     },
     "create_course": {

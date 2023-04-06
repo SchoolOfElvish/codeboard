@@ -2,8 +2,15 @@
   import { to } from '$lib/routes';
   import type { PageData } from './$types';
   export let data: PageData;
+  import { _ } from 'svelte-i18n';
 
-  let { first_name: firstName, last_name: lastName, role, created_at } = data.response;
+  let {
+    first_name: firstName,
+    last_name: lastName,
+    role,
+    created_at,
+    about_info: aboutInfo
+  } = data.response;
 </script>
 
 <!-- https://tailwindui.com/components/application-ui/page-examples/detail-screens#component-80034b9052ca551c25f7d731b7b3c6dd -->
@@ -77,15 +84,16 @@
                   <dt class="text-sm font-medium text-gray-500">Phone</dt>
                   <dd class="mt-1 text-sm text-gray-900">+1 555-555-5555</dd>
                 </div>
-                <div class="sm:col-span-2">
-                  <dt class="text-sm font-medium text-gray-500">About</dt>
-                  <dd class="mt-1 text-sm text-gray-900">
-                    Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum
-                    culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla
-                    mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad
-                    adipisicing reprehenderit deserunt qui eu.
-                  </dd>
-                </div>
+                {#if aboutInfo}
+                  <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500">
+                      {$_(`pages.users.me.about_me`)}
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                      {aboutInfo}
+                    </dd>
+                  </div>
+                {/if}
               </dl>
             </div>
             <div>

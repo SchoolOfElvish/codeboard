@@ -46,7 +46,8 @@
         "integrations": "Integrations",
         "personal_information": "Personal Information",
         "use_permament_email": "Use a permanent address where you can recieve mail.",
-        "something_went_wrong": "Something went wrong"
+        "something_went_wrong": "Something went wrong",
+        "about_me": "About me"
       }
     },
     "create_course": {

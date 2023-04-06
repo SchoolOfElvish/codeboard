@@ -37,13 +37,14 @@ module Api
           first_name: current_user.first_name,
           last_name: current_user.last_name,
           email: current_user.email,
-          birthdate: current_user.birthdate
+          birthdate: current_user.birthdate,
+          about_info: current_user.about_info
         }
         Success(user_data)
       end
 
       def user_info_params
-        params.permit(:first_name, :last_name, :birthdate)
+        params.permit(:first_name, :last_name, :birthdate, :about_info)
       end
     end
   end

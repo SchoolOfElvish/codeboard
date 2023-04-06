@@ -7,7 +7,13 @@
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
 
-  let { first_name: firstName, last_name: lastName, email, birthdate } = data.response;
+  let {
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    birthdate,
+    about_info: aboutInfo
+  } = data.response;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
 
@@ -15,7 +21,8 @@
     const result = await put('/v1/users/me', {
       first_name: firstName,
       last_name: lastName,
-      birthdate: birthdate
+      birthdate: birthdate,
+      about_info: aboutInfo
     });
 
     result
@@ -197,6 +204,21 @@
                   min="1900-01-01"
                   max="2099-01-01"
                   required
+                />
+              </div>
+            </div>
+            <!--BIO-->
+            <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
+              <label for="bio" class="block text-sm font-medium text-gray-700">
+                {$_(`pages.users.me.about_me`)}</label
+              >
+              <div class="mt-1">
+                <textarea
+                  bind:value={aboutInfo}
+                  id="bio"
+                  name="bio"
+                  class=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                  style="height: 90px;"
                 />
               </div>
             </div>
