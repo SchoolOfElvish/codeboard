@@ -5,43 +5,34 @@
   import { BlobUpload } from '@rails/activestorage/src/blob_upload';
 
   let fileInput: HTMLInputElement;
+  let file: File;
+  let result: JsonResponse;
 
-  type Avatar = {
-    filename: string;
-    byte_size: number;
-    checksum: string;
-    content_type: string;
-  };
-
-  interface JsonResponse {
+  type JsonResponse = {
     url: string;
     headers: string;
     blob_id: number;
     signed_blob_id: string;
-  }
+  };
 
-  let avatar: Avatar;
+  const calculateChecksum = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      FileChecksum.create(file, (error: Error, checksum: string) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(checksum);
+      });
+    });
+  };
 
   const handleFileSelected = async () => {
     if (fileInput.files && fileInput.files[0]) {
-      const file = fileInput.files[0];
-      console.log(file);
-
-      const calculateChecksum = async (file: File): Promise<string> => {
-        return new Promise((resolve, reject) => {
-          FileChecksum.create(file, (error: Error, checksum: string) => {
-            if (error) {
-              reject(error);
-              return;
-            }
-
-            resolve(checksum);
-          });
-        });
-      };
+      file = fileInput.files[0];
 
       const checksum = await calculateChecksum(file);
-      console.log('File checksum:', checksum);
 
       const response = await post('/v1/test', {
         avatar: {
@@ -52,8 +43,7 @@
         }
       });
 
-      let result = (await response.json()) as JsonResponse;
-      console.log(result);
+      result = (await response.json()) as JsonResponse;
       let headers = JSON.parse(result.headers);
       let url = result.url;
 
@@ -62,37 +52,27 @@
         directUploadData: { headers: headers as Record<string, string>, url }
       });
 
-      console.log(upload);
-
-      // Wrap upload.create() in a Promise
       const uploadPromise = new Promise<void>((resolve, reject) => {
         const uploadCallback = (error: Error | undefined) => {
           if (error) {
             console.error('Upload failed:', error);
-            reject(error); // Reject the promise on error
+            reject(error);
           } else {
-            console.log('Upload successful');
-            resolve(); // Resolve the promise on success
+            resolve();
           }
         };
 
         upload.create(uploadCallback);
       });
 
-      // Wait for the upload to finish
       await uploadPromise;
-
-      // Now execute the final part
-      const final = await put('/v1/attach_avatar', {
-        result: {
-          signed_blob_id: result.signed_blob_id
-        }
-      });
     }
   };
 
-  const handleSubmit = () => {
-    console.log('Successfully submitted');
+  const handleSubmit = async () => {
+    const final = await put('/v1/test', {
+      signed_blob_id: result.signed_blob_id
+    });
   };
 </script>
 

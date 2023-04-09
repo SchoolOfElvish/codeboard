@@ -11,9 +11,9 @@ Rails.application.routes.draw do
       get 'users/me', to: 'profiles#show'
       put 'users/me', to: 'profiles#update'
       post '/refresh', to: 'sessions#refresh'
-      post 'test', to: 'test#update'
-      put 'attach_avatar', to: 'test#attach_avatar'
-        
+      post 'test', to: 'test#create'
+      put 'test', to: 'test#update'
+
       resources :courses, only: %i[create index] do
         resources :lessons, only: [:create]
       end
