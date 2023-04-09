@@ -3,7 +3,7 @@
   import {} from '@rails/activestorage';
   import { FileChecksum } from '@rails/activestorage/src/file_checksum';
   import { BlobUpload } from '@rails/activestorage/src/blob_upload';
-  
+
   let fileInput: HTMLInputElement;
 
   type Avatar = {
@@ -55,26 +55,39 @@
       let result = (await response.json()) as JsonResponse;
       console.log(result);
       let headers = JSON.parse(result.headers);
-      // let url = JSON.stringify(result.url);
       let url = result.url;
 
       const upload = new BlobUpload({
         file: file,
         directUploadData: { headers: headers as Record<string, string>, url }
       });
-       
+
       console.log(upload);
 
-      const uploadCallback = (error: Error | undefined) => {
-        if (error) {
-          console.error('Upload failed:', error);
-        } else {
-          console.log('Upload successful');
+      // Wrap upload.create() in a Promise
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        const uploadCallback = (error: Error | undefined) => {
+          if (error) {
+            console.error('Upload failed:', error);
+            reject(error); // Reject the promise on error
+          } else {
+            console.log('Upload successful');
+            resolve(); // Resolve the promise on success
+          }
+        };
+
+        upload.create(uploadCallback);
+      });
+
+      // Wait for the upload to finish
+      await uploadPromise;
+
+      // Now execute the final part
+      const final = await put('/v1/attach_avatar', {
+        result: {
+          signed_blob_id: result.signed_blob_id
         }
-      };
-
-      upload.create(uploadCallback);
-
+      });
     }
   };
 

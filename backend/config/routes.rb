@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       put 'users/me', to: 'profiles#update'
       post '/refresh', to: 'sessions#refresh'
       post 'test', to: 'test#update'
+      put 'attach_avatar', to: 'test#attach_avatar'
         
       resources :courses, only: %i[create index] do
         resources :lessons, only: [:create]
