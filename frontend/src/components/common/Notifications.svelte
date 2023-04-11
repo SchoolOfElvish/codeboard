@@ -1,12 +1,8 @@
-<script type="ts">
+<script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import notifications from '$stores/notifications';
+  
 
-  let notificationsList = [];
-
-  const unsubscribe = notifications.subscribe((notificationsArray) => {
-    notificationsList = notificationsArray;
-  });
 
   function addSuccessNotification() {
     notifications.success({
@@ -42,7 +38,7 @@
   <button on:click={addInfoNotification}>info</button>
   <button on:click={addWarningNotification}>warning</button>
   <ul>
-    {#each notificationsList as notification}
+    {#each $notifications as notification}
       <li>
         <h3>{notification.message}</h3>
         <p>{notification.description}</p>

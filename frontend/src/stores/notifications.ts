@@ -2,16 +2,16 @@ import { writable } from 'svelte/store';
 
 type NotificationType = 'success' | 'error' | 'info' | 'warning';
 
-type Notificat = {
+ export type Notification = {
   message: string;
   description: string;
   type: NotificationType;
 };
 
 const createNotification = () => {
-  const notifications = writable<Notificat[]>([]);
+  const notifications = writable<Notification[]>([]);
   const { update, subscribe } = notifications;
-  const addNotification = ({ message, description, type }: Notificat) => {
+  const addNotification = ({ message, description, type }: Notification) => {
     const newNotification = {
       message,
       description,
