@@ -1,6 +1,5 @@
 <script lang="ts">
   import notifications from '$stores/notifications';
-
 </script>
 
 <div
