@@ -1,11 +1,22 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { put } from '$utils/fetch';
+  import { put,post } from '$utils/fetch';
   import type { PageData } from './$types';
   import { _ } from 'svelte-i18n';
+  import {} from '@rails/activestorage';
+  import { FileChecksum } from '@rails/activestorage/src/file_checksum';
+  import { BlobUpload } from '@rails/activestorage/src/blob_upload';
+
   export let data: PageData;
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
+
+  type JsonResponse = {
+    url: string;
+    headers: string;
+    blob_id: number;
+    signed_blob_id: string;
+  };
 
   let {
     first_name: firstName,
@@ -15,15 +26,75 @@
     about_info: aboutInfo,
     avatar
   } = data.response;
+  
   let AvatarFile: File;
   let status: OperationStatus = 'incompleted';
   let errors: string[];
+
+  let fileInput: HTMLInputElement;
+  let file: File;
+  let uploadResult: JsonResponse;
+
+  const calculateChecksum = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      FileChecksum.create(file, (error: Error, checksum: string) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(checksum);
+      });
+    });
+  };
+
+  const handleFileSelected = async () => {
+    if (fileInput.files && fileInput.files[0]) {
+      file = fileInput.files[0];
+
+      const checksum = await calculateChecksum(file);
+
+      const response = await post('/v1/test', {
+        avatar: {
+          filename: file.name,
+          byte_size: file.size,
+          checksum: checksum,
+          content_type: file.type
+        }
+      });
+
+      uploadResult = (await response.json()) as JsonResponse;
+      let headers = JSON.parse(uploadResult.headers);
+      let url = uploadResult.url;
+
+      const upload = new BlobUpload({
+        file: file,
+        directUploadData: { headers: headers as Record<string, string>, url }
+      });
+
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        const uploadCallback = (error: Error | undefined) => {
+          if (error) {
+            console.error('Upload failed:', error);
+            reject(error);
+          } else {
+            resolve();
+          }
+        };
+
+        upload.create(uploadCallback);
+      });
+
+      await uploadPromise;
+    }
+  };
 
   const submitUserData = async () => {
     const result = await put('/v1/users/me', {
       first_name: firstName,
       last_name: lastName,
       birthdate: birthdate,
+      signed_blob_id: uploadResult.signed_blob_id,
       about_info: aboutInfo
     });
 
@@ -166,7 +237,7 @@
                   for="file-upload"
                   class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 >
-                  <input id="file-upload" name="file-upload" type="file" class="sr-only" />
+                  <input id="file-upload" name="file-upload" type="file" class="sr-only"  bind:this={fileInput} on:change={handleFileSelected}  />
                   Change</label
                 >
               </div>

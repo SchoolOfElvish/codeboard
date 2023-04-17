@@ -14,6 +14,20 @@ module Api
         end
       end
 
+      def create
+        case create_blob
+        in Success(blob)
+          render json: {
+            url: blob.service_url_for_direct_upload(expires_in: 10.minutes),
+            headers: blob.service_headers_for_direct_upload.to_json,
+            blob_id: blob.id,
+            signed_blob_id: blob.signed_id
+          }
+        in Failure(error)
+          render json: { error: error.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       def update
         case update_user_info
         in Success(user)
@@ -26,9 +40,10 @@ module Api
       private
 
       def update_user_info
-        Users::UpdateUserInfo.new.call(
+        Users::UpdateUser.new.call(
           user: current_user,
-          user_params: user_info_params
+          user_params: user_info_params,
+          url_params: url_params,
         )
       end
 
@@ -46,6 +61,22 @@ module Api
 
       def user_info_params
         params.permit(:first_name, :last_name, :birthdate, :about_info, :avatar)
+      end
+
+      def create_blob
+        Users::CreateBlob.new.call(avatar_params)
+      end
+
+      def put_avatar
+        Users::PutAvatar.new.call(url_params, current_user)
+      end
+
+      def avatar_params
+        params.require(:avatar).permit(:filename, :byte_size, :checksum, :content_type)
+      end
+
+      def url_params
+        params.permit(:signed_blob_id)
       end
     end
   end
