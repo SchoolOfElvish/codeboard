@@ -3,27 +3,17 @@
   import { page } from '$app/stores';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
-  import { locale, locales } from 'svelte-i18n';
+  import { locale } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
   import { logOut } from '$utils/session';
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
-  import { isLoading } from 'svelte-i18n';
-  import { localeValueresult } from '$lib/i18n/index.js';
-
-
-
-  function handleChange(event){
-    const selectedLocale = event.target.value;
-    localStorage.setItem('locale', selectedLocale );
-  };
-  
- 
-    
- 
-
+  import Langswitcher from './Langswitcher.svelte';
+  $: if ($locale.startsWith('en')) {
+    $locale = 'en';
+  }
   $: menuItems = user.isAuthorized
     ? [
         {
@@ -68,22 +58,6 @@
   let isMobileMenuOpen = false;
 </script>
 
-{#if $isLoading}
-  <p>Loading</p>
-{:else}
-  <nav>
-    <main>
-      <div class="select">
-        <select bind:value={$locale} on:change={handleChange}>
-          {#each $locales as locale}
-          <option value={localeValueresult}> {locale} </option>
-          {/each}
-        </select>
-      </div>
-    </main>
-  </nav>
-{/if}
-
 <nav class="bg-gray-800">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
@@ -111,8 +85,14 @@
         </div>
       </div>
       {#if user.isAuthorized}
+        <div class="ml-auto">
+          <Langswitcher />
+        </div>
         <Profile.Desktop items={userMenuItems} />
       {:else}
+        <div class="ml-auto">
+          <Langswitcher />
+        </div>
         <div class="hidden md:block">
           <AuthenticationButtons />
         </div>
@@ -157,6 +137,7 @@
       {#if user.isAuthorized}
         <Profile.Mobile items={userMenuItems} />
       {:else}
+        <Langswitcher />
         <div class="border-t border-gray-700 p-5">
           <AuthenticationButtons />
         </div>

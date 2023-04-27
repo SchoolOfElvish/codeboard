@@ -1,7 +1,6 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import type { UserMenuItem } from './Desktop.svelte';
-
   export let items: UserMenuItem[] = [];
 </script>
 
