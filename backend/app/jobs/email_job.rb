@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmailJob < ApplicationJob
+class EmailJob < ApplicationJob::Base
   queue_as :default
 
   def perform(user)
