@@ -21,9 +21,8 @@ services:
       - db
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
-      - SMTP_HOST=mailcatcher
-      - SMTP_PORT=1025
-    
+
+      
 
   db:
     image: postgres:14
