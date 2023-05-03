@@ -6,20 +6,14 @@
   import { locale } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
-  import { del } from '$utils/fetch';
-
+  import { logOut } from '$utils/session';
+  
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
 
   $: if ($locale == 'en-GB') {
     $locale = 'en';
-  }
-
-  const logOut = async () => {
-    await del('/v1/sign-out');
-    localStorage.removeItem('user');
-    window.location.href = to.signIn();
   }
 
   const menuItems = user.isAuthorized
