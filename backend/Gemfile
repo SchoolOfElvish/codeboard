@@ -89,10 +89,10 @@ gem 'jwt', '~> 2.6'
 
 gem 'dry-monads', '~> 1.6'
 
-gem 'rack-cors', '~> 1.1'
-
 # Provides support for Cross-Origin Resource Sharing (CORS): allows restricted
 # resources to be requested from another domain
+gem 'rack-cors', '~> 1.1'
+
 gem 'pg', '~> 1.4'
 
 gem 'sidekiq'

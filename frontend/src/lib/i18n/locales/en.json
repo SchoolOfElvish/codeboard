@@ -78,13 +78,6 @@
       "none_search": "Courses found: 0",
       "author": "Author",
       "find": "Learn more"
-    },
-    "sign_out": {
-      "errors": {
-        "user_unauthorized": "User unauthorizes"
-      },
-      "title": "Sign out",
-      "fillers_text": "You'll be redirected to sign in page"
     }
   }
 }

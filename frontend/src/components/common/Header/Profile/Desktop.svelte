@@ -84,7 +84,7 @@
               >
                 {userItem.name}
               </a>
-            {/if}      
+            {/if}
           {/each}
         </div>
       </Transition>

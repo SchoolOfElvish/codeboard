@@ -28,7 +28,7 @@ module Api
       def sign_out
         case log_out
         in Success
-          render json: nil, status: :ok
+          head :ok
         in Failure[error]
           render json: { error: }, status: :unprocessable_entity
         end

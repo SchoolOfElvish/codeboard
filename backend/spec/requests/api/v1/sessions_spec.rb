@@ -90,9 +90,7 @@ RSpec.describe 'Api::V1::Sessions' do
 
   describe 'DELETE /sign_out' do
     let(:user) { create(:user) }
-    # let(:token) { Jwt::Issuer.call(user)[0] }
     let(:headers) { auth_header_for(user) }
-    # let(:params) { { user:, token: } }
 
     context 'when user authenticated' do
       it 'sign out request successfull' do

@@ -7,7 +7,7 @@
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
   import { logOut } from '$utils/session';
-  
+
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
