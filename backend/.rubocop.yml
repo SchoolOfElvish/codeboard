@@ -21,5 +21,8 @@ AllCops:
   SuggestExtensions: true
   NewCops: enable
 
+Layout/BlockLength:
+  Max: 100
+
 RSpec/MultipleMemoizedHelpers:
   Enabled: false

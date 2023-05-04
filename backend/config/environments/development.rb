@@ -22,8 +22,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: 'c1ef4c7d17f342bb398f5c70176a20fd-102c75d8-e1d67b0d',
-    domain: 'sandbox055520c516b94363bc8fcd6d4b245f5e.mailgun.org'
+    api_key: ENV.fetch('API_MAILGUN'),
+    domain: ENV.fetch('DOMAIN_MAILGUN')
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
   }
 
