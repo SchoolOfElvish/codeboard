@@ -20,12 +20,8 @@ Rails.application.configure do
   config.server_timing = true
   # Devise config
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: ENV.fetch('MAILGUN_API', nil),
-    domain: ENV.fetch('MAILGUN_DOMAIN', nil)
-    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
-  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: 'mailcatcher', port: 1025 }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
