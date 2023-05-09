@@ -32,6 +32,9 @@ gem 'redis', '~> 4.0'
 # Gem for Login
 gem 'devise'
 
+# Gem for emails
+gem 'mailgun-ruby', '~>1.2.8'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -89,3 +92,5 @@ gem 'dry-monads', '~> 1.6'
 gem 'rack-cors', '~> 1.1'
 
 gem 'pg', '~> 1.4'
+
+gem 'sidekiq'
