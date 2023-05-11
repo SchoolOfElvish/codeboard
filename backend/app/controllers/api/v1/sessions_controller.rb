@@ -30,7 +30,7 @@ module Api
         in Success
           head :ok
         in Failure[error]
-          render json: { error: }, status: :unprocessable_entity
+          render json: { error: error.full_messages }, status: :unprocessable_entity
         end
       end
 
