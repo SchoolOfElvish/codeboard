@@ -45,11 +45,8 @@ module Api
 
       private
 
-      attr_reader :headers
-
       def log_out
-        @headers = request.headers
-        Users::SignOut.new.call(headers)
+        Users::SignOut.new.call(current_user)
       end
 
       def log_in
