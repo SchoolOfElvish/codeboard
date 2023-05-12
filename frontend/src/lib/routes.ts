@@ -17,6 +17,9 @@ export type Routes = {
   users: {
     me: Route;
   };
+  homework: {
+    my: Route;
+  }
 };
 
 export const to: Routes = {
