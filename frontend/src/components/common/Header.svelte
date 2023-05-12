@@ -3,7 +3,6 @@
   import { page } from '$app/stores';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
-  import { locale } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
   import { logOut } from '$utils/session';
@@ -11,9 +10,7 @@
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
   import Langswitcher from './Langswitcher.svelte';
-  $: if ($locale.startsWith('en')) {
-    $locale = 'en';
-  }
+
   $: menuItems = user.isAuthorized
     ? [
         {
