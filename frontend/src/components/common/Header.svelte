@@ -33,7 +33,7 @@
         {
           name: $_('navbar.menu.create_group'),
           href: to.groups.new()
-        }
+        },
         {
           name: $_('navbar.menu.homework'),
           href: to.homework.my()

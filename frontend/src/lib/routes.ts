@@ -19,7 +19,7 @@ export type Routes = {
   };
   homework: {
     my: Route;
-  }
+  };
 };
 
 export const to: Routes = {
@@ -36,5 +36,8 @@ export const to: Routes = {
   },
   users: {
     me: buildPath('/users/me')
+  },
+  homework: {
+    my: buildPath('/homework/my')
   }
 };

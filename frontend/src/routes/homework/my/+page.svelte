@@ -7,7 +7,7 @@
 <article class="mx-auto max-w-7xl overflow-hidden rounded-lg border border-gray-100 shadow-sm">
   <div class="p-4 sm:p-6">
     <a href="/">
-      <h3 class="text-lg font-medium text-gray-900">homework 1</h3>
+      <h3 class="text-lg font-medium text-gray-900">Homework</h3>
     </a>
 
     <p class="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-3">
