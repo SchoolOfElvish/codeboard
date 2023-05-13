@@ -26,5 +26,6 @@ module Codeboard
     # config.eager_load_paths << Rails.root.join("extras")
     # Initialized active_jobs
     config.active_job.queue_adapter = :sidekiq
+    config.active_storage.variant_processor = :mini_magick
   end
 end

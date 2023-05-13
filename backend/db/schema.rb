@@ -99,10 +99,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_160556) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "birthdate"
-    t.datetime "token_issued_at"
     t.string "last_name", default: "", null: false
     t.enum "role", null: false, enum_type: "users_role"
+    t.date "birthdate"
+    t.datetime "token_issued_at"
     t.text "about_info"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

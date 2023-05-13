@@ -57,7 +57,7 @@ module Api
           email: current_user.email,
           birthdate: current_user.birthdate,
           about_info: current_user.about_info,
-          avatar: url_for(current_user.avatar_blob)
+          avatar: url_for(current_user.avatar.variant(:thumb))
         }
         Success(user_data)
       end
