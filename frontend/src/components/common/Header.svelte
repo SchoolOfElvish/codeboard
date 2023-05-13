@@ -6,6 +6,7 @@
   import { locale } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
+  import { logOut } from '$utils/session';
 
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
@@ -47,7 +48,7 @@
     },
     {
       name: $_('navbar.user_menu.logout'),
-      href: '/'
+      action: logOut
     }
   ];
 

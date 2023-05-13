@@ -1,7 +1,8 @@
 <script context="module" lang="ts">
   export type UserMenuItem = {
     name: string;
-    href: string;
+    href?: string;
+    action?: () => void;
   };
 </script>
 
@@ -62,16 +63,28 @@
           tabindex="-1"
         >
           {#each items as userItem, index}
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a
-              href={userItem.href}
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-menu-item-{index}"
-            >
-              {userItem.name}
-            </a>
+            {#if userItem.action}
+              <button
+                type="button"
+                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-{index}"
+                on:click={userItem.action}
+              >
+                {userItem.name}
+              </button>
+            {:else}
+              <a
+                href={userItem.href}
+                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-{index}"
+              >
+                {userItem.name}
+              </a>
+            {/if}
           {/each}
         </div>
       </Transition>

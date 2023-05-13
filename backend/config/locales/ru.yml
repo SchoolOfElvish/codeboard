@@ -20,3 +20,6 @@ ru:
       messages:
         blank: "не может быть пустым"
         too_short: "слишком короткое минимум %{count} символов"
+  sessions:
+    sign_out:
+      log_out: "Выход"

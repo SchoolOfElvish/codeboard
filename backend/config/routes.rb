@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/sign-up', to: 'sessions#sign_up'
       post '/sign-in', to: 'sessions#sign_in'
-      post '/sign-out', to: 'sessions#sign_out'
+      delete '/sign-out', to: 'sessions#sign_out'
       get 'users/me', to: 'profiles#show'
       put 'users/me', to: 'profiles#update'
       post '/refresh', to: 'sessions#refresh'
