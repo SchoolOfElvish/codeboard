@@ -14,6 +14,8 @@ module Api
         end
       end
 
+      # rubocop:disable Metrics/MethodLength
+
       def create
         case create_blob
         in Success(blob)
@@ -27,6 +29,8 @@ module Api
           render json: { error: error.full_messages }, status: :unprocessable_entity
         end
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       def update
         case update_user_info
@@ -42,8 +46,7 @@ module Api
       def update_user_info
         Users::UpdateUser.new.call(
           user: current_user,
-          user_params: user_info_params,
-          url_params: url_params,
+          user_params: user_info_params
         )
       end
 
@@ -53,14 +56,14 @@ module Api
           last_name: current_user.last_name,
           email: current_user.email,
           birthdate: current_user.birthdate,
-          about_info: current_user.about_info, 
+          about_info: current_user.about_info,
           avatar: url_for(current_user.avatar_blob)
         }
         Success(user_data)
       end
 
       def user_info_params
-        params.permit(:first_name, :last_name, :birthdate, :about_info, :avatar)
+        params.permit(:first_name, :last_name, :birthdate, :about_info, :avatar, :signed_blob_id)
       end
 
       def create_blob
@@ -73,10 +76,6 @@ module Api
 
       def avatar_params
         params.require(:avatar).permit(:filename, :byte_size, :checksum, :content_type)
-      end
-
-      def url_params
-        params.permit(:signed_blob_id)
       end
     end
   end

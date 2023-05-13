@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { put,post } from '$utils/fetch';
+  import { put, post } from '$utils/fetch';
   import type { PageData } from './$types';
   import { _ } from 'svelte-i18n';
   import {} from '@rails/activestorage';
@@ -26,14 +26,13 @@
     about_info: aboutInfo,
     avatar
   } = data.response;
-  
-  let AvatarFile: File;
+
   let status: OperationStatus = 'incompleted';
   let errors: string[];
 
   let fileInput: HTMLInputElement;
   let file: File;
-  let uploadResult: JsonResponse;
+  let uploadResult = {} as JsonResponse;
 
   const calculateChecksum = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -237,7 +236,14 @@
                   for="file-upload"
                   class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 >
-                  <input id="file-upload" name="file-upload" type="file" class="sr-only"  bind:this={fileInput} on:change={handleFileSelected}  />
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    class="sr-only"
+                    bind:this={fileInput}
+                    on:change={handleFileSelected}
+                  />
                   Change</label
                 >
               </div>
@@ -316,7 +322,9 @@
                 />
               </div>
             </div>
+
             <!--BIO-->
+
             <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
               <label for="bio" class="block text-sm font-medium text-gray-700">
                 {$_(`pages.users.me.about_me`)}</label

@@ -2,17 +2,17 @@
 
 module Users
   class UpdateUser < Core::Service
-    def call(user:, user_params:, url_params: nil)
+    def call(user:, user_params:)
       @user = user
       @user_params = user_params
-      @url_params = url_params
+      @signed_blob_id = @user_params[:signed_blob_id]
 
       update_info
     end
 
     private
 
-    attr_reader :user, :user_params, :first_name, :last_name, :birthdate, :about_info
+    attr_reader :user, :user_params, :first_name, :last_name, :birthdate, :about_info, :signed_blob_id
 
     def user_info
       {
@@ -22,14 +22,14 @@ module Users
         about_info: user_params[:about_info]
       }
     end
-    
-    def put_avatar_if_url_params_present
-      return Success() unless url_params
-      Users::PutAvatar.new.call(url_params, user)
+
+    def put_avatar
+      Users::PutAvatar.new.call(signed_blob_id, user)
     end
 
     def update_info
-      result = put_avatar_if_url_params_present
+      result = put_avatar if signed_blob_id.present?
+
       return Failure() if result == Failure()
 
       user.update(user_info) ? Success(user) : Failure(user.errors)

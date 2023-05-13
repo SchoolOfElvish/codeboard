@@ -2,9 +2,9 @@
 
 module Users
   class PutAvatar < Core::Service
-    def call(url_params, current_user)
+    def call(signed_blob_id, current_user)
       user = current_user
-      @signed_blob_id = url_params[:signed_blob_id]
+      @signed_blob_id = signed_blob_id
       blob = yield find_blob
       user.avatar.attach(blob)
       Success(:upload)

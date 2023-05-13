@@ -2,6 +2,8 @@
 
 # This migration comes from active_storage (originally 20170806125915)
 class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def change
     # Use Active Record's configured type for primary and foreign keys
     primary_key_type, foreign_key_type = primary_and_foreign_key_types
@@ -29,11 +31,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
       t.references :record,   null: false, polymorphic: true, index: false, type: foreign_key_type
       t.references :blob,     null: false, type: foreign_key_type
 
-      if connection.supports_datetime_with_precision?
-        t.datetime :created_at, precision: 6, null: false
-      else
-        t.datetime :created_at, null: false
-      end
+      t.datetime :created_at, precision: 6, null: false if connection.supports_datetime_with_precision?
 
       t.index %i[record_type record_id name blob_id], name: :index_active_storage_attachments_uniqueness,
                                                       unique: true
@@ -58,4 +56,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
     foreign_key_type = setting || :bigint
     [primary_key_type, foreign_key_type]
   end
+
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

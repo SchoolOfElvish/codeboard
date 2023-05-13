@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Users::UpdateUserInfo do
-  subject(:update_user_info) { described_class.new.call(user:, user_params:) }
+RSpec.describe Users::UpdateUser do
+  subject(:update_user) { described_class.new.call(user:, user_params:) }
 
   let(:user) { create(:user) }
   let(:user_params) do
@@ -19,11 +19,11 @@ RSpec.describe Users::UpdateUserInfo do
 
   context 'when user does not have birthdate' do
     it 'returns Success result' do
-      expect(update_user_info).to be_success
+      expect(update_user).to be_success
     end
 
     it 'does not update user birthdate' do
-      update_user_info
+      update_user
       expect(user.birthdate).to be_nil
     end
   end
@@ -38,12 +38,12 @@ RSpec.describe Users::UpdateUserInfo do
     end
 
     it 'user update exist birthdate' do
-      update_user_info
+      update_user
       expect(user.birthdate).to eq(random_date)
     end
 
     it 'returns Success result' do
-      expect(update_user_info).to be_success
+      expect(update_user).to be_success
     end
   end
 
@@ -57,11 +57,11 @@ RSpec.describe Users::UpdateUserInfo do
     end
 
     it 'returns Success result' do
-      expect(update_user_info).to be_success
+      expect(update_user).to be_success
     end
 
     it 'updates user first name' do
-      update_user_info
+      update_user
       expect(user.first_name).to eq('Newname')
     end
   end
@@ -76,11 +76,11 @@ RSpec.describe Users::UpdateUserInfo do
     end
 
     it 'returns Success result' do
-      expect(update_user_info).to be_success
+      expect(update_user).to be_success
     end
 
     it 'updates user last name' do
-      update_user_info
+      update_user
       expect(user.last_name).to eq('Newlastname')
     end
   end
@@ -95,7 +95,7 @@ RSpec.describe Users::UpdateUserInfo do
     end
 
     it 'returns error' do
-      expect(update_user_info).to be_failure
+      expect(update_user).to be_failure
     end
   end
 end
