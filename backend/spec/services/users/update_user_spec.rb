@@ -10,7 +10,8 @@ RSpec.describe Users::UpdateUser do
     {
       first_name: user.first_name,
       last_name: user.last_name,
-      birthdate: nil
+      birthdate: nil,
+      about_info: ''
     }
   end
   let(:random_date) do
@@ -96,6 +97,22 @@ RSpec.describe Users::UpdateUser do
 
     it 'returns error' do
       expect(update_user).to be_failure
+    end
+  end
+
+  context 'when user update bio on valid' do
+    let(:user_params) do
+      {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        birthdate: random_date,
+        about_info: 'just for test'
+      }
+    end
+
+    it 'updates user bio' do
+      update_user
+      expect(user.about_info).to eq('just for test')
     end
   end
 end

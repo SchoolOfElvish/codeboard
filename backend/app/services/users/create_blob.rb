@@ -7,6 +7,7 @@ module Users
       @byte_size = avatar_params[:byte_size]
       @checksum = avatar_params[:checksum]
       @content_type = avatar_params[:content_type]
+
       create_before_direct_upload
     end
 

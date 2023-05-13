@@ -53,7 +53,7 @@
 
       const checksum = await calculateChecksum(file);
 
-      const response = await post('/v1/test', {
+      const response = await post('/v1/users/me', {
         avatar: {
           filename: file.name,
           byte_size: file.size,
