@@ -22,8 +22,6 @@ services:
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
 
-      
-
   db:
     image: postgres:14
     volumes:

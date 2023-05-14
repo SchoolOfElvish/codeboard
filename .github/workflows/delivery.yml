@@ -1,13 +1,12 @@
 name: Delivery
 
-on:
-  workflow_run:
-    workflows: CI
-    branches: main
-    types: completed
+on: push
 
 jobs:
   deploy:
+    permissions:
+      packages: write
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
@@ -29,12 +28,21 @@ jobs:
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_FRONTEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_FRONTEND_API_KEY }}' -o ./frontend/.env
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./backend/.env
 
-    - name: Build and push Docker images
+    - name: Build and push Docker images backend
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: ghcr.io/schoolofelvish/codeboard_backend:latest, ghcr.io/schoolofelvish/codeboard_frontend:latest
+        file: docker/production/backend.Dockerfile
+        tags: ghcr.io/schoolofelvish/codeboard_backend:latest
+
+    - name: Build and push Docker images frontend
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        file: docker/production/frontend.Dockerfile
+        tags: ghcr.io/schoolofelvish/codeboard_frontend:latest
 
     - name: SSH into production VPS
       uses: appleboy/ssh-action@master
