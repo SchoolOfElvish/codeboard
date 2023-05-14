@@ -15,11 +15,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Login to GitHub Container registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
+      
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
     - name: Fetch secrets from tawbar
       run: |
@@ -27,12 +30,11 @@ jobs:
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./backend/.env
 
     - name: Build and push Docker images
-      run: |
-        docker build -t ghcr.io/schoolofelvish/codeboard_backend:latest -f docker/production/backend.Dockerfile .
-        docker push ghcr.io/schoolofelvish/codeboard_backend:latest
-
-        docker build -t ghcr.io/schoolofelvish/codeboard_frontend:latest -f docker/production/frontend.Dockerfile .
-        docker push ghcr.io/schoolofelvish/codeboard_frontend:latest
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/schoolofelvish/codeboard_backend:latest, ghcr.io/schoolofelvish/codeboard_frontend:latest
 
     - name: SSH into production VPS
       uses: appleboy/ssh-action@master
