@@ -26,7 +26,7 @@ jobs:
         curl https://api.tawbar.com/projects/v1/${{ secrets.TAWBAR_BACKEND_PROJECT_ID }}/production -H 'Authorization: ${{ secrets.TAWBAR_BACKEND_API_KEY }}' -o ./backend/.env
 
     - name: Build and push Docker images backend
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v4
       with:
         context: .
         push: true
@@ -34,7 +34,7 @@ jobs:
         tags: ghcr.io/schoolofelvish/codeboard_backend:latest
 
     - name: Build and push Docker images frontend
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v4
       with:
         context: .
         push: true
