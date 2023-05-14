@@ -4,6 +4,9 @@ WORKDIR /frontend
 
 COPY frontend ./
 
+ARG PUBLIC_BACKEND_URL_SSR
+ARG PUBLIC_BACKEND_URL_CLIENT
+
 RUN yarn install
 RUN yarn build
 
