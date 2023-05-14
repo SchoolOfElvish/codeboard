@@ -9,10 +9,18 @@ on:
         description: "The version to use for the build"
         required: true
         type: string
+    secrets:
+      vps-password:
+        description: "Password of user from VPS server"
+        required: true
+      vps-user:
+        description: "Username from VPS server"
+        required: true
 
 permissions:
   id-token: write
   contents: read
+  packages: write
 
 jobs:
   build-frontend:
@@ -24,6 +32,7 @@ jobs:
       image-tag: ${{ env.IMAGE_TAG }}
     steps:
       - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
         with:
           username: ${{ github.actor }}
@@ -52,6 +61,7 @@ jobs:
       image-tag: ${{ env.IMAGE_TAG }}
     steps:
       - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
         with:
           username: ${{ github.actor }}
@@ -79,9 +89,9 @@ jobs:
       - name: SSH into production VPS
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          host: ${{ vars.VPS_HOST }}
+          username: ${{ secrets.vps-user }}
+          password: ${{ secrets.vps-password }}
           script: |
             cd ~/SchoolOfElvish/codeboard
             docker compose -f production.yml pull
