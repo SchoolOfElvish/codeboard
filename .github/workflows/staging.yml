@@ -1,0 +1,38 @@
+name: "Deploy to staging"
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+
+jobs:
+  setup:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.context.outputs.version }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: context
+        run: |
+          if [ "${GITHUB_RUN_ATTEMPT}" = "1" ]; then
+            echo "version=v$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "version=v$(git rev-parse --short HEAD)-${GITHUB_RUN_ATTEMPT}" >> $GITHUB_OUTPUT
+          fi
+
+  build-and-deploy:
+    needs: [setup]
+    uses: ./.github/workflows/build-and-deploy.yml
+    secrets:
+      vps-password: ${{ secrets.VPS_PASSWORD }}
+      vps-user: ${{ secrets.VPS_USERNAME }}
+    with:
+      environment: staging
+      version: ${{ needs.setup.outputs.version }}

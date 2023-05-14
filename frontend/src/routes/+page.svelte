@@ -23,7 +23,7 @@
       <p class="hidden text-gray-500 sm:mt-4 sm:block">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae dolor officia blanditiis
         repellat in, vero, aperiam porro ipsum laboriosam consequuntur exercitationem incidunt
-        tempora latest dva
+        tempora latest tri
       </p>
     </div>
 
