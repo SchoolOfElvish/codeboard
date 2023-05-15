@@ -6,7 +6,8 @@ class User < ApplicationRecord
   validates :last_name, :first_name, :email, :role, presence: true
   enum :role, { student: 'STUDENT', teacher: 'TEACHER' }
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :confirmable
   has_many :refresh_tokens, dependent: :delete_all
   has_many :whitelisted_tokens, dependent: :delete_all
   has_many :blacklisted_tokens, dependent: :delete_all
