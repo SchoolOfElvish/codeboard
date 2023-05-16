@@ -14,4 +14,8 @@ class User < ApplicationRecord
   has_many :courses, dependent: :delete_all
   has_many :lessons, through: :courses
   has_many :groups, dependent: :delete_all, foreign_key: 'author_id', inverse_of: :author
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end
