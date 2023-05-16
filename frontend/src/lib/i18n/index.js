@@ -7,15 +7,15 @@ const defaultLocale = 'en';
 register('en', () => import('./locales/en.json'));
 register('ru', () => import('./locales/ru.json'));
 
-function localeValue() {
-  let value = browser && window.localStorage.getItem('locale');
-  if (value === null) {
-    value = browser ? window.navigator.language : defaultLocale;
+export function localeStoragevalue() {
+  let localevalue = browser ? window.localStorage.getItem('locale') : null;
+  if (localevalue === null) {
+    localevalue = browser ? window.navigator.language : defaultLocale;
   }
-  return value;
+  return localevalue;
 }
 
 init({
   fallbackLocale: defaultLocale,
-  initialLocale: localeValue() 
-}); 
+  initialLocale: localeStoragevalue()
+});

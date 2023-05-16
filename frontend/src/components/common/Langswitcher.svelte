@@ -1,22 +1,17 @@
 <script lang="ts">
-  import Alert from '$components/Alert.svelte';
   import { locale, locales } from 'svelte-i18n';
   import { isLoading } from 'svelte-i18n';
 
-
-  $: if ($locale.startsWith('ru')) {
-    $locale = 'ru';
+  function handleChange(event: Event) {
+    const selectedLocale = (event.target as HTMLSelectElement).value;
+    localStorage.setItem('locale', selectedLocale);
   }
-  else {$locale = 'en'}
 
-
-interface NumberEvent extends CustomEvent<string> {}
-
-function handleChange(event: NumberEvent) {
-console.log(event.type); 
-const selectedLocale = event.detail; 
-localStorage.setItem('locale', selectedLocale); 
-}
+  if ($locale != null && $locale != undefined && $locale.startsWith('ru')) {
+    $locale = 'ru';
+  } else {
+    $locale = 'en';
+  }
 </script>
 
 {#if $isLoading}
