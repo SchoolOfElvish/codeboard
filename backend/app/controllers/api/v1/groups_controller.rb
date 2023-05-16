@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class GroupsController < ApplicationController
+    class GroupsController < CoreController
       include Dry::Monads::Result::Mixin
 
       def create

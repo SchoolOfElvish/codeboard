@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ProfilesController < ApplicationController
+    class ProfilesController < CoreController
       include Dry::Monads::Result::Mixin
 
       def show
