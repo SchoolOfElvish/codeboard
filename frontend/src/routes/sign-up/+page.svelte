@@ -45,7 +45,7 @@
       isLoading = false;
       if (response.token) {
         user.set({ token: response.token, refreshToken: response.refresh_token });
-        window.location.href = to.root();
+        window.location.href = 'http://localhost:3001/sign-up/confirmable';
       }
     }
   };
