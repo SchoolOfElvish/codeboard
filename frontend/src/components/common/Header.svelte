@@ -134,7 +134,7 @@
       {#if user.isAuthorized}
         <Profile.Mobile items={userMenuItems} />
       {:else}
-        <Langswitcher />
+        
         <div class="border-t border-gray-700 p-5">
           <AuthenticationButtons />
         </div>
