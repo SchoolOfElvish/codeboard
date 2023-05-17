@@ -9,9 +9,8 @@
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
-  import Langswitcher from './Langswitcher.svelte';
-
-  $: menuItems = user.isAuthorized
+  import LangSwitcher from './LangSwitcher.svelte';
+  const menuItems = user.isAuthorized
     ? [
         {
           name: $_('navbar.menu.dashboard'),
@@ -36,9 +35,7 @@
       ]
     : [];
 
-  let userMenuItems: UserMenuItem[];
-
-  $: userMenuItems = [
+  const userMenuItems: UserMenuItem[] = [
     {
       name: $_('navbar.user_menu.profile'),
       href: '/users/me'
@@ -83,12 +80,12 @@
       </div>
       {#if user.isAuthorized}
         <div class="ml-auto">
-          <Langswitcher />
+          <LangSwitcher />
         </div>
         <Profile.Desktop items={userMenuItems} />
       {:else}
         <div class="ml-auto">
-          <Langswitcher />
+          <LangSwitcher />
         </div>
         <div class="hidden md:block">
           <AuthenticationButtons />
@@ -134,7 +131,6 @@
       {#if user.isAuthorized}
         <Profile.Mobile items={userMenuItems} />
       {:else}
-        
         <div class="border-t border-gray-700 p-5">
           <AuthenticationButtons />
         </div>
