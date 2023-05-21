@@ -9,7 +9,8 @@
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
-  import LangSwitcher from './LangSwitcher.svelte';
+  import LanguageSwitcher from './LanguageSwitcher.svelte';
+
   const menuItems = user.isAuthorized
     ? [
         {
@@ -63,6 +64,7 @@
             alt="Your Company"
           />
         </div>
+
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
             {#each menuItems as item}
@@ -78,15 +80,14 @@
           </div>
         </div>
       </div>
+
+      <div class="ml-auto">
+        <LanguageSwitcher />
+      </div>
+      
       {#if user.isAuthorized}
-        <div class="ml-auto">
-          <LangSwitcher />
-        </div>
         <Profile.Desktop items={userMenuItems} />
       {:else}
-        <div class="ml-auto">
-          <LangSwitcher />
-        </div>
         <div class="hidden md:block">
           <AuthenticationButtons />
         </div>
