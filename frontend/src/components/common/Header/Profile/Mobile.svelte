@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import type { UserMenuItem } from './Desktop.svelte';
+  import LanguageSwitcher from '$components/common/LanguageSwitcher.svelte';
   export let items: UserMenuItem[] = [];
 </script>
 
@@ -45,5 +46,8 @@
         </a>
       {/if}
     {/each}
+  </div>
+  <div class="ml-4">
+    <LanguageSwitcher />
   </div>
 </div>

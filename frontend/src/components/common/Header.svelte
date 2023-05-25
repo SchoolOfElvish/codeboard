@@ -11,7 +11,7 @@
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
   import LanguageSwitcher from './LanguageSwitcher.svelte';
 
-  const menuItems = user.isAuthorized
+  $: menuItems = user.isAuthorized
     ? [
         {
           name: $_('navbar.menu.dashboard'),
@@ -36,7 +36,8 @@
       ]
     : [];
 
-  const userMenuItems: UserMenuItem[] = [
+  let userMenuItems: UserMenuItem[];
+  $: userMenuItems = [
     {
       name: $_('navbar.user_menu.profile'),
       href: '/users/me'
@@ -64,7 +65,6 @@
             alt="Your Company"
           />
         </div>
-
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
             {#each menuItems as item}
@@ -81,10 +81,10 @@
         </div>
       </div>
 
-      <div class="ml-auto">
+      <div class="ml-auto hidden md:flex">
         <LanguageSwitcher />
       </div>
-      
+
       {#if user.isAuthorized}
         <Profile.Desktop items={userMenuItems} />
       {:else}

@@ -36,7 +36,7 @@ services:
       context: .
       dockerfile: docker/development/frontend.Dockerfile
     volumes:
-      - ./frontend:/frontend:cached
+      - ./frontend:/frontend
       - node_modules:/frontend/node_modules
     command: yarn dev --port 3001 --host 0.0.0.0
     env_file:
@@ -59,7 +59,7 @@ services:
     image: backend:latest
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
-      - ./backend:/backend:cached
+      - ./backend:/backend
       - bundle:/backend/vendor
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
