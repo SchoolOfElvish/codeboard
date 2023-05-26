@@ -3,6 +3,7 @@
 module Users
   class PutAvatar < Core::Service
     def call(signed_blob_id, current_user)
+      binding.pry
       user = current_user
       @signed_blob_id = signed_blob_id
       blob = yield find_blob
@@ -15,6 +16,9 @@ module Users
     attr_reader :signed_blob_id, :blob
 
     def find_blob
+      
+      binding.pry
+      
       blob = ActiveStorage::Blob.find_signed(@signed_blob_id)
       blob ? Success(blob) : Failure(:blob_not_found)
     end

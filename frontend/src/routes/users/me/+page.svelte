@@ -220,7 +220,9 @@
                 >Photo</label
               >
               <div class="mt-2 flex items-center gap-x-3">
-                <img src={avatar} alt="avatar" class="w-10 h-10 object-cover rounded-full" />
+                {#if avatar}
+                  <img src={avatar} alt="avatar" class="w-10 h-10 object-cover rounded-full" />
+                {/if}
                 <label
                   for="file-upload"
                   class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
