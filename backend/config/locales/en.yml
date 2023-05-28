@@ -1,4 +1,6 @@
 en:
+  errors:
+    unsupported_format: "Format not supported, supported only: jpeg, png, gif, bmp, tiff, webp"
   activerecord:
     models:
       user:

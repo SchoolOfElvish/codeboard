@@ -2,5 +2,5 @@
 
 set -e
 
-command="docker compose run --rm backend /bin/bash -c 'bundle exec rspec ${@}'"
+command="docker compose up -d redis && docker compose run --rm backend /bin/bash -c 'bundle exec rspec ${@}'"
 eval $command

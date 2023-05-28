@@ -1,4 +1,6 @@
 ru:
+  errors:
+    unsupported_format: "Формат не поддерживается, поддерживаются: jpeg, png, gif, bmp, tiff, webp"
   activerecord:
     models:
       user:

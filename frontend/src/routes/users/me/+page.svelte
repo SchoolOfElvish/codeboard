@@ -50,7 +50,6 @@
   const handleFileSelected = async () => {
     if (fileInput.files && fileInput.files[0]) {
       file = fileInput.files[0];
-
       const checksum = await calculateChecksum(file);
 
       const response = await post('/v1/users/me', {
@@ -60,6 +59,12 @@
           checksum: checksum,
           content_type: file.type
         }
+      });
+
+      response.error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        status = 'failure';
+        return error;
       });
 
       uploadResult = (await response.json()) as JsonResponse;

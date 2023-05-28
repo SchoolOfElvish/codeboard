@@ -25,6 +25,8 @@ module Api
             blob_id: blob.id,
             signed_blob_id: blob.signed_id
           }
+        in Failure(:unsupported_type)
+          render json: { error: [t('errors.unsupported_format')] }, status: :unprocessable_entity
         in Failure(error)
           render json: { error: error.full_messages }, status: :unprocessable_entity
         end
@@ -50,6 +52,8 @@ module Api
         )
       end
 
+      # rubocop:disable Metrics/AbcSize
+
       def receive_user_data
         user_data = {
           first_name: current_user.first_name,
@@ -61,6 +65,8 @@ module Api
         }
         Success(user_data)
       end
+
+      # rubocop:enable Metrics/AbcSize
 
       def user_info_params
         params.permit(:first_name, :last_name, :birthdate, :about_info, :avatar, :signed_blob_id)
