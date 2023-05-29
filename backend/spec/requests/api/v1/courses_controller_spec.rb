@@ -28,4 +28,21 @@ RSpec.describe 'Api::V1::CoursesController' do
       end
     end
   end
+
+  describe 'GET /index' do
+    let(:course) { create(:course) }
+    let(:name) { course.name }
+    let(:user) { create(:teacher) }
+    let(:params) { { name: } }
+    let(:headers) { auth_header_for(user) }
+
+    it 'find a course' do
+      get("/api/v1/courses?search=#{name}", headers:)
+      expect(JSON.parse(response.body)[0]['name']).to eq(name)
+    end
+
+    it 'find a course attached to current user', skip: "I'll write it later" do
+      # TODO This spec should be checking if search return correct results for current user
+    end
+  end
 end
