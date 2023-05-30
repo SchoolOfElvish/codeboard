@@ -96,3 +96,6 @@ gem 'rack-cors', '~> 1.1'
 gem 'pg', '~> 1.4'
 
 gem 'sidekiq'
+
+#For authorization
+gem "action_policy", "~> 0.6.5"
