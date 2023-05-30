@@ -4,7 +4,8 @@
       "create_course": "Create course",
       "create_group": "Create group",
       "dashboard": "Dashboard",
-      "my_courses": "Courses"
+      "my_courses": "Courses",
+      "homework": "Homework"
     },
     "user_menu": {
       "profile": "Your Profile",
@@ -78,6 +79,9 @@
       "none_search": "Courses found: 0",
       "author": "Author",
       "find": "Learn more"
+    },
+    "homework": {
+      "title": "Homework:"
     }
   }
 }

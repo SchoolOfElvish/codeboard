@@ -4,7 +4,8 @@
       "create_course": "Создать курс",
       "create_group": "Создать группу",
       "dashboard": "Панель управления",
-      "my_courses": "Курсы"
+      "my_courses": "Курсы",
+      "homework": "Задания"
     },
     "user_menu": {
       "profile": "Профиль",
@@ -77,6 +78,9 @@
       "none_search": "Найдено курсов: 0",
       "author": "Автор",
       "find": "Узнать больше"
+    },
+    "homework": {
+      "title": "Задания:"
     }
   }
 }
