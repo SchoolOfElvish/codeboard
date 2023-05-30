@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { confirmations: 'api/v1/confirmations' }
 
   namespace :api do
     namespace :v1 do
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'users/me', to: 'profiles#show'
       put 'users/me', to: 'profiles#update'
       post '/refresh', to: 'sessions#refresh'
+      post '/conirm_email', to: 'confirmations#confirm_email'
       resources :courses, only: %i[create index] do
         resources :lessons, only: [:create]
       end
