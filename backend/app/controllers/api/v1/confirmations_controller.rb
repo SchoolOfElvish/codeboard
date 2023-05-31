@@ -8,10 +8,20 @@ module Api
       skip_before_action :authenticate!, only: %i[confirm_email]
       
       def confirm_email
-        confirmation_token = params[:confirmations_token]
-        user = User.comfirm_by_token(confirmation_token)
+        confirmation_token = params[:confirmation_token]
+        user = User.find_by(confirmation_token:)
+        user.confirm
+        token, refresh_token = yield issue_token(user)
+        Success[token, refresh_token]
+      end
+
+      private
+
+      attr_reader :user
+
+      def issue_token(user)
         token, refresh_token = Jwt::Issuer.call(user)
-        render json: { token:, refresh_token: }, status: ok
+        Success[token, refresh_token.token]
       end
     end
   end

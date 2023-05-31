@@ -10,7 +10,9 @@ export const load = (async ({ params, fetch, url} ) => {
     // const request = api.url('api/v1/confirm_email').post({confirmation_token: token}).json();
     
    const responce = await fetch(`http://backend:3000/api/v1/confirm_email?confirmation_token=${token}` );
-    const body = await responce.json();
+  
+    console.log(responce);
+ 
     throw redirect(302, "http://localhost:3001/users/me");
 }) satisfies PageServerLoad;
 
