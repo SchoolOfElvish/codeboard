@@ -5,15 +5,19 @@ module Api
     class CoursesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
+      skip_before_action :authenticate!, only: %i[index]
+
       def index
-        @courses = search_courses(Course.includes(:user).limit(100))
-        render json: prepare_json_for_list(@courses)
+        case course_search
+        in Success(*courses_found)
+          render json: courses_found, status: :ok
+        end
       end
 
       def create
         case course_creation
         in Success(course)
-          render json: prepare_json(course), status: :created
+          render json: course, status: :created
         in Failure(error)
           render json: { errors: error.messages }, status: :unprocessable_entity
         end
@@ -21,30 +25,12 @@ module Api
 
       private
 
-      def search_courses(courses)
-        if params[:search].present?
-          courses.where('name LIKE ?', "%#{params[:search]}%")
-        else
-          courses
-        end
-      end
-
-      def prepare_json_for_list(courses)
-        courses.map { |course| prepare_json(course) }
-      end
-
-      def prepare_json(course)
-        {
-          id: course.id,
-          name: course.name,
-          user: {
-            first_name: course.user.first_name
-          }
-        }
-      end
-
       def course_creation
         Courses::Create.new.call(user: current_user, params: course_params)
+      end
+
+      def course_search
+        Courses::Search.new.call(params)
       end
 
       def course_params
