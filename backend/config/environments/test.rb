@@ -59,4 +59,8 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  config.hosts << 'www.example.com'
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.active_job.queue_adapter = :sidekiq
+  routes.default_url_options[:host] = ENV.fetch('HOST_URL', 'http://localhost:3000')
 end

@@ -33,6 +33,9 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.before do
+    ActiveStorage::Current.url_options = { host: 'localhost', port: 3000 }
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('/spec/fixtures')
 

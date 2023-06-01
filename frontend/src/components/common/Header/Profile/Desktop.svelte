@@ -4,10 +4,6 @@
     href?: string;
     action?: () => void;
   };
-
-  export type MenuItemWithPrefetch = UserMenuItem & {
-    dataSveltekitPrefetch?: boolean;
-  };
 </script>
 
 <script lang="ts">

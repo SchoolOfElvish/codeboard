@@ -5,6 +5,12 @@ module Users
     def call(signed_blob_id, current_user)
       user = current_user
       blob = yield find_blob(signed_blob_id)
+      puts '--------------------------------------------------------------------------------------------------------'
+      puts blob.inspect
+      puts '--------------------------------------------------------------------------------------------------------'
+      puts user.inspect
+      puts '--------------------------------------------------------------------------------------------------------'
+      puts ActiveStorage::Current.url_options.to_h.inspect
       user.avatar.attach(blob)
       Success(:upload)
     end

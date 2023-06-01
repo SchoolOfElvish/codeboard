@@ -9,7 +9,7 @@
   import { logOut } from '$utils/session';
 
   import * as Profile from './Header/Profile';
-  import type { MenuItemWithPrefetch } from './Header/Profile/Desktop.svelte';
+  import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
 
   $: if ($locale == 'en-GB') {
@@ -37,11 +37,10 @@
       ]
     : [];
 
-  const userMenuItems: MenuItemWithPrefetch[] = [
+  const userMenuItems: UserMenuItem[] = [
     {
       name: $_('navbar.user_menu.profile'),
-      href: '/users/me',
-      dataSveltekitPrefetch: true
+      href: '/users/me'
     },
     {
       name: $_('navbar.user_menu.settings'),

@@ -5,6 +5,10 @@ require 'rails_helper'
 RSpec.describe Users::PutAvatar do
   subject(:service) { described_class.new.call(signed_blob_id, current_user) }
 
+  before do
+    puts ActiveStorage::Current.url_options.to_h.inspect
+  end
+
   let(:signed_blob_id) do
     'eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--573b5cb2fa6815'
   end
@@ -16,7 +20,7 @@ RSpec.describe Users::PutAvatar do
     end
   end
 
-  context 'when signed_blob_id exist', skip: 'Do not work in GitHub CI' do
+  context 'when signed_blob_id exist' do
     before { upload }
 
     let(:signed_blob_id) { create_blob.signed_id }
@@ -47,8 +51,7 @@ RSpec.describe Users::PutAvatar do
 
   def upload
     blob = create_blob
-    file = Rails.root.join('spec/services/users/avatars/download.jpeg').open
+    file = fixture_file_upload('download.jpeg', 'image/jpeg')
     blob.upload(file)
-    file.close
   end
 end
