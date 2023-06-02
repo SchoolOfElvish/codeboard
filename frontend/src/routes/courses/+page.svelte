@@ -32,7 +32,7 @@
   }
 
   async function fetchCourses() {
-    const data = await (await get(`/v1/courses?search=${search}`)).json<Course[]>();
+    const data = await (await get(`/v1/courses/guest?search=${search}`)).json<Course[]>();
     courses.set(data);
   }
 
