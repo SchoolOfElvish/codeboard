@@ -30,19 +30,36 @@ RSpec.describe 'Api::V1::CoursesController' do
   end
 
   describe 'GET /index' do
-    let(:course) { create(:course) }
+    let(:teacher) { create(:teacher) }
+    let(:student) { create(:user) }
+    let!(:course) { create(:course, user: teacher) }
     let(:name) { course.name }
-    let(:user) { create(:teacher) }
-    let(:params) { { name: } }
-    let(:headers) { auth_header_for(user) }
+    let(:headers) { auth_header_for(teacher) }
 
     it 'find a course' do
-      get("/api/v1/courses?search=#{name}", headers:)
+      get("/api/v1/courses?search=#{name}")
       expect(JSON.parse(response.body)[0]['name']).to eq(name)
     end
 
-    it 'find a course attached to current user', skip: "I'll write it later" do
-      # TODO This spec should be checking if search return correct results for current user
+    context 'when user is authorised' do
+      let(:another_teacher) { create(:teacher) }
+      let(:name) { Course.last.name }
+
+      before { create_list(:course, 2, user: another_teacher) }
+
+      it 'find courses attached to the teacher' do
+        get('/api/v1/courses', headers:)
+        expect(JSON.parse(response.body).length).to eq(2)
+      end
+
+      it 'find the course attached to the teacher' do
+        get("/api/v1/courses?search=#{name}", headers:)
+        expect(JSON.parse(response.body)[0]['name']).to eq(name)
+      end
+
+      it 'Find courses which the current user is attached to', skip: 'TDD for course search by students' do
+        # TODO TDD for course search by students
+      end
     end
   end
 end
