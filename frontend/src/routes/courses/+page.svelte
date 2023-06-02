@@ -10,6 +10,7 @@
     name: string;
     user: {
       first_name: string;
+      last_name: string;
     };
   };
 
@@ -80,7 +81,7 @@
           </a>
 
           <p class="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-3">
-            {$_(`pages.courses.author`)}: {course.user.first_name}
+            {$_(`pages.courses.author`)}: {course.user.first_name} {course.user.last_name}
           </p>
 
           <a

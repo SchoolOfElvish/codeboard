@@ -29,37 +29,45 @@ RSpec.describe 'Api::V1::CoursesController' do
     end
   end
 
+  describe 'GET /guest' do
+    let(:course) { create(:course) }
+    let(:name) { course.name }
+
+    before { create_list(:course, 3) }
+
+    it 'show all courses' do
+      get('/api/v1/courses/guest')
+      expect(JSON.parse(response.body).length).to eq(3)
+    end
+
+    it 'find a course' do
+      get("/api/v1/courses/guest?search=#{name}")
+      expect(JSON.parse(response.body)[0]['name']).to eq(name)
+    end
+  end
+
   describe 'GET /index' do
     let(:teacher) { create(:teacher) }
     let(:student) { create(:user) }
     let!(:course) { create(:course, user: teacher) }
     let(:name) { course.name }
     let(:headers) { auth_header_for(teacher) }
+    let(:another_teacher) { create(:teacher) }
 
-    it 'find a course' do
-      get("/api/v1/courses?search=#{name}")
-      expect(JSON.parse(response.body)[0]['name']).to eq(name)
+    before { create_list(:course, 2, user: another_teacher, name: course.name) }
+
+    it 'find courses attached to the teacher' do
+      get('/api/v1/courses', headers:)
+      expect(JSON.parse(response.body).length).to eq(1)
     end
 
-    context 'when user is authorised' do
-      let(:another_teacher) { create(:teacher) }
-      let(:name) { Course.last.name }
+    it 'find the course attached to the teacher' do
+      get("/api/v1/courses?search=#{name}", headers:)
+      expect(JSON.parse(response.body).length).to eq(1)
+    end
 
-      before { create_list(:course, 2, user: another_teacher) }
-
-      it 'find courses attached to the teacher' do
-        get('/api/v1/courses', headers:)
-        expect(JSON.parse(response.body).length).to eq(2)
-      end
-
-      it 'find the course attached to the teacher' do
-        get("/api/v1/courses?search=#{name}", headers:)
-        expect(JSON.parse(response.body)[0]['name']).to eq(name)
-      end
-
-      it 'Find courses which the current user is attached to', skip: 'TDD for course search by students' do
-        # TODO TDD for course search by students
-      end
+    it 'Find courses which the current user is attached to', skip: 'TDD for course search by students' do
+      # TODO: TDD for course search by students
     end
   end
 end

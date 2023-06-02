@@ -5,9 +5,16 @@ module Api
     class CoursesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
-      skip_before_action :authenticate!, only: %i[index]
+      skip_before_action :authenticate!, only: %i[guest]
 
       def index
+        case course_search
+        in Success(*courses_found)
+          render json: courses_found, status: :ok
+        end
+      end
+
+      def guest
         case course_search
         in Success(*courses_found)
           render json: courses_found, status: :ok
@@ -30,7 +37,7 @@ module Api
       end
 
       def course_search
-        Courses::Search.new.call(params)
+        Courses::Search.new.call(params, current_user)
       end
 
       def course_params
