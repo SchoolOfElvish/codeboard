@@ -36,12 +36,12 @@ RSpec.describe 'Api::V1::CoursesController' do
     before { create_list(:course, 3) }
 
     it 'show all courses' do
-      get('/api/v1/courses/guest')
+      get('/api/v1/courses/all')
       expect(JSON.parse(response.body).length).to eq(3)
     end
 
     it 'find a course' do
-      get("/api/v1/courses/guest?search=#{name}")
+      get("/api/v1/courses/all?search=#{name}")
       expect(JSON.parse(response.body)[0]['name']).to eq(name)
     end
   end
@@ -68,6 +68,19 @@ RSpec.describe 'Api::V1::CoursesController' do
 
     it 'Find courses which the current user is attached to', skip: 'TDD for course search by students' do
       # TODO: TDD for course search by students
+    end
+  end
+
+  describe 'GET /show' do
+    let(:teacher) { create(:teacher) }
+    let(:course) { create(:course, user: teacher) }
+    let(:id) { course.id }
+    let(:name) { course.name }
+    let(:headers) { auth_header_for(teacher) }
+
+    it 'Return the course' do
+      get("/api/v1/courses/:#{id}", headers:)
+      expect(JSON.parse(response.body)['name']).to eq(name)
     end
   end
 end

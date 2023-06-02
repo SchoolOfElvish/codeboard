@@ -5,7 +5,7 @@ module Api
     class CoursesController < ApplicationController
       include Dry::Monads::Result::Mixin
 
-      skip_before_action :authenticate!, only: %i[guest]
+      skip_before_action :authenticate!, only: %i[all]
 
       def index
         case course_search
@@ -14,10 +14,19 @@ module Api
         end
       end
 
-      def guest
+      def all
         case course_search
         in Success(*courses_found)
           render json: courses_found, status: :ok
+        end
+      end
+
+      def show
+        case course_show
+        in Success(course)
+          render json: course, status: :created
+        in Failure(error)
+          render json: { errors: error.messages }, status: :unprocessable_entity
         end
       end
 
@@ -40,8 +49,12 @@ module Api
         Courses::Search.new.call(params, current_user)
       end
 
+      def course_show
+        Courses::Show.new.call(params)
+      end
+
       def course_params
-        params.permit(:name)
+        params.permit(:name, :id)
       end
     end
   end
