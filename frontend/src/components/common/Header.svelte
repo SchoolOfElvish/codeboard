@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="ml-auto hidden md:flex">
+      <div class="ml-auto hidden md:flex mb-1">
         <LanguageSwitcher />
       </div>
 
