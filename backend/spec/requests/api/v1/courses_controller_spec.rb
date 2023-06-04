@@ -78,9 +78,19 @@ RSpec.describe 'Api::V1::CoursesController' do
     let(:name) { course.name }
     let(:headers) { auth_header_for(teacher) }
 
-    it 'Return the course' do
+    it 'return the course' do
       get("/api/v1/courses/:#{id}", headers:)
       expect(JSON.parse(response.body)['name']).to eq(name)
+    end
+
+    context 'when id does not exist' do
+      let(:course) { create(:course, id: 1) }
+      let(:id) { 2 }
+
+      it "dosen't return a course" do
+        get("/api/v1/courses/:#{id}", headers:)
+        expect(JSON.parse(response.body)['errors']).to eq("Couldn't find Course with 'id'=#{id}")
+      end
     end
   end
 end

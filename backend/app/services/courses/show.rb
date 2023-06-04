@@ -5,8 +5,12 @@ module Courses
     def call(params)
       @params = params
       @id = (params[:id]).delete(':')
-      course = Course.find(id)
-      course ? Success(prepare_json(course)) : Failure(course.errors)
+      begin
+        course = Course.find(id)
+      rescue ActiveRecord::RecordNotFound
+        error = "Couldn't find Course with 'id'=#{id}"
+      end
+      course ? Success(prepare_json(course)) : Failure(error)
     end
 
     private

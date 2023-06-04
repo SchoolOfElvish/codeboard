@@ -26,7 +26,7 @@ module Api
         in Success(course)
           render json: course, status: :created
         in Failure(error)
-          render json: { errors: error.messages }, status: :unprocessable_entity
+          render json: { errors: error }, status: :not_found
         end
       end
 
@@ -54,7 +54,7 @@ module Api
       end
 
       def course_params
-        params.permit(:name, :id)
+        params.permit(:name)
       end
     end
   end
