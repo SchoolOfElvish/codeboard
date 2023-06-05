@@ -5,15 +5,8 @@
     import { _ } from 'svelte-i18n';
     import { page } from '$app/stores';
     import { to } from '$lib/routes';
-  
-    type Course = {
-      name: string;
-      user: {
-        first_name: string;
-        last_name: string;
-      };
-    };
-  
+    import type { Course } from './course';
+    
     let courses = writable<Course[]>([]);
     let search = '';
     export let linkToController:string = '/v1/courses'
