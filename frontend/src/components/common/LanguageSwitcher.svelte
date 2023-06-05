@@ -7,7 +7,7 @@
     localStorage.setItem('locale', selectedLocale);
   }
 
-  if ($locale != null != undefined && $locale.startsWith('ru')) {
+  if (!!$locale && $locale.startsWith('ru')) {
     $locale = 'ru';
   } else {
     $locale = 'en';
