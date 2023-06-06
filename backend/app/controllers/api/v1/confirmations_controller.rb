@@ -9,10 +9,12 @@ module Api
       
       def confirm_email
         confirmation_token = params[:confirmation_token]
+       
         user = User.find_by(confirmation_token:)
         user.confirm
-        token, refresh_token = yield issue_token(user)
+        token, refresh_token = issue_token(user)
         Success[token, refresh_token]
+        render json: { token:, refresh_token: }, status: :created
       end
 
       private
