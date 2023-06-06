@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
   import type { UserMenuItem } from './Desktop.svelte';
-
+  import LanguageSwitcher from '$components/common/LanguageSwitcher.svelte';
   export let items: UserMenuItem[] = [];
 </script>
 
@@ -14,6 +14,7 @@
         alt=""
       />
     </div>
+
     <div class="ml-3">
       <div class="text-base font-medium leading-none text-white">Tom Cook</div>
       <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
@@ -26,6 +27,7 @@
       <Icon name="Bell" />
     </button>
   </div>
+
   <div class="mt-3 space-y-1 px-2">
     {#each items as userItem}
       {#if userItem.action}
@@ -44,5 +46,8 @@
         </a>
       {/if}
     {/each}
+  </div>
+  <div class="ml-4">
+    <LanguageSwitcher />
   </div>
 </div>
