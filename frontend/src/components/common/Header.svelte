@@ -3,20 +3,15 @@
   import { page } from '$app/stores';
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
-  import { locale } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
   import user from '$stores/user';
   import { logOut } from '$utils/session';
-
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
+  import LanguageSwitcher from './LanguageSwitcher.svelte';
 
-  $: if ($locale == 'en-GB') {
-    $locale = 'en';
-  }
-
-  const menuItems = user.isAuthorized
+  $: menuItems = user.isAuthorized
     ? [
         {
           name: $_('navbar.menu.dashboard'),
@@ -41,7 +36,8 @@
       ]
     : [];
 
-  const userMenuItems: UserMenuItem[] = [
+  let userMenuItems: UserMenuItem[];
+  $: userMenuItems = [
     {
       name: $_('navbar.user_menu.profile'),
       href: '/users/me'
@@ -55,7 +51,6 @@
       action: logOut
     }
   ];
-
   let isMobileMenuOpen = false;
 </script>
 
@@ -85,6 +80,11 @@
           </div>
         </div>
       </div>
+
+      <div class="ml-auto hidden md:flex mb-1">
+        <LanguageSwitcher />
+      </div>
+
       {#if user.isAuthorized}
         <Profile.Desktop items={userMenuItems} />
       {:else}
