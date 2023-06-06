@@ -79,7 +79,7 @@ RSpec.describe 'Api::V1::CoursesController' do
     let(:headers) { auth_header_for(teacher) }
 
     it 'return the course' do
-      get("/api/v1/courses/:#{id}", headers:)
+      get("/api/v1/courses/#{id}", headers:)
       expect(JSON.parse(response.body)['name']).to eq(name)
     end
 
@@ -88,7 +88,7 @@ RSpec.describe 'Api::V1::CoursesController' do
       let(:id) { 2 }
 
       it "dosen't return a course" do
-        get("/api/v1/courses/:#{id}", headers:)
+        get("/api/v1/courses/#{id}", headers:)
         expect(JSON.parse(response.body)['errors']).to eq("Couldn't find Course with 'id'=#{id}")
       end
     end
