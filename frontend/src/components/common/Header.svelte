@@ -81,10 +81,6 @@
         </div>
       </div>
 
-      <div class="ml-auto hidden md:flex mb-1">
-        <LanguageSwitcher />
-      </div>
-
       {#if user.isAuthorized}
         <Profile.Desktop items={userMenuItems} />
       {:else}
