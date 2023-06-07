@@ -21,7 +21,7 @@
     <select
       bind:value={$locale}
       on:change={handleChange}
-      class="mt-2 block rounded-md border-gray-300 py-2 px-3 pl-3 pr-10 text-gray-300 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 h-9 mx-auto"
+      class="mt-2 block rounded-md border-gray-300 text-gray-300 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 mx-auto pr-3 bg-none"
     >
       {#each $locales as locale}
         <option class="hover:bg-gray-600 hover: text-white sm:text-sm(4px)" value={locale}>
