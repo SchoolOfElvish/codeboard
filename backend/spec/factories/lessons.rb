@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :lesson do
     course
-    title { 'MyString' }
-    description { 'MyText' }
+    title { Faker::Hacker.say_something_smart }
+    description { Faker::Hipster.paragraphs }
   end
 end
