@@ -44,6 +44,13 @@ module Api
       end
 
       def course_creation
+        case authorize Course, to: create
+          when Failure(:not_teacher)
+            return Failure(:not_teacher)
+          when Success()
+            return Success()
+        end
+
         Courses::Create.new.call(user: current_user, params: course_params)
       end
 
