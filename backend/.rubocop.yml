@@ -23,3 +23,6 @@ AllCops:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+Rails/Output:
+  Enabled: false

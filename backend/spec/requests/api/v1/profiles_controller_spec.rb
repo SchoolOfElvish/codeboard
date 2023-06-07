@@ -72,4 +72,47 @@ RSpec.describe 'Api::V1::ProfilesController' do
       end
     end
   end
+
+  describe 'POST create' do
+    let(:avatar_file) do
+      fixture_file_upload('download.jpeg', 'image/jpeg')
+    end
+
+    let(:avatar) do
+      {
+        filename: avatar_file.original_filename,
+        byte_size: File.size(avatar_file),
+        checksum: 'asdasdsadsadsa',
+        content_type: avatar_file.content_type
+      }
+    end
+
+    let(:params) { { avatar: } }
+
+    let(:user) { create(:user) }
+    let(:headers) { auth_header_for(user) }
+
+    context 'when params valid' do
+      it 'return ok' do
+        post('/api/v1/users/me', params:, headers:)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when params invalid' do
+      let(:avatar) do
+        {
+          filename: avatar_file.original_filename,
+          byte_size: File.size(avatar_file),
+          checksum: 'asdasdsadsadsa',
+          content_type: 'image/avif'
+        }
+      end
+
+      it 'return error' do
+        post('/api/v1/users/me', params:, headers:)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end

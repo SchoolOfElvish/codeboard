@@ -1,27 +1,104 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { put } from '$utils/fetch';
+  import { put, post } from '$utils/fetch';
   import type { PageData } from './$types';
   import { _ } from 'svelte-i18n';
+  import {} from '@rails/activestorage';
+  import { FileChecksum } from '@rails/activestorage/src/file_checksum';
+  import { BlobUpload } from '@rails/activestorage/src/blob_upload';
+
   export let data: PageData;
 
   type OperationStatus = 'success' | 'failure' | 'incompleted';
+
+  type JsonResponse = {
+    url: string;
+    headers: string;
+    blob_id: number;
+    signed_blob_id: string;
+  };
 
   let {
     first_name: firstName,
     last_name: lastName,
     email,
     birthdate,
-    about_info: aboutInfo
+    about_info: aboutInfo,
+    avatar
   } = data.response;
+
   let status: OperationStatus = 'incompleted';
   let errors: string[];
+
+  let fileInput: HTMLInputElement;
+  let file: File;
+  let uploadResult = {} as JsonResponse;
+
+  const calculateChecksum = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      FileChecksum.create(file, (error: Error, checksum: string) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(checksum);
+      });
+    });
+  };
+
+  const handleFileSelected = async () => {
+    if (fileInput.files && fileInput.files[0]) {
+      file = fileInput.files[0];
+      const checksum = await calculateChecksum(file);
+
+      const response = await post('/v1/users/me', {
+        avatar: {
+          filename: file.name,
+          byte_size: file.size,
+          checksum: checksum,
+          content_type: file.type
+        }
+      });
+
+      response.error(422, async (error) => {
+        errors = JSON.parse(error.message).error;
+        status = 'failure';
+        return error;
+      });
+
+      uploadResult = (await response.json()) as JsonResponse;
+      let headers = JSON.parse(uploadResult.headers);
+      let url = uploadResult.url;
+
+      const upload = new BlobUpload({
+        file: file,
+        directUploadData: { headers: headers as Record<string, string>, url }
+      });
+
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        const uploadCallback = (error: Error | undefined) => {
+          if (error) {
+            console.error('Upload failed:', error);
+            reject(error);
+          } else {
+            resolve();
+          }
+        };
+
+        upload.create(uploadCallback);
+      });
+
+      await uploadPromise;
+    }
+  };
 
   const submitUserData = async () => {
     const result = await put('/v1/users/me', {
       first_name: firstName,
       last_name: lastName,
       birthdate: birthdate,
+      signed_blob_id: uploadResult.signed_blob_id,
       about_info: aboutInfo
     });
 
@@ -96,7 +173,7 @@
     </nav>
   </aside>
 
-  <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
+  <div class="space-y-6 sm:px-6 lg:col-span-9 lg:px-0 bg-white">
     {#if status === 'failure'}
       <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
         <strong class="block font-medium text-red-700"
@@ -134,7 +211,41 @@
       </div>
     {/if}
     <form action="#" method="POST">
-      <div class="shadow sm:overflow-hidden sm:rounded-md">
+      <div class="space-y-2">
+        <div class="space-y-6 bg-white py-6 px-4 sm:p-6 border-b">
+          <div>
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Profile</h3>
+            <p class="mt-1 text-sm text-gray-500">
+              This information will be displayed publicly so be careful what you share.
+            </p>
+          </div>
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <label for="photo" class="block text-sm font-medium leading-6 text-gray-900"
+                >Photo</label
+              >
+              <div class="mt-2 flex items-center gap-x-3">
+                {#if avatar}
+                  <img src={avatar} alt="avatar" class="w-10 h-10 object-cover rounded-full" />
+                {/if}
+                <label
+                  for="file-upload"
+                  class="relative cursor-pointer rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    class="sr-only"
+                    bind:this={fileInput}
+                    on:change={handleFileSelected}
+                  />
+                  Change</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="space-y-6 bg-white py-6 px-4 sm:p-6">
           <div>
             <h3 class="text-base font-semibold leading-6 text-gray-900">
@@ -207,7 +318,9 @@
                 />
               </div>
             </div>
+
             <!--BIO-->
+
             <div class="col-span-6 sm:col-span-4 sm:col-start-1 sm:col-end-5">
               <label for="bio" class="block text-sm font-medium text-gray-700">
                 {$_(`pages.users.me.about_me`)}</label

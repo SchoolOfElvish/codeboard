@@ -61,6 +61,7 @@ services:
     volumes:
       - ./backend:/backend:cached
       - bundle:/backend/vendor
+      - backend_tmp:/backend/tmp
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/1
     env_file:

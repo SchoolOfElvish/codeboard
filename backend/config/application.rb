@@ -15,6 +15,8 @@ module Codeboard
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en ru]
     config.active_model.i18n_customize_full_message = true
+    config.active_job.queue_adapter = :sidekiq
+    config.active_storage.variant_processor = :mini_magick
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -23,6 +25,5 @@ module Codeboard
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     # Initialized active_jobs
-    config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -13,4 +13,7 @@ class User < ApplicationRecord
   has_many :courses, dependent: :delete_all
   has_many :lessons, through: :courses
   has_many :groups, dependent: :delete_all, foreign_key: 'author_id', inverse_of: :author
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
 end

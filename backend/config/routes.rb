@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       delete '/sign-out', to: 'sessions#sign_out'
       get 'users/me', to: 'profiles#show'
       put 'users/me', to: 'profiles#update'
+      post 'users/me', to: 'profiles#create'
       post '/refresh', to: 'sessions#refresh'
+
       resources :courses, only: %i[create index] do
         resources :lessons, only: [:create]
       end
