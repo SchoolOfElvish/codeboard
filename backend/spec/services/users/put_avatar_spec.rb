@@ -12,6 +12,7 @@ RSpec.describe Users::PutAvatar do
   let(:signed_blob_id) do
     'eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--573b5cb2fa6815'
   end
+
   let(:current_user) { create(:user) }
 
   context 'when signed_blob_id invalid' do
