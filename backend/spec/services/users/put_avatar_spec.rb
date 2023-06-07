@@ -21,37 +21,13 @@ RSpec.describe Users::PutAvatar do
   end
 
   context 'when signed_blob_id exist' do
-    before { upload }
+    let(:file) { Rails.root.join('spec/fixtures/files/download.jpeg').open }
 
-    let(:signed_blob_id) { create_blob.signed_id }
+    let(:blob) { ActiveStorage::Blob.create_and_upload!(io: file, filename: 'file.png') }
+    let(:signed_blob_id) { blob.signed_id }
 
     it 'return sucess' do
       expect(service).to be_success
     end
-  end
-
-  # rubocop:disable Metrics/MethodLength
-
-  def create_blob
-    avatar_params = {
-      filename: 'download.jpeg',
-      byte_size: 9766,
-      checksum: 'ZR0N6Qha6ejk5H3X5nG4gg==',
-      content_type: 'image/jpeg'
-    }
-    result = Users::CreateBlob.new.call(avatar_params)
-
-    case result
-    in Dry::Monads::Result::Success(blob)
-      @blob ||= blob
-    end
-  end
-
-  # rubocop:enable Metrics/MethodLength
-
-  def upload
-    blob = create_blob
-    file = fixture_file_upload('download.jpeg', 'image/jpeg')
-    blob.upload(file)
   end
 end
