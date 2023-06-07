@@ -18,23 +18,23 @@
     refresh_token: string;
   };
 
-  const logIn = async () => {
-    const result = await post('/v1/sign-in', { email, password });
-
-    const response = await result
-      .error(403, async (error) => {
-        errors = JSON.parse(error.message).error;
-        error;
-      })
-      .json<ResponseData>();
-
-    if (response) {
-      if (response.token) {
-        user.set({ token: response.token, refreshToken: response.refresh_token });
-        window.location.href = to.root();
-      }
-    }
-  };
+  /* const logIn = async () => { */
+  /*   const result = await post('/v1/sign-in', { email, password }); */
+  /**/
+  /*   const response = await result */
+  /*     .error(403, async (error) => { */
+  /*       errors = JSON.parse(error.message).error; */
+  /*       error; */
+  /*     }) */
+  /*     .json<ResponseData>(); */
+  /**/
+  /*   if (response) { */
+  /*     if (response.token) { */
+  /*       user.set({ token: response.token, refreshToken: response.refresh_token }); */
+  /*       window.location.href = to.root(); */
+  /*     } */
+  /*   } */
+  /* }; */
 </script>
 
 <div class="flex min-h-full flex-col py-20 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@
     {/if}
 
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6">
+      <form method="POST" class="space-y-6">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700"
             >{$_('pages.sign_in.email')}</label
@@ -119,7 +119,6 @@
         <div>
           <button
             type="submit"
-            on:click={logIn}
             class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >{$_('pages.sign_in.sign_in_button')}</button
           >

@@ -24,5 +24,6 @@ module Codeboard
     # config.eager_load_paths << Rails.root.join("extras")
     # Initialized active_jobs
     config.active_job.queue_adapter = :sidekiq
+    config.hosts << 'backend'
   end
 end
