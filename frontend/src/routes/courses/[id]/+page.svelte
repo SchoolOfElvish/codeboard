@@ -5,8 +5,6 @@
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import { get } from '$utils/fetch';
-  import { _ } from 'svelte-i18n';
-  import { to } from '$lib/routes';
   import type { Lesson } from '$components/lesson';
 
   

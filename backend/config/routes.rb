@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       post '/refresh', to: 'sessions#refresh'
       get 'courses/all', to: 'courses#all'
       resources :courses, only: %i[create index show] do
-        resources :lessons, only: [:create]
+        resources :lessons, only: %i[create index]
       end
       resources :groups, only: [:create]
       resources :users, only: [:show]

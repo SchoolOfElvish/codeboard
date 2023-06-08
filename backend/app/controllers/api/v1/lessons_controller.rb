@@ -4,6 +4,14 @@ module Api
   module V1
     class LessonsController < ApplicationController
       include Dry::Monads::Result::Mixin
+
+      def index
+        case fetch_lessons
+        in Success(*lessons)
+          render json: lessons, status: :ok
+        end
+      end
+
       def create
         case create_lesson
         in Success(lesson)
@@ -14,6 +22,10 @@ module Api
       end
 
       private
+
+      def fetch_lessons
+        Lessons::Fetch.new.call(course_id: params[:course_id])
+      end
 
       def create_lesson
         Lessons::Create.new.call(params: lesson_params)

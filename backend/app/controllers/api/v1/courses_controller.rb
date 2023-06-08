@@ -46,11 +46,11 @@ module Api
       end
 
       def course_search
-        Courses::Search.new.call(params, current_user)
+        Courses::Search.new.call(params:, current_user:)
       end
 
       def course_show
-        Courses::Show.new.call(params)
+        Courses::Show.new.call(params:)
       end
 
       def course_params

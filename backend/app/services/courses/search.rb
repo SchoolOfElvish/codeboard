@@ -2,7 +2,7 @@
 
 module Courses
   class Search < Core::Service
-    def call(params, current_user)
+    def call(params:, current_user:)
       @params = params
       @user = current_user
       @courses_sample = Course.includes(:user).limit(100)

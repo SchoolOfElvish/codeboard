@@ -2,7 +2,7 @@
 
 module Courses
   class Show < Core::Service
-    def call(params)
+    def call(params:)
       @params = params
       @id = (params[:id]).delete(':')
       begin
