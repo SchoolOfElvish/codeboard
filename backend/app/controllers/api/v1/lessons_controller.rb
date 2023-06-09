@@ -28,7 +28,7 @@ module Api
       end
 
       def create_lesson
-        Lessons::Create.new.call(params: lesson_params)
+        Lessons::Create.new.call(params: lesson_params, current_user:)
       end
 
       def lesson_params

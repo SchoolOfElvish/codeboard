@@ -12,6 +12,9 @@ export type Routes = {
     root: Route;
     show: Route;
   };
+  lessons: {
+    new: Route;
+  };
   groups: {
     new: Route;
   };
@@ -32,6 +35,9 @@ export const to: Routes = {
     my: buildPath('/courses/my'),
     root: buildPath('/courses'),
     show: buildPath('/courses/[id]')
+  },
+  lessons: {
+    new: buildPath('/courses/[id]/lessons/new')
   },
   groups: {
     new: buildPath('/groups/new')

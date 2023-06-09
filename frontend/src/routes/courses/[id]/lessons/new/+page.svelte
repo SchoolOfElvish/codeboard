@@ -1,15 +1,36 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { post } from '$utils/fetch';
+
   let title = '';
   let description = '';
 
-  const createLesson = () => {
-    fetch(`http://localhost:3000/api/v1/courses/${$page.params.id}/lessons/new`, {
-      method: 'POST',
-      body: JSON.stringify({ title, description })
-    });
+  let status: OperationStatus = 'incompleted';
+  let errors: Error = {};
+
+  type OperationStatus = 'success' | 'failure' | 'incompleted';
+  type Error = {
+    [key: string]: string[];
   };
+
+  const createLesson = async () => {
+    const result = await post(`/v1/courses/${$page.params.id}/lessons`, {
+      title,
+      description
+    });
+
+    result
+      .error(422, async (error) => {
+        errors = JSON.parse(error.message).errors;
+        status = 'failure';
+        console.log(JSON.parse(error.message));
+        return error;
+      })
+      .res(() => (status = 'success'));
+  };
+
   let isFormEmpty = true;
+
   const checkForm = (title: string, description: string) => {
     if (title == '' || description == '') {
       isFormEmpty = true;
