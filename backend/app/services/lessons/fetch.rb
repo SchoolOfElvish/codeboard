@@ -11,7 +11,7 @@ module Lessons
 
     private
 
-    attr_reader :kourse_id, :fetched_lessons
+    attr_reader :fetched_lessons
 
     def prepare_json_for_list(fetched_lessons)
       fetched_lessons.map { |lesson| prepare_json(lesson) }

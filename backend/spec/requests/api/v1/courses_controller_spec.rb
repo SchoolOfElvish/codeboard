@@ -29,7 +29,7 @@ RSpec.describe 'Api::V1::CoursesController' do
     end
   end
 
-  describe 'GET /guest' do
+  describe 'GET /all' do
     let(:course) { create(:course) }
     let(:name) { course.name }
 

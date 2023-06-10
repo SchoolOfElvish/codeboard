@@ -4,8 +4,9 @@
       "create_course": "Создать курс",
       "create_group": "Создать группу",
       "dashboard": "Панель управления",
-      "my_courses": "Курсы",
-      "homework": "Задания"
+      "my_courses": "Мои курсы",
+      "homework": "Задания",
+      "all_courses": "Все курсы"
     },
     "user_menu": {
       "profile": "Профиль",

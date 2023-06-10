@@ -4,8 +4,9 @@
       "create_course": "Create course",
       "create_group": "Create group",
       "dashboard": "Dashboard",
-      "my_courses": "Courses",
-      "homework": "Homework"
+      "my_courses": "My courses",
+      "homework": "Homework",
+      "all_courses": "All curses"
     },
     "user_menu": {
       "profile": "Your Profile",
