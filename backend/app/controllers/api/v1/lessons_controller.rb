@@ -17,7 +17,7 @@ module Api
         in Success(lesson)
           render json: lesson, status: :created
         in Failure(error)
-          render json: { errors: error.messages }, status: :unprocessable_entity
+          render json: { errors: error.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -28,7 +28,7 @@ module Api
       end
 
       def create_lesson
-        Lessons::Create.new.call(params: lesson_params, current_user:)
+        Lessons::Create.new.call(params: lesson_params)
       end
 
       def lesson_params

@@ -4,19 +4,38 @@ en:
       user:
         one: "User"
         other: "Users"
+      course:
+        one: "Course"
+        other: "Courses"
+      lesson:
+        one: "Lesson"
+        other: "Lessons"
     attributes:
       user:
         first_name: "First Name"
         last_name: "Last Name"
         email: "Email"
         role: "Role"
+        password: "Password"
         about_info: "About me"
+      course:
+        name: "Name"
+        user: "User"
+      lesson:
+        title: "Title"
+        course: "Course"
+        description: "Description"
     errors:
       models:
         user:
           format: "\"%{attribute}\" %{message}"
+        course:
+          format: "\"%{attribute}\" %{message}"
+        lesson:
+          format: "\"%{attribute}\" %{message}"
       messages:
         blank: "can't be blank"
+        required: "must exist"
         too_short: "is too short (minimum is %{count} characters)"
   sessions:
     sign_out:

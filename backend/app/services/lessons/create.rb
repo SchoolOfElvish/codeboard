@@ -2,13 +2,9 @@
 
 module Lessons
   class Create < Core::Service
-    def call(params:, current_user:)
+    def call(params:)
       @params = params # expected parameters in params: course_id, title, description, current_user
-      if Course.find(params['course_id']).user_id == current_user.id
-        lesson.save ? Success(lesson) : Failure(lesson.errors)
-      else
-        Failure(ActiveModel::Errors.new(self)) # TODO: Add custom message
-      end
+      lesson.save ? Success(lesson) : Failure(lesson.errors)
     end
 
     private

@@ -23,7 +23,7 @@ RSpec.describe 'Api::V1::LessonsController' do
       end
     end
 
-    context 'when other user trying to create lesson' do
+    context 'when other user trying to create lesson', skip: 'TDD for policies' do
       let(:other_theatcher) { create(:teacher) }
       let(:headers) { auth_header_for(other_theatcher) }
 

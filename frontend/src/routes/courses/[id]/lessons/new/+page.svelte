@@ -82,7 +82,7 @@
         type="submit"
         class="ml-3 inline-block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
       >
-       {$_(`pages.create_lesson.create_lesson_button`)}
+        {$_(`pages.create_lesson.create_lesson_button`)}
       </button>
     </div>
   </form>
