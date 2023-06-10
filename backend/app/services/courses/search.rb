@@ -21,7 +21,7 @@ module Courses
 
     def search_courses_for_authorized_user(courses)
       if params[:search].present?
-        courses.where(user_id: @user.id).where('name LIKE ?', "%#{params[:search]}%")
+        courses.where(user_id: @user.id).where('name ILIKE ?', "%#{params[:search]}%")
       else
         courses.where(user_id: @user.id)
       end
@@ -29,7 +29,7 @@ module Courses
 
     def search_courses_for_unauthorized_user(courses)
       if params[:search].present?
-        courses.where('name LIKE ?', "%#{params[:search]}%")
+        courses.where('name ILIKE ?', "%#{params[:search]}%")
       else
         courses
       end
