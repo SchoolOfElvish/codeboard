@@ -9,6 +9,30 @@
   type Error = {
     [key: string]: string;
   };
+
+  type ResponseData = {
+    token: string;
+    refresh_token: string;
+  };
+
+  const logIn = async () => {
+    const result = await post('/v1/sign-in', { email, password });
+
+    const response = await result
+      .error(403, async (error) => {
+        errors = JSON.parse(error.message).error;
+        error;
+      })
+      .json<ResponseData>();
+        console.log(response);
+
+    if (response) {
+      if (response.token) {
+        user.set({ token: response.token, refreshToken: response.refresh_token });
+        // window.location.href = to.root();
+      }
+    }
+  };
 </script>
 
 <div class="flex min-h-full flex-col py-20 sm:px-6 lg:px-8">
