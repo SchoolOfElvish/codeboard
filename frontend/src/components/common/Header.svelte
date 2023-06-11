@@ -32,6 +32,10 @@
         {
           name: $_('navbar.menu.homework'),
           href: to.homework.my()
+        },
+        {
+          name: $_('navbar.menu.all_courses'),
+          href: to.courses.root()
         }
       ]
     : [];

@@ -4,8 +4,9 @@
       "create_course": "Создать курс",
       "create_group": "Создать группу",
       "dashboard": "Панель управления",
-      "my_courses": "Курсы",
-      "homework": "Задания"
+      "my_courses": "Мои курсы",
+      "homework": "Задания",
+      "all_courses": "Все курсы"
     },
     "user_menu": {
       "profile": "Профиль",
@@ -54,7 +55,7 @@
       "errors": {
         "name": "Название курса обязательно для заполнения"
       },
-      "title": "Создать курс",
+      "title": "Создать курс:",
       "input_label": "Введите название курса",
       "create_button": "Создать курс",
       "success_message": "Курс создан",
@@ -78,6 +79,20 @@
       "none_search": "Найдено курсов: 0",
       "author": "Автор",
       "find": "Узнать больше"
+    },
+    "course": {
+      "lessons_not_found": "В этот курс не добавлены уроки",
+      "lesson_description": "Описание",
+      "lesson_find": "Узнать больше",
+      "add_lesson": "Добавить урок"
+    },
+    "create_lesson": {
+      "create_lesson": "Создать урок:",
+      "title": "Название",
+      "enter_title": "Введите название урока",
+      "description": "Описание",
+      "enter_description": "Введите описание урока",
+      "create_lesson_button": "Создать урок"
     },
     "homework": {
       "title": "Задания:"

@@ -4,8 +4,9 @@
       "create_course": "Create course",
       "create_group": "Create group",
       "dashboard": "Dashboard",
-      "my_courses": "Courses",
-      "homework": "Homework"
+      "my_courses": "My courses",
+      "homework": "Homework",
+      "all_courses": "All curses"
     },
     "user_menu": {
       "profile": "Your Profile",
@@ -55,7 +56,7 @@
       "errors": {
         "name": "Course name can't be blank"
       },
-      "title": "Create course",
+      "title": "Create course:",
       "input_label": "Enter course name",
       "create_button": "Create course",
       "success_message": "Course created",
@@ -79,6 +80,20 @@
       "none_search": "Courses found: 0",
       "author": "Author",
       "find": "Learn more"
+    },
+    "course": {
+      "lessons_not_found": "No lessons attached to this course",
+      "lesson_description": "Description",
+      "lesson_find": "Learn more",
+      "add_lesson": "Add lesson"
+    },
+    "create_lesson": {
+      "create_lesson": "Create lesson:",
+      "title": "Title",
+      "enter_title": "Enter lesson title",
+      "description": "Description",
+      "enter_description": "Enter lesson description",
+      "create_lesson_button": "Create lesson"
     },
     "homework": {
       "title": "Homework:"

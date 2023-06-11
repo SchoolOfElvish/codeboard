@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :course do
-    name { 'MyString' }
-    user
+    name { Faker::Hacker.say_something_smart }
+    user { create(:teacher) }
   end
 end

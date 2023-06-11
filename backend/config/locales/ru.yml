@@ -4,6 +4,12 @@ ru:
       user:
         one: "Пользователь"
         other: "Пользователи"
+      course:
+        one: "Курс"
+        other: "Курсы"
+      lesson:
+        one: "Урок"
+        other: "Уроки"
     attributes:
       user:
         first_name: "Имя"
@@ -12,14 +18,25 @@ ru:
         role: "Роль"
         password: "Пароль"
         about_info: "Обо мне"
+      course:
+        name: "Название"
+        user: "Пользователь"
+      lesson:
+        title: "Название"
+        course: "Курс"
+        description: "Описание"
     errors:
-      format: "%{attribute} %{message}"
       models:
         user:
           format: "Поле \"%{attribute}\" %{message}"
+        course:
+          format: "Поле \"%{attribute}\" %{message}"
+        lesson:
+          format: "Поле \"%{attribute}\" %{message}"
       messages:
         blank: "не может быть пустым"
-        too_short: "слишком короткое минимум %{count} символов"
+        required: "должно существовать"
+        too_short: "должно быть не короче %{count} символов"
   sessions:
     sign_out:
       log_out: "Выход"
