@@ -12,4 +12,4 @@ export const verifyAndDecodeToken = (token: string) => {
   } catch (error) {
     return null;
   }
-}
+};

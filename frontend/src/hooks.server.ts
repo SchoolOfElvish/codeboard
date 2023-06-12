@@ -2,6 +2,7 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { locale } from 'svelte-i18n';
 import { verifyAndDecodeToken } from '$utils/jwt';
+import { setCookie } from '$utils/cookies';
 
 export const handle = (async ({ event, resolve }) => {
   const lang = event.request.headers.get('accept-language')?.split(',')[0];
@@ -33,6 +34,31 @@ export const handle = (async ({ event, resolve }) => {
       isAuthenticated = true;
       email = decodedToken.email;
       id = decodedToken.id;
+    } else {
+      const refreshToken = event.cookies.get('refreshToken');
+      if (refreshToken) {
+        const response = await fetch('http://backend:3000/api/v1/refresh-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ refreshToken, token: jwtToken })
+        });
+
+        const body = await response.json();
+        if (body.token) {
+          isAuthenticated = true;
+          const decodedToken = verifyAndDecodeToken(body.token);
+          if (decodedToken) {
+            email = decodedToken.email;
+            id = decodedToken.id;
+          }
+
+          setCookie(event.cookies, 'token', body.token, false);
+          setCookie(event.cookies, 'refreshToken', body.refresh_token, false);
+        } else {
+          event.cookies.delete('token');
+          event.cookies.delete('refreshToken');
+        }
+      }
     }
   }
 
@@ -45,8 +71,8 @@ export const handle = (async ({ event, resolve }) => {
   event.locals.user = {
     isAuthenticated: isAuthenticated,
     email: email,
-    id: id,
-  }
+    id: id
+  };
 
   console.log(event.locals.user);
 

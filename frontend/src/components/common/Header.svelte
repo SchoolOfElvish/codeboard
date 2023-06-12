@@ -4,7 +4,6 @@
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
-  import { logOut } from '$utils/session';
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
@@ -135,7 +134,7 @@
           </a>
         {/each}
       </div>
-      {#if user.isAuthorized}
+      {#if user.isAuthenticated}
         <Profile.Mobile items={userMenuItems} />
       {:else}
         <div class="border-t border-gray-700 p-5">

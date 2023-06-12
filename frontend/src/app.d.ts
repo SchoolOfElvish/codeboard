@@ -9,7 +9,7 @@ declare global {
         isAuthenticated: boolean;
         email: string | null;
         id: string | null;
-      }
+      };
     }
     // interface PageData {}
     // interface Platform {}
