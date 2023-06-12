@@ -13,14 +13,17 @@ type ResponseData = {
   refresh_token: string;
 };
 
-const setCookie = (cookies: any, name: string, value: string) => {
-  cookies.set(name, value, {
+const setCookie = (cookies: any, name: string, value: string, remember: boolean) => {
+  const defaultOptions = {
     path: '/',
     httpOnly: true,
     sameSite: 'strict',
     secure: !dev,
-    maxAge: 60 * 60 * 24 * 7 // one week
-  });
+  }
+
+  const temporaryCookieOptions = { maxAge: 60 * 60 * 24 * 7  }
+
+  cookies.set(name, value, { ...defaultOptions, ...(remember && temporaryCookieOptions) });
 };
 
 export const actions = {
@@ -28,6 +31,7 @@ export const actions = {
     const form = await request.formData();
     const email = form.get('email');
     const password = form.get('password');
+    const remember = Boolean(form.get('remember-me')) == true;
 
     const response = await fetch('http://backend:3000/api/v1/sign-in', {
       method: 'POST',
@@ -37,8 +41,8 @@ export const actions = {
 
     const body = await response.json() as ResponseData;
 
-    setCookie(cookies, 'token', body.token);
-    setCookie(cookies, 'refreshToken', body.refresh_token);
+    setCookie(cookies, 'token', body.token, remember);
+    setCookie(cookies, 'refreshToken', body.refresh_token, remember);
 
     throw redirect(302, '/');
   },

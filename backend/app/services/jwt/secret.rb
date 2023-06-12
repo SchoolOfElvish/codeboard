@@ -5,7 +5,7 @@ module Jwt
     module_function
 
     def secret
-      Rails.application.secrets.secret_key_base
+      ENV.fetch('JWT_SECRET') { Rails.application.secrets.secret_key_base }
     end
   end
 end

@@ -53,7 +53,8 @@
     },
     {
       name: $_('navbar.user_menu.logout'),
-      action: logOut
+      href: '/sign-out',
+      reload: true
     }
   ];
   let isMobileMenuOpen = false;

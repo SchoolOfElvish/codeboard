@@ -2,6 +2,7 @@
   export type UserMenuItem = {
     name: string;
     href?: string;
+    reload?: boolean;
     action?: () => void;
   };
 </script>
@@ -77,6 +78,7 @@
             {:else}
               <a
                 href={userItem.href}
+                rel={userItem.reload ? 'external' : undefined}
                 class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
                 tabindex="-1"
