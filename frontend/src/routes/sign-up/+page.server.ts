@@ -1,5 +1,6 @@
 import type { Actions } from './$types';
-
+import { setCookie } from '$utils/cookies';
+import { redirect } from '@sveltejs/kit';
 
 type ResponseData = {
   token: string;
@@ -15,6 +16,7 @@ export const actions: Actions = {
     const password = form.get('password');
     const passwordConfirmation = form.get('password_confirmation');
     const role = form.get('role');
+    const remember = false
   
     
     const response = await fetch('http://backend:3000/api/v1/sign-up', {
@@ -23,25 +25,11 @@ export const actions: Actions = {
       body: JSON.stringify({ firstName, lastName, email, password, passwordConfirmation, role })
     });
 
-  
-    
-  
-  
+    const body = (await response.json()) as ResponseData;
+    console.log(body)
+    setCookie(cookies, 'token', body.token, remember);
+    setCookie(cookies, 'refreshToken', body.refresh_token, remember);
 
-
-    // const response = await result
-    //   .error(422, async (error) => {
-    //     errors = JSON.parse(error.message).error;
-    //     error;
-    //   })
-    //   .json<ResponseData>();
-
-    // if (response) {
-    //   isLoading = false;
-    //   if (response.token) {
-    //     // user.set({ token: response.token, refreshToken: response.refresh_token });
-    //     window.location.href = to.root();
-    //   }
-    // }
+    throw redirect(302, '/');
   }
 }satisfies Actions;
