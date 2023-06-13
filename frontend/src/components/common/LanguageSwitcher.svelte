@@ -53,14 +53,14 @@
       <span class="hover:text-white">{$locale}</span>
     </button>
     {#if isOpen}
-      <div class="absolute w-16 rounded-md shadow-lg bg-gray-700 mt-1">
+      <div class="absolute flex rounded-md shadow-lg bg-gray-700 mt-1">
         {#each $locales as local}
           {#if $locale === local}
             <div />
           {:else}
             <button
               type="button"
-              class="dropdown-item w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 rounded-md"
+              class="dropdown-item w-full px-5 py-2 text-sm text-gray-300 hover:bg-gray-600 rounded-md"
               on:click={() => handleSelection(local)}
             >
               {local}
