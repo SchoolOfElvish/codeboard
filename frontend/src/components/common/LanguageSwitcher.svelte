@@ -41,7 +41,7 @@
 {#if $isLoading}
   <p>Loading</p>
 {:else}
-  <div class="dropdown relative">
+  <div class="dropdown">
     <button
       type="button"
       class="mt-2 rounded-md border-gray-300 text-gray-300 ring-inset ring-gray-300 focus:ring-2 
@@ -53,7 +53,7 @@
       <span class="hover:text-white">{$locale}</span>
     </button>
     {#if isOpen}
-      <div class="absolute right-0 w-16 rounded-md shadow-lg bg-gray-700 mt-1">
+      <div class="absolute w-16 rounded-md shadow-lg bg-gray-700 mt-1">
         {#each $locales as local}
           {#if $locale === local}
             <div />
