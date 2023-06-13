@@ -10,10 +10,11 @@ module Jwt
       exp = Jwt::Encoder.token_expiry
       access_token = JWT.encode(
         {
-          user_id: user.id,
+          id: user.id,
           jti:,
           iat: Jwt::Encoder.token_issued_at.to_i,
-          exp:
+          exp:,
+          email: user.email
         },
         Jwt::Secret.secret
       )

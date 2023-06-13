@@ -1,54 +1,16 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
-  import user from '$stores/user';
-  import { to } from '$lib/routes';
-  import { post } from '$utils/fetch';
 
-  let firstName = '';
-  let lastName = '';
-  let email = '';
-  let password = '';
-  let passwordConfirmation = '';
-  let role = '';
+ 
 
-  let isLoading = false;
+
   let errors: Error = {};
-
-  type ResponseData = {
-    token: string;
-    refresh_token: string;
-  };
 
   type Error = {
     [key: string]: string[];
   };
 
-  const createAccount = async () => {
-    isLoading = true;
-    const result = await post('/v1/sign-up', {
-      firstName,
-      lastName,
-      email,
-      password,
-      passwordConfirmation,
-      role
-    });
-
-    const response = await result
-      .error(422, async (error) => {
-        errors = JSON.parse(error.message).error;
-        error;
-      })
-      .json<ResponseData>();
-
-    if (response) {
-      isLoading = false;
-      if (response.token) {
-        user.set({ token: response.token, refreshToken: response.refresh_token });
-        window.location.href = to.root();
-      }
-    }
-  };
+  
 </script>
 
 <section class="bg-white">
@@ -98,7 +60,7 @@
           </div>
         {/if}
 
-        <form class="mt-8 grid grid-cols-6 gap-6">
+        <form method="POST" class="mt-8 grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">
             <label for="FirstName" class="block text-sm font-medium text-gray-700">
               First Name
@@ -108,7 +70,6 @@
               type="text"
               id="FirstName"
               name="first_name"
-              bind:value={firstName}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
@@ -122,7 +83,6 @@
               type="text"
               id="LastName"
               name="last_name"
-              bind:value={lastName}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
@@ -136,7 +96,6 @@
               name="role"
               id="Student"
               class="peer hidden"
-              bind:group={role}
               value="STUDENT"
             />
 
@@ -154,7 +113,6 @@
               name="role"
               id="Teacher"
               class="peer hidden"
-              bind:group={role}
               value="TEACHER"
             />
 
@@ -173,7 +131,6 @@
               type="email"
               id="Email"
               name="email"
-              bind:value={email}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
@@ -185,7 +142,6 @@
               type="password"
               id="Password"
               name="password"
-              bind:value={password}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
@@ -199,7 +155,6 @@
               type="password"
               id="PasswordConfirmation"
               name="password_confirmation"
-              bind:value={passwordConfirmation}
               class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
@@ -214,7 +169,7 @@
           </div>
 
           <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-            <CreateAccountButton on:click={createAccount} {isLoading} />
+            <CreateAccountButton/>
 
             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?

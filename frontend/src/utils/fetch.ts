@@ -1,5 +1,5 @@
 import wretch, { type Wretch } from 'wretch';
-import user from '$stores/user';
+// import user from '$stores/user';
 import { get as storeGet } from 'svelte/store';
 import { browser } from '$app/environment';
 
@@ -17,7 +17,7 @@ interface ResponseData {
 }
 
 const fetch = async (url: string, method: FetchMethod, data: Record<string, unknown>) => {
-  const request = api.url(url).auth(`Bearer ${storeGet(user).token}`);
+  const request = api.url(url).auth(`Bearer ${storeGet(null).token}`);
 
   let requestWithMethod;
   switch (method) {
@@ -44,12 +44,12 @@ const getToken = async () => {
   const response = await api
     .url('/v1/refresh')
     .post({
-      token: storeGet(user).token,
-      refreshToken: storeGet(user).refreshToken
+      token: storeGet(null).token,
+      refreshToken: storeGet(null).refreshToken
     })
     .json<ResponseData>();
 
-  user.set({ token: response.token, refreshToken: response.refresh_token });
+  // user.set({ token: response.token, refreshToken: response.refresh_token });
 };
 
 const refreshTokens = async (
@@ -59,7 +59,7 @@ const refreshTokens = async (
 ) => {
   await getToken();
   return req
-    .auth(`Bearer ${storeGet(user).token}`)
+    .auth(`Bearer ${storeGet(null).token}`)
     .post(data)
     .unauthorized((err: Error) => {
       throw err;
