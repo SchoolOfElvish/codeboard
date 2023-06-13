@@ -5,30 +5,22 @@
   import { isLoading } from 'svelte-i18n';
 
   let isOpen = false;
-  let currentLocale: string;
+  // let currentLocale: string;
 
   if ($locale && $locale.startsWith('ru')) {
-    currentLocale = 'ru';
+    $locale = 'ru';
   } else {
-    currentLocale = 'en';
+    $locale = 'en';
   }
 
   function handleToggle() {
     isOpen = !isOpen;
   }
 
-  function handleSelection(locale: string) {
-    currentLocale = locale;
-    localStorage.setItem('locale', locale);
+  function handleSelection(selectedLocale: string) {
+    locale.set(selectedLocale);
+    localStorage.setItem('locale', selectedLocale);
     isOpen = false;
-  }
-
-  $: {
-    if (currentLocale.startsWith('ru')) {
-      $locale = 'ru';
-    } else {
-      $locale = 'en';
-    }
   }
 
   onMount(() => {
