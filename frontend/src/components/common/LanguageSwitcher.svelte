@@ -5,7 +5,6 @@
   import { isLoading } from 'svelte-i18n';
 
   let isOpen = false;
-  // let currentLocale: string;
 
   if ($locale && $locale.startsWith('ru')) {
     $locale = 'ru';
@@ -46,22 +45,27 @@
     <button
       type="button"
       class="mt-2 rounded-md border-gray-300 text-gray-300 ring-inset ring-gray-300 focus:ring-2 
-           focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 bg-none flex items-center hover:bg-gray-700 hover:text-white"
+           focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 bg-none flex items-center 
+           hover:bg-gray-700 hover:text-white p-2"
       on:click={handleToggle}
     >
-      <Icon name="Key" classes="w-6 h-6" />
+      <Icon name="Globe" classes="w-5 h-5 mr-1" />
       <span class="hover:text-white">{$locale}</span>
     </button>
     {#if isOpen}
       <div class="absolute right-0 w-16 rounded-md shadow-lg bg-gray-700 mt-1">
-        {#each $locales as locale}
-          <button
-            type="button"
-            class="w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 rounded-md"
-            on:click={() => handleSelection(locale)}
-          >
-            {locale}
-          </button>
+        {#each $locales as local}
+          {#if $locale === local}
+            <div />
+          {:else}
+            <button
+              type="button"
+              class="dropdown-item w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 rounded-md"
+              on:click={() => handleSelection(local)}
+            >
+              {local}
+            </button>
+          {/if}
         {/each}
       </div>
     {/if}

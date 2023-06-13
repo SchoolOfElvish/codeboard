@@ -47,7 +47,7 @@
       {/if}
     {/each}
   </div>
-  <div class="ml-5">
+  <div class="ml-3">
     <LanguageSwitcher />
   </div>
 </div>

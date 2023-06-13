@@ -15,7 +15,7 @@
 </script>
 
 <div class="hidden md:block">
-  <div class="ml-4 flex items-center md:ml-6">
+  <div class="ml-4 flex items-center">
     <button
       type="button"
       class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
