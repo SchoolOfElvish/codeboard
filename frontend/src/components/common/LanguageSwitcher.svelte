@@ -41,26 +41,28 @@
 {#if $isLoading}
   <p>Loading</p>
 {:else}
-  <div class="dropdown">
+  <div id="main" class="dropdown w-fit relative mt-2">
     <button
       type="button"
-      class="mt-2 rounded-md border-gray-300 text-gray-300 ring-inset ring-gray-300 focus:ring-2 
-           focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 bg-none flex items-center 
-           hover:bg-gray-700 hover:text-white p-2"
+      class="flex p-1 rounded-md border-gray-300 text-gray-300 ring-inset ring-gray-300 focus:ring-2 
+      focus:ring-gray-600 sm:text-sm(4px) sm:leading-6 bg-gray-800 bg-none hover:bg-gray-700 hover:text-white"
       on:click={handleToggle}
     >
-      <Icon name="Globe" classes="w-5 h-5 mr-1" />
-      <span class="hover:text-white">{$locale}</span>
+      <Icon name="Globe" classes="h-6 w-6" />
+      <span class="mx-1">{$locale}</span>
     </button>
     {#if isOpen}
-      <div class="absolute flex rounded-md shadow-lg bg-gray-700 mt-1">
+      <div
+        id="opener"
+        class="absolute z-10 justify-center rounded-md shadow-lg bg-gray-700 mt-1 w-full"
+      >
         {#each $locales as local}
           {#if $locale === local}
-            <div />
+            <span />
           {:else}
             <button
               type="button"
-              class="dropdown-item w-full px-5 py-2 text-sm text-gray-300 hover:bg-gray-600 rounded-md"
+              class="flex flex-col items-center justify-center w-full  px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md"
               on:click={() => handleSelection(local)}
             >
               {local}
