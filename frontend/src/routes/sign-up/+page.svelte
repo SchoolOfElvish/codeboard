@@ -4,7 +4,7 @@
  
 
 
-  let errors: Error = {};
+  let errors: Error = {last_name: [ "can't be blank" ]};
 
   type Error = {
     [key: string]: string[];
@@ -46,7 +46,7 @@
         <h1 class="my-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
           Welcome to CodeBoard 👨‍💻
         </h1>
-
+        <pre>{JSON.stringify(errors, null, 2)}</pre>
         {#if Object.keys(errors).length > 0}
           <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
             <strong class="block font-medium text-red-700"> Something went wrong </strong>

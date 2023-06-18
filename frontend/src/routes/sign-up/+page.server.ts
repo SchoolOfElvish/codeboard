@@ -1,14 +1,11 @@
 import type { Actions } from './$types';
 import { setCookie } from '$utils/cookies';
 import { redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
-type ResponseData = {
-  token: string;
-  refresh_token: string;
-};
 
 export const actions: Actions = {
-  default: async ({ request, cookies, fetch}) => {
+  default: async ({ request, cookies, fetch }) => {
     const form = await request.formData();
     const firstName = form.get('first_name');
     const lastName = form.get('last_name');
@@ -16,20 +13,39 @@ export const actions: Actions = {
     const password = form.get('password');
     const passwordConfirmation = form.get('password_confirmation');
     const role = form.get('role');
-    const remember = false
-  
+    const remember = false;
+   
     
-    const response = await fetch('http://backend:3000/api/v1/sign-up', {
+
+    type Error = {
+      [key: string]: string[];
+    };
+
+    type ResponseData = {
+      token: string;
+      refresh_token: string;
+      error?: Error;
+    };
+
+    const result = await fetch('http://backend:3000/api/v1/sign-up', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ firstName, lastName, email, password, passwordConfirmation, role })
     });
 
-    const body = (await response.json()) as ResponseData;
-    console.log(body)
-    setCookie(cookies, 'token', body.token, remember);
-    setCookie(cookies, 'refreshToken', body.refresh_token, remember);
+    const response: ResponseData = await result.json();
 
-    throw redirect(302, '/');
+    if (result.status === 422) {
+      
+     let errors = response.error ;
+      console.log(errors);
+      return fail(400, { email, missing: true })
+    } else {
+      if (response.token) {
+        setCookie(cookies, 'token', response.token, remember);
+        setCookie(cookies, 'refreshToken', response.refresh_token, remember);
+        throw redirect(302, '/');
+      }
+    }
   }
 }satisfies Actions;
