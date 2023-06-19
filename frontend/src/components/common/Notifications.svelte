@@ -4,7 +4,7 @@
 </script>
 
 <div
-  class="pointer-events-none fixed inset-0 flex items-end px-4 py-20 sm:items-start bg-opacity-25"
+  class="pointer-events-none fixed inset-0 flex items-end px-4 py-20 sm:items-start bg-opacity-25 z-50"
 >
   <div class="flex w-full flex-col items-center sm:items-end">
     {#each $notifications as notification}

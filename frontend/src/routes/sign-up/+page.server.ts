@@ -39,12 +39,13 @@ export const actions: Actions = {
       
      let errors = response.error ;
       console.log(errors);
-      return fail(400, { email, missing: true })
+      return fail(400, { errors})
     } else {
       if (response.token) {
         setCookie(cookies, 'token', response.token, remember);
         setCookie(cookies, 'refreshToken', response.refresh_token, remember);
         throw redirect(302, '/');
+
       }
     }
   }

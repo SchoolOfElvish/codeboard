@@ -1,7 +1,13 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
+  import type { PageData, ActionData } from './$types';
+  import notifications from '$stores/notifications';
+  import { onMount } from 'svelte';
+  import Icon from '$components/icons/Icon.svelte';
 
+  export let form: ActionData;
  
+  console.log(form);
 
 
   let errors: Error = {last_name: [ "can't be blank" ]};
@@ -9,8 +15,33 @@
   type Error = {
     [key: string]: string[];
   };
+  // onMount(()=>{
+  //   // if (form?.missing){
+  // notifications.error({
+  //         message: 'error!',
+  //         description: 'Your action was error.'
+  //       });
+  //     // }
+  // })
 
-  
+     if (form?.errors){
+
+      // {#each Object.keys(errors.) as key}
+      //           {key}: {errors[key].join(', ')}
+      //           <br />
+      //         {/each}
+
+  notifications.error({
+          message: 'error!',
+          description: 'Your action was error.'
+        });
+      }
+// function notify (){ notifications.error({
+//           message: 'error!',
+//           description: 'Your action was error.'
+//         })
+//       console.log("dsa")}
+        
 </script>
 
 <section class="bg-white">
@@ -46,7 +77,7 @@
         <h1 class="my-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
           Welcome to CodeBoard 👨‍💻
         </h1>
-        <pre>{JSON.stringify(errors, null, 2)}</pre>
+        <!-- <pre>{JSON.stringify(errors, null, 2)}</pre> -->
         {#if Object.keys(errors).length > 0}
           <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
             <strong class="block font-medium text-red-700"> Something went wrong </strong>

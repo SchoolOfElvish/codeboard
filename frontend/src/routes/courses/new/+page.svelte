@@ -1,9 +1,9 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { post } from '$utils/fetch';
+ 
   import { _ } from 'svelte-i18n';
 
-  let name = '';
+ 
 
   let status: OperationStatus = 'incompleted';
   let errors: Error = {};
@@ -13,18 +13,7 @@
     [key: string]: string[];
   };
 
-  const handleSubmit = async () => {
-    const result = await post('/v1/courses', { name });
-
-    result
-      .error(422, async (error) => {
-        errors = JSON.parse(error.message).errors;
-        status = 'failure';
-        console.log(JSON.parse(error.message));
-        return error;
-      })
-      .res(() => (status = 'success'));
-  };
+ 
 
   const closeAlert = () => {
     status = 'incompleted';
@@ -81,12 +70,12 @@
     <h1 class="text-2xl font-bold sm:text-3xl">{$_('pages.create_course.title')}</h1>
   </div>
 
-  <form class="mx-auto mt-8 mb-0 max-w-md space-y-4">
+  <form method = "POST" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
     <div>
       <label for="title" class="sr-only">title</label>
       <div class="relative ">
         <input
-          bind:value={name}
+          name = "name"
           type="text"
           class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm invalid:border-red-500"
           placeholder={$_('pages.create_course.input_label')}
@@ -96,7 +85,6 @@
 
     <div class="flex items-center justify-between">
       <button
-        on:click|preventDefault={handleSubmit}
         type="submit"
         class="inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >

@@ -1,6 +1,5 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import { put } from '$utils/fetch';
   import type { PageData } from './$types';
   import { _ } from 'svelte-i18n';
   export let data: PageData;
