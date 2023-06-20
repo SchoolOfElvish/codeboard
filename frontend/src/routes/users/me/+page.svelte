@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
-  import type { PageData } from './$types';
+  // import type { PageData } from './$types';
   import { _ } from 'svelte-i18n';
   export let data: PageData;
 
@@ -16,22 +16,22 @@
   let status: OperationStatus = 'incompleted';
   let errors: string[];
 
-  const submitUserData = async () => {
-    const result = await put('/v1/users/me', {
-      first_name: firstName,
-      last_name: lastName,
-      birthdate: birthdate,
-      about_info: aboutInfo
-    });
+  // const submitUserData = async () => {
+  //   const result = await put('/v1/users/me', {
+  //     first_name: firstName,
+  //     last_name: lastName,
+  //     birthdate: birthdate,
+  //     about_info: aboutInfo
+  //   });
 
-    result
-      .error(422, async (error) => {
-        errors = JSON.parse(error.message).error;
-        status = 'failure';
-        return error;
-      })
-      .res(() => (status = 'success'));
-  };
+  //   result
+  //     .error(422, async (error) => {
+  //       errors = JSON.parse(error.message).error;
+  //       status = 'failure';
+  //       return error;
+  //     })
+  //     .res(() => (status = 'success'));
+  // };
 
   const closeAlert = () => {
     status = 'incompleted';

@@ -2,46 +2,41 @@
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
   import type { PageData, ActionData } from './$types';
   import notifications from '$stores/notifications';
-  import { onMount } from 'svelte';
-  import Icon from '$components/icons/Icon.svelte';
+  
 
   export let form: ActionData;
- 
-  console.log(form);
 
 
-  let errors: Error = {last_name: [ "can't be blank" ]};
+  if (form?.errors) {
 
-  type Error = {
-    [key: string]: string[];
-  };
-  // onMount(()=>{
-  //   // if (form?.missing){
-  // notifications.error({
-  //         message: 'error!',
-  //         description: 'Your action was error.'
-  //       });
-  //     // }
-  // })
+    const errors =form.errors;
+    console.log(errors);
+  
 
-     if (form?.errors){
 
-      // {#each Object.keys(errors.) as key}
-      //           {key}: {errors[key].join(', ')}
-      //           <br />
-      //         {/each}
 
   notifications.error({
-          message: 'error!',
-          description: 'Your action was error.'
-        });
-      }
-// function notify (){ notifications.error({
-//           message: 'error!',
-//           description: 'Your action was error.'
-//         })
-//       console.log("dsa")}
-        
+      message: 'Error!',
+      description: errors.join("\n")
+     });
+     
+console.log(errors.join("\n"));
+
+    //  notifications.error({-
+    //   message: 'Error!',
+    //   description: a
+    //  });
+    
+    }
+
+
+
+
+
+
+
+
+
 </script>
 
 <section class="bg-white">
@@ -78,7 +73,7 @@
           Welcome to CodeBoard 👨‍💻
         </h1>
         <!-- <pre>{JSON.stringify(errors, null, 2)}</pre> -->
-        {#if Object.keys(errors).length > 0}
+        <!-- {#if Object.keys(errors).length > 0}
           <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
             <strong class="block font-medium text-red-700"> Something went wrong </strong>
 
@@ -89,7 +84,7 @@
               {/each}
             </p>
           </div>
-        {/if}
+        {/if} -->
 
         <form method="POST" class="mt-8 grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">
@@ -122,13 +117,7 @@
             Chose a role:
           </p>
           <div class="col-span-6 sm:col-span-3 top-0">
-            <input
-              type="radio"
-              name="role"
-              id="Student"
-              class="peer hidden"
-              value="STUDENT"
-            />
+            <input type="radio" name="role" id="Student" class="peer hidden" value="STUDENT" />
 
             <label
               for="Student"
@@ -139,13 +128,7 @@
           </div>
 
           <div class="col-span-6 sm:col-span-3">
-            <input
-              type="radio"
-              name="role"
-              id="Teacher"
-              class="peer hidden"
-              value="TEACHER"
-            />
+            <input type="radio" name="role" id="Teacher" class="peer hidden" value="TEACHER" />
 
             <label
               for="Teacher"
@@ -200,7 +183,7 @@
           </div>
 
           <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-            <CreateAccountButton/>
+            <CreateAccountButton />
 
             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?

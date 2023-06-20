@@ -1,9 +1,7 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
- 
-  import { _ } from 'svelte-i18n';
 
- 
+  import { _ } from 'svelte-i18n';
 
   let status: OperationStatus = 'incompleted';
   let errors: Error = {};
@@ -12,8 +10,6 @@
   type Error = {
     [key: string]: string[];
   };
-
- 
 
   const closeAlert = () => {
     status = 'incompleted';
@@ -70,12 +66,12 @@
     <h1 class="text-2xl font-bold sm:text-3xl">{$_('pages.create_course.title')}</h1>
   </div>
 
-  <form method = "POST" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
+  <form method="POST" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
     <div>
       <label for="title" class="sr-only">title</label>
       <div class="relative ">
         <input
-          name = "name"
+          name="name"
           type="text"
           class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm invalid:border-red-500"
           placeholder={$_('pages.create_course.input_label')}

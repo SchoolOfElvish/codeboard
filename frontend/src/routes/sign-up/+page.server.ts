@@ -3,7 +3,6 @@ import { setCookie } from '$utils/cookies';
 import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
-
 export const actions: Actions = {
   default: async ({ request, cookies, fetch }) => {
     const form = await request.formData();
@@ -14,17 +13,13 @@ export const actions: Actions = {
     const passwordConfirmation = form.get('password_confirmation');
     const role = form.get('role');
     const remember = false;
-   
-    
 
-    type Error = {
-      [key: string]: string[];
-    };
+    type Errors =  string[];
 
     type ResponseData = {
       token: string;
       refresh_token: string;
-      error?: Error;
+      error?: Errors;
     };
 
     const result = await fetch('http://backend:3000/api/v1/sign-up', {
@@ -36,17 +31,16 @@ export const actions: Actions = {
     const response: ResponseData = await result.json();
 
     if (result.status === 422) {
+      let errors = response.error;
       
-     let errors = response.error ;
-      console.log(errors);
-      return fail(400, { errors})
+
+      return fail(422,  {errors} );
     } else {
       if (response.token) {
         setCookie(cookies, 'token', response.token, remember);
         setCookie(cookies, 'refreshToken', response.refresh_token, remember);
         throw redirect(302, '/');
-
       }
     }
   }
-}satisfies Actions;
+} satisfies Actions;
