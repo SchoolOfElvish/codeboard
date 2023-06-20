@@ -24,7 +24,7 @@ module Api
         in Success[token, refresh_token]
           render json: { token:, refresh_token: }, status: :created
         in Failure[error]
-          render json: { error: }, status: :forbidden
+          render json: { error: error.full_messages }, status: :forbidden
         end
       end
 

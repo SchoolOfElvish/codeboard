@@ -1,9 +1,13 @@
 <script lang="ts">
   import Icon from '$components/icons/Icon.svelte';
+  import type { Notification } from '$stores/notifications';
+  import { each } from 'svelte/internal';
 
   export let type = '';
   export let message = '';
-  export let description = '';
+  export let description: Notification['description'] = '';
+
+  let formatedDescriptions = typeof description == 'string' ? description : description.join('\n');
 </script>
 
 <div
@@ -28,7 +32,13 @@
         </div>
         <div class="ml-3 w-0 flex-1 pt-0.5">
           <p class="text-sm font-medium text-gray-900">{message}</p>
-          <p class="mt-1 text-sm text-gray-500">{description}.</p>
+          {#if typeof description == 'string'}
+            <p class="mt-1 text-sm text-gray-500">{description}.</p>
+          {:else}
+            {#each description as desc}
+              <p class="mt-1 text-sm text-gray-500">{desc}.</p>
+            {/each}
+          {/if}
         </div>
         <div class="ml-4 flex flex-shrink-0">
           <button

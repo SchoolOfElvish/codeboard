@@ -1,42 +1,18 @@
 <script lang="ts">
   import CreateAccountButton from '$features/registration/CreateAccountButton.svelte';
-  import type { PageData, ActionData } from './$types';
+  import type { ActionData } from './$types';
   import notifications from '$stores/notifications';
-  
 
   export let form: ActionData;
 
-
   if (form?.errors) {
+    const errors = form.errors;
 
-    const errors =form.errors;
-    console.log(errors);
-  
-
-
-
-  notifications.error({
+    notifications.error({
       message: 'Error!',
-      description: errors.join("\n")
-     });
-     
-console.log(errors.join("\n"));
-
-    //  notifications.error({-
-    //   message: 'Error!',
-    //   description: a
-    //  });
-    
-    }
-
-
-
-
-
-
-
-
-
+      description: errors
+    });
+  }
 </script>
 
 <section class="bg-white">
@@ -72,19 +48,6 @@ console.log(errors.join("\n"));
         <h1 class="my-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
           Welcome to CodeBoard 👨‍💻
         </h1>
-        <!-- <pre>{JSON.stringify(errors, null, 2)}</pre> -->
-        <!-- {#if Object.keys(errors).length > 0}
-          <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
-            <strong class="block font-medium text-red-700"> Something went wrong </strong>
-
-            <p class="mt-2 text-sm text-red-700">
-              {#each Object.keys(errors) as key}
-                {key}: {errors[key].join(', ')}
-                <br />
-              {/each}
-            </p>
-          </div>
-        {/if} -->
 
         <form method="POST" class="mt-8 grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">

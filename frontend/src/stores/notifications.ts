@@ -4,7 +4,7 @@ type NotificationType = 'success' | 'error' | 'info' | 'warning';
 
 export type Notification = {
   message: string;
-  description: string;
+  description: string | string[];
   type: NotificationType;
 };
 
@@ -21,13 +21,13 @@ const createNotification = () => {
   };
   return {
     subscribe,
-    success: ({ message, description }: { message: string; description: string }) =>
+    success: ({ message, description }: Omit<Notification, 'type'>) =>
       addNotification({ message, description, type: 'success' }),
-    error: ({ message, description }: { message: string; description: string }) =>
+    error: ({ message, description }: Omit<Notification, 'type'>) =>
       addNotification({ message, description, type: 'error' }),
-    info: ({ message, description }: { message: string; description: string }) =>
+    info: ({ message, description }: Omit<Notification, 'type'>) =>
       addNotification({ message, description, type: 'info' }),
-    warning: ({ message, description }: { message: string; description: string }) =>
+    warning: ({ message, description }: Omit<Notification, 'type'>) =>
       addNotification({ message, description, type: 'warning' })
   };
 };

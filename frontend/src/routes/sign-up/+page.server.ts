@@ -14,7 +14,7 @@ export const actions: Actions = {
     const role = form.get('role');
     const remember = false;
 
-    type Errors =  string[];
+    type Errors = string[] | string;
 
     type ResponseData = {
       token: string;
@@ -32,9 +32,7 @@ export const actions: Actions = {
 
     if (result.status === 422) {
       let errors = response.error;
-      
-
-      return fail(422,  {errors} );
+      return fail(422, { errors });
     } else {
       if (response.token) {
         setCookie(cookies, 'token', response.token, remember);
