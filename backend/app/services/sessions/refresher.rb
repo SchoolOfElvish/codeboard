@@ -6,7 +6,7 @@ module Sessions
       @token_params = token_params
 
       decoded_token = yield decode_token
-      user = yield get_user_by(decoded_token[:user_id])
+      user = yield get_user_by(decoded_token[:id])
       token, refresh_token = yield refresh_token(decoded_token, user)
 
       Success[token, refresh_token.token]

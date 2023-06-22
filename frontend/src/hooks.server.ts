@@ -37,7 +37,7 @@ export const handle = (async ({ event, resolve }) => {
     } else {
       const refreshToken = event.cookies.get('refreshToken');
       if (refreshToken) {
-        const response = await fetch('http://backend:3000/api/v1/refresh-token', {
+        const response = await fetch('http://backend:3000/api/v1/refresh', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ refreshToken, token: jwtToken })

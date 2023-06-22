@@ -15,7 +15,7 @@ module Api
         in Success(course)
           render json: prepare_json(course), status: :created
         in Failure(error)
-          render json: { errors: error.messages }, status: :unprocessable_entity
+          render json: { error: error.full_messages }, status: :unprocessable_entity
         end
       end
 
