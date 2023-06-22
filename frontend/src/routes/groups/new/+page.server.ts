@@ -5,6 +5,7 @@ export const actions: Actions = {
   default: async ({ request, cookies, fetch }) => {
     const form = await request.formData();
     const name = form.get('name');
+    const email = form.get('email');
 
     type Errors = string[] | string;
 
@@ -18,7 +19,7 @@ export const actions: Actions = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${cookies.get('token')}`
       },
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ name, email })
     });
 
     const response: ResponseData = await result.json();
