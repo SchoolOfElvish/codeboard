@@ -22,9 +22,9 @@ module Jwt
     end
 
     def authenticate_user_from_token(decoded_token)
-      raise Errors::Jwt::InvalidToken unless decoded_token[:jti].present? && decoded_token[:user_id].present?
+      raise JWT::DecodeError unless decoded_token[:jti].present? && decoded_token[:id].present?
 
-      user = User.find(decoded_token.fetch(:user_id))
+      user = User.find(decoded_token.fetch(:id))
       blacklisted = Jwt::Blacklister.blacklisted?(jti: decoded_token[:jti])
       whitelisted = Jwt::Whitelister.whitelisted?(jti: decoded_token[:jti])
       valid_issued_at = Jwt::Authenticator.valid_issued_at?(user, decoded_token)

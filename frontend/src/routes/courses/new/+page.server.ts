@@ -1,5 +1,6 @@
 import type { Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
+import { setCookie } from '$utils/cookies';
 
 export const actions: Actions = {
   default: async ({ request, cookies, fetch }) => {
@@ -14,7 +15,5 @@ export const actions: Actions = {
       },
       body: JSON.stringify({ name })
     });
-
-    console.log(result.headers);
   }
 } satisfies Actions;
