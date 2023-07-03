@@ -2,7 +2,7 @@
 
 class AddConfirmableToUsers < ActiveRecord::Migration[7.0]
   def up
-    change_table :users do |t|
+    change_table :users, bulk: true do |t|
       t.string   :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
@@ -13,7 +13,7 @@ class AddConfirmableToUsers < ActiveRecord::Migration[7.0]
   end
 
   def down
-    change_table :users do |t|
+    change_table :users, bulk: true do |t|
       t.remove :confirmation_token
       t.remove :confirmed_at
       t.remove :confirmation_sent_at

@@ -24,7 +24,7 @@
         error;
       })
       .json<ResponseData>();
-        console.log(response);
+    console.log(response);
 
     if (response) {
       if (response.token) {

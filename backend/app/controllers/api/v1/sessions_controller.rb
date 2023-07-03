@@ -17,9 +17,9 @@ module Api
       end
 
       def sign_in
-        puts "=" * 100
-        puts params
-        puts "=" * 100
+        Rails.logger.debug '=' * 100
+        Rails.logger.debug params
+        Rails.logger.debug '=' * 100
         case log_in
         in Success[token, refresh_token]
           render json: { token:, refresh_token: }, status: :created

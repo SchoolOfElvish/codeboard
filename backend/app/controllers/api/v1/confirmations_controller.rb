@@ -8,13 +8,12 @@ module Api
       skip_before_action :authenticate!, only: %i[confirm_email]
       def confirm_email
         confirmation_token = params[:confirmation_token]
-       
-        user = User.find_by(confirmation_token: confirmation_token)
+
+        user = User.find_by(confirmation_token:)
         user.confirm
         token, refresh_token = issue_token(user)
-        render json: { token: token, refresh_token: refresh_token }, status: :created
+        render json: { token:, refresh_token: }, status: :created
       end
-      
 
       private
 
