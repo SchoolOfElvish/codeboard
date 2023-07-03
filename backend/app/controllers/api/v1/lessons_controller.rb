@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class LessonsController < ApplicationController
+    class LessonsController < CoreController
       include Dry::Monads::Result::Mixin
       def create
         case create_lesson

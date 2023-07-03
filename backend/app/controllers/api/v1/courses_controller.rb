@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class CoursesController < ApplicationController
+    class CoursesController < CoreController
       include Dry::Monads::Result::Mixin
 
       def index

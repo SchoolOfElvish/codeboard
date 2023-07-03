@@ -1,0 +1,5 @@
+<p>Привет <%= @resource.email %>!</p>
+
+<p>Подтвердите свой адрес электронной почты:</p>
+
+<p><%= link_to 'Подтвердить мой аккаунт', "http://localhost:3001/users/confirm?confirmation_token=#{@token}" %></p>

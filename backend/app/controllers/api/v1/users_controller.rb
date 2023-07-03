@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < CoreController
       include Dry::Monads::Result::Mixin
       before_action :set_user
 

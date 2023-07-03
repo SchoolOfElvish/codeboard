@@ -4,9 +4,15 @@ import { locale, waitLocale } from 'svelte-i18n';
 import type { LayoutLoad } from './$types';
 import { defineLocale } from '$lib/i18n/index.js';
 
-export const load: LayoutLoad = async () => {
+export const load: LayoutLoad = async ({ data }) => {
+  const { user } = data;
+
   if (browser) {
     locale.set(defineLocale());
   }
+
   await waitLocale();
+  return {
+    user: user
+  };
 };

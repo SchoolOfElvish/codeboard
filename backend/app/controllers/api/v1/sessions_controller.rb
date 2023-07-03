@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class SessionsController < ApplicationController
+    class SessionsController < CoreController
       include Dry::Monads::Result::Mixin
 
       skip_before_action :authenticate!, only: %i[sign_up sign_in refresh]
@@ -17,6 +17,9 @@ module Api
       end
 
       def sign_in
+        Rails.logger.debug '=' * 100
+        Rails.logger.debug params
+        Rails.logger.debug '=' * 100
         case log_in
         in Success[token, refresh_token]
           render json: { token:, refresh_token: }, status: :created

@@ -1,5 +1,4 @@
 import { get } from '$utils/fetch';
-import { error } from '@sveltejs/kit';
 import type { RouteParams } from './$types';
 
 export const ssr = false;

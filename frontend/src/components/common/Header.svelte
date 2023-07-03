@@ -4,14 +4,18 @@
   import { to } from '$lib/routes';
   import { _ } from 'svelte-i18n';
   import { Transition } from '@rgossiaux/svelte-headlessui';
-  import user from '$stores/user';
-  import { logOut } from '$utils/session';
   import * as Profile from './Header/Profile';
   import type { UserMenuItem } from './Header/Profile/Desktop.svelte';
   import AuthenticationButtons from './Header/AuthenticationButtons.svelte';
   import LanguageSwitcher from './LanguageSwitcher.svelte';
+  type User = {
+    isAuthenticated: boolean;
+  };
 
-  $: menuItems = user.isAuthorized
+  export let user: User;
+
+  console.log(user);
+  $: menuItems = user.isAuthenticated
     ? [
         {
           name: $_('navbar.menu.dashboard'),
@@ -48,7 +52,8 @@
     },
     {
       name: $_('navbar.user_menu.logout'),
-      action: logOut
+      href: '/sign-out',
+      reload: true
     }
   ];
   let isMobileMenuOpen = false;
@@ -85,7 +90,7 @@
         <LanguageSwitcher />
       </div>
 
-      {#if user.isAuthorized}
+      {#if user.isAuthenticated}
         <Profile.Desktop items={userMenuItems} />
       {:else}
         <div class="hidden md:block">
@@ -129,7 +134,7 @@
           </a>
         {/each}
       </div>
-      {#if user.isAuthorized}
+      {#if user.isAuthenticated}
         <Profile.Mobile items={userMenuItems} />
       {:else}
         <div class="border-t border-gray-700 p-5">
